@@ -16,9 +16,6 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-<br>
-<br>
-
 I'm a second-year undergraduate @ Purdue, pursuing a B.Sc in CompE.
 
 My primary interest revolves arould building robust user-facing solutions at the intersection of applied AI, reproducible (open-source) softwares and interoperablility principles. I enjoy research-driven environments aimed at taking concepts to tangible products. 
