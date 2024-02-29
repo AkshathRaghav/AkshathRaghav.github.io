@@ -26,6 +26,6 @@ Current (Updated 3/1):
 <ul>
     <li>Building a package for constraining LLM outputs within agent chains, </li>
     <li>Estimating the transferrability of PTMs,</li>
-    <li>Developing an automated pipeline for evaluating the reproducibility of ML experiments.</li>
-    <li>Constructing multi-tool autonomous agents.</li>
+    <li>Developing an automated pipeline for evaluating the reproducibility of ML experiments,</li>
+    <li>Constructing multi-tool autonomous agents</li>
 </ul>
