@@ -22,8 +22,10 @@ My primary interest revolves arould building robust user-facing solutions at the
 
 <b>Automatability</b>, <b>replicability</b> and <b>accessability</b> remain the core of my work. 
 
+Current: 
 <ul>
-    <li>Building a package for LLM constraining, a method for estimating the transferrability of Pre-trained Models (PTMs).</li>
+    <li>Building a package for constraining LLM outputs within agent chains, </li>
+    <li>Estimating the transferrability of Pre-trained Models (PTMs).</li>
     <li>Developing an automated pipeline for evaluating the reproducibility of ML experiments.</li>
     <li>Constructing multi-tool autonomous agents.</li>
 </ul>
