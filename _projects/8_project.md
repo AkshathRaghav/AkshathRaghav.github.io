@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Cubord
-description: Discord Bot for cubing through your keyboard ⌨️
-img: assets/img/cubord.jpg
-importance: 4
-redirect: https://github.com/AkshathRaghav/cubord.io
+title: Cubot.io
+description: Open-Source Java Library for SpeedCubing 🧊
+img: assets/img/cubot.jpg
+importance: 5
+redirect: https://github.com/AkshathRaghav/cubot.io
 category: software
 ---
 

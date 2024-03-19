@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Cubord
-description: Discord Bot for cubing through your keyboard ⌨️
-img: assets/img/cubord.jpg
-importance: 4
-redirect: https://github.com/AkshathRaghav/cubord.io
+title: aws-opensearch
+description: Contributed to the macrobenchmarking framework through OSCI! 
+img: assets/img/opensearch.jpg
+importance: 3
+redirect: https://opensearch.org/authors/akshathraghav/
 category: software
 ---
 

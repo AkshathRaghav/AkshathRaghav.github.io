@@ -1,6 +1,6 @@
 ---
 layout: post
-title: a post with geojson
+title: How AI can help you reproduce open-source software! 
 date: 2024-01-26 17:57:00
 description: this is what included geojson code could look like
 tags: formatting charts maps

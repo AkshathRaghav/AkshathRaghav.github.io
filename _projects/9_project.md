@@ -1,10 +1,9 @@
 ---
 layout: page
-title: Cubord
-description: Discord Bot for cubing through your keyboard ⌨️
-img: assets/img/cubord.jpg
-importance: 4
-redirect: https://github.com/AkshathRaghav/cubord.io
+title: huggingbench
+description: Precision rank popular PTMs against your use-case ⚒️
+img: assets/img/1.jpg
+importance: 1
 category: software
 ---
 

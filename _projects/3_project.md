@@ -1,11 +1,10 @@
 ---
 layout: page
-title: project 3
-description: a project that redirects to another website
-img: assets/img/7.jpg
-redirect: https://unsplash.com
+title: eugenie
+description: Deployed a multi-tool autonomous agent (handles web research, data engineering, coding problems) 🧞
+img: assets/img/eugenie.jpg
 importance: 3
-category: work
+category: research
 ---
 
 Every project has a beautiful feature showcase page.

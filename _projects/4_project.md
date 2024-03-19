@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 4
-description: another without an image
-img:
-importance: 3
-category: fun
+title: RAIS 
+description: Defining and leveraging reproducibility factors in AI/ML Research 😎
+img: assets/img/rais.jpg
+importance: 4
+category: research
 ---
 
 Every project has a beautiful feature showcase page.

@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Cubord
-description: Discord Bot for cubing through your keyboard ⌨️
-img: assets/img/cubord.jpg
-importance: 4
-redirect: https://github.com/AkshathRaghav/cubord.io
-category: software
+title: gencollab
+description: AI-Managed SWE Projects 💭
+img: assets/img/1.jpg
+importance: 1
+redirect: https://docs.google.com/presentation/d/1mxbECz5DRXxlsBal5AXHyI3CCXneC7dZDZbKOD6iBvM/edit?usp=sharing
+category: hackathons
 ---
 
 Every project has a beautiful feature showcase page.

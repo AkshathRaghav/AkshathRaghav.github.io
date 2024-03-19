@@ -1,11 +1,11 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
+title: forest-fire-forecast
+description: Deployed a global fire-risk prediction into Ambee's proprietary API (Funded) 🔥
+img: assets/img/image24.jpg
 importance: 2
-category: work
-giscus_comments: true
+category: research
+related_publications: true 
 ---
 
 Every project has a beautiful feature showcase page.
