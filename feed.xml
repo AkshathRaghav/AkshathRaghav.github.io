@@ -1,46 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://akshathraghav.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://akshathraghav.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2024-03-19T02:34:30+00:00</updated><id>https://akshathraghav.github.io/feed.xml</id><title type="html">&lt;u&gt;a&lt;/u&gt;kshath raghav &lt;u&gt;raviki&lt;/u&gt;ran</title><subtitle></subtitle><entry><title type="html">Working with `GrammarFlow` to constrain your LLM chains 🪢</title><link href="https://akshathraghav.github.io/blog/2024/parsechain/" rel="alternate" type="text/html" title="Working with `GrammarFlow` to constrain your LLM chains 🪢"/><published>2024-01-27T19:22:00+00:00</published><updated>2024-01-27T19:22:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/parsechain</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/parsechain/"><![CDATA[<h1 id="-grammarflow">🪢 GrammarFlow</h1> <p>Find a larger list of examples to get started with <a href="https://github.com/e-lab/SyntaxShaper/blob/main/demo.ipynb">here</a>!</p> <h2 id="-what-is-this">🤔 What is this?</h2> <p><a href="https://github.com/e-lab/SyntaxShaper/">This repository</a> contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by <code class="language-plaintext highlighter-rouge">json.loads</code> (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the <code class="language-plaintext highlighter-rouge">llama.cpp</code> package for sampling logits smartly.</p> <p>The goal of this package was to overcome the issues faced when using langchain’s output parsers with local language models. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts. Moreover, across LLMs, it’s a pain for me to keep re-defining grammar formats into my prompt and then making custom parsers. I use this in my workflow daily to simplify the process and speed-up my productivity.</p> <h2 id="-quick-install">📚 Quick Install</h2> <p><code class="language-plaintext highlighter-rouge">pip install parsechain</code></p> <h2 id="-implementation-walkthrough">📃 Implementation Walkthrough:</h2> <ol> <li> <p>Map out what your agent chain is doing. Understand what it’s goals are and what data needs to be carried forward from one step to the next. For example, consider the <a href="https://react-lm.github.io/">ReAct prompting framework</a>. In every call, we want to pass in the Action and subsequent Observation to the next call.</p> </li> <li>Make a Pydantic Model for the above case. Here’s a sample: <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ThoughtState</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
- <span class="n">thought</span><span class="p">:</span> <span class="nb">str</span>
- <span class="n">goal</span><span class="p">:</span> <span class="nb">str</span>
- <span class="n">tool</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(...,</span>
-                   <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Choose one of [</span><span class="sh">'</span><span class="s">Web_QA</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">Web_Search</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">Web_Scraping</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">Web_Automation</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">Web_Research</span><span class="sh">'</span><span class="s">]</span><span class="sh">"</span><span class="p">)</span>
- <span class="n">action</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(...,</span>
-                     <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Choose one of [</span><span class="sh">'</span><span class="s">Create</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">Update</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">Delete</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">Read</span><span class="sh">'</span><span class="s">]</span><span class="sh">"</span><span class="p">)</span>
- <span class="n">action_input</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(...,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">The input data for the action</span><span class="sh">"</span><span class="p">)</span>
- <span class="n">thought_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span>
-     <span class="bp">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">1 if it is the first thought, 0 if it is the final thought.</span><span class="sh">"</span><span class="p">)</span>
-</code></pre></div> </div> </li> <li>[Optional] Create a prompt template using parsechain’s PromptBuilder. Below is an example of the Llama prompt template. <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">parsechain</span> <span class="kn">import</span> <span class="n">PromptBuilder</span>
-<span class="n">llama_prompt</span> <span class="o">=</span> <span class="nc">PromptBuilder</span><span class="p">()</span>
-<span class="n">llama_prompt</span><span class="p">.</span><span class="nf">add_section</span><span class="p">(</span>
- <span class="n">text</span><span class="o">=</span><span class="sh">"</span><span class="s">&lt;s&gt;[INST] &lt;&lt;SYS&gt;&gt;</span><span class="se">\n</span><span class="s">{system_context}</span><span class="se">\n</span><span class="s">&lt;&lt;/SYS&gt;&gt;</span><span class="sh">"</span><span class="p">,</span>
- <span class="n">placeholder</span><span class="o">=</span><span class="sh">"</span><span class="s">system_context</span><span class="sh">"</span><span class="p">,</span>
- <span class="n">define_grammar</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">llama_prompt</span><span class="p">.</span><span class="nf">add_section</span><span class="p">(</span>
- <span class="n">text</span><span class="o">=</span><span class="sh">"</span><span class="s">{user_message}[/INST]</span><span class="sh">"</span><span class="p">,</span>
- <span class="n">placeholder</span><span class="o">=</span><span class="sh">"</span><span class="s">user_message</span><span class="sh">"</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div> </div> <p>You can find an in-depth explanation on making prompts <a href="https://github.com/e-lab/SyntaxShaper/blob/main/demo.ipynb">here</a>!</p> </li> <li>[Optional] If you decide to make your own template, define your system_context and user_message <code class="language-plaintext highlighter-rouge">placeholders</code>. <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system_context</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">Your goal is to think and plan out how to solve questions using agent tools provided to you. Think about all aspects of your thought process.</span><span class="sh">"""</span>
-<span class="n">user_message</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">Who is Vladmir Putin?</span><span class="sh">"""</span>
-</code></pre></div> </div> </li> <li>Invoke the <code class="language-plaintext highlighter-rouge">Constrain</code> block with the prompt. Set the configuration metadata, and format the prompt with the required <code class="language-plaintext highlighter-rouge">grammars</code> and <code class="language-plaintext highlighter-rouge">placeholders</code>. ```python from parsechain import Constrain</li> </ol> <p>with Constrain(llama_prompt) as manager: manager.set_config( format=’json’, # or ‘xml’, ‘toml’. return_sequence=’single_response’ # or ‘multi_response’, if you need multiple grammars. )</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Makes the changes to the prompt
-manager.format_prompt(placeholders={ # if you have placeholders in the prompt
-                      'user_message': user_message,
-                      'system_context': system_context
-                      },
-                      grammars=[{
-                          'description': 'This format describes your current thinking state', # Description of the response format
-                          'model': [ThoughtState]}
-                      ]
-)
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://akshathraghav.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://akshathraghav.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2024-03-20T03:34:34+00:00</updated><id>https://akshathraghav.github.io/feed.xml</id><title type="html">&lt;u&gt;a&lt;/u&gt;kshath raghav &lt;u&gt;raviki&lt;/u&gt;ran</title><subtitle></subtitle><entry><title type="html">Working with `GrammarFlow` to constrain your LLM chains 🪢</title><link href="https://akshathraghav.github.io/blog/2024/parsechain/" rel="alternate" type="text/html" title="Working with `GrammarFlow` to constrain your LLM chains 🪢"/><published>2024-01-27T19:22:00+00:00</published><updated>2024-01-27T19:22:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/parsechain</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/parsechain/"><![CDATA[<h1 id="-grammarflow">🪢 <a href="https://github.com/e-lab/SyntaxShaper/tree/main">GrammarFlow</a></h1> <p>Find a larger list of examples to get started with <a href="https://github.com/e-lab/SyntaxShaper/blob/main/demo.ipynb">here</a>!</p> <h2 id="-what-is-this">🤔 What is this?</h2> <p><a href="https://github.com/e-lab/SyntaxShaper/">This repository</a> contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by <code class="language-plaintext highlighter-rouge">json.loads</code> (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the <code class="language-plaintext highlighter-rouge">llama.cpp</code> package for sampling logits smartly.</p> <p>The goal of this package was to overcome the issues faced when using langchain’s output parsers with local language models. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts. Moreover, across LLMs, it’s a pain for me to keep re-defining grammar formats into my prompt and then making custom parsers. I use this in my workflow daily to simplify the process and speed-up my productivity.</p> <h2 id="-quick-install">📚 Quick Install</h2> <p><code class="language-plaintext highlighter-rouge">pip install parsechain</code></p> <h2 id="-walkthrough">📃 Walkthrough</h2> <p>Let’s try out making a agent-thinking-chain. I used something similar in <a href="https://viktor1223.github.io/AI-Assistant/">euGenie</a>!</p> <h3 id="quick-background">Quick Background</h3> <blockquote> <p>HotpotQA is a question answering dataset featuring natural, multi-hop questions, with strong supervision for supporting facts to enable more explainable question answering systems.</p> </blockquote> <p><a href="https://github.com/ysymyth/ReAct">ReAct</a> adds a bunch of useful helper functions to their evaluation code for prompting against this dataset. This sample directory cleans up their code and adds GrammarFlow to it.</p> <ol> <li>Create a Pydantic model to constrain our thinking state. We’ll ask the model for ‘thought’, ‘action’, and ‘action_input’.</li> <li>Create a Prompt for our ReAct flow. Our <code class="language-plaintext highlighter-rouge">make_prompt()</code> function below takes care of it.</li> <li>Within the original <code class="language-plaintext highlighter-rouge">webthink()</code> function, we make changes along the lines of: <ul> <li>Tracking and logging all steps between iterations\n</li> <li>Use <code class="language-plaintext highlighter-rouge">Constrain()</code> from GrammarFlow to make the extraction of ‘Thought’, ‘Action’ and ‘Action_Input’ pythonic and error-prone. Note: Prompts are stateful, and thus need to be discarded after every <code class="language-plaintext highlighter-rouge">Constrain()</code> block. That’s why we use <code class="language-plaintext highlighter-rouge">make_prompt()</code> within every run.</li> </ul> </li> </ol> <h3 id="implementation">Implementation</h3> <ol> <li> <p>Map out what your agent chain is doing. Understand what it’s goals are and what data needs to be carried forward from one step to the next. In every call, we want to pass in the Action and subsequent Observation to the next call.</p> </li> <li>Make a Pydantic Model for the above case. Here’s a sample: <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Step</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+ <span class="n">thought</span><span class="p">:</span> <span class="nb">str</span> 
+ <span class="n">action</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(...,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">You only have 3 options: search | lookup | finish</span><span class="sh">"</span><span class="p">)</span>
+ <span class="n">action_input</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(...,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Your input to the above action.</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div> </div> </li> <li>[Optional] Create a prompt template using parsechain’s PromptBuilder. For simpler prompts, you do not need to create a PromptBuilder() object, but for the purpose of showing what can be done, we will.</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">parsechain</span> <span class="kn">import</span> <span class="n">PromptBuilder</span>
 
-# Assume `llm` to be a call to a model
-llm_response = llm.request(manager.prompt, temperature=0.01)
+<span class="c1"># Using this to ignore certain sections in my main loop
+</span><span class="k">def</span> <span class="nf">check_previous_interaction</span><span class="p">(</span><span class="n">id_</span><span class="p">):</span> <span class="k">return</span> <span class="n">id_</span> <span class="o">&gt;</span> <span class="mi">1</span>
 
-# Parse the response into a custom dataclass for holding values
-response = manager.parse(llm_response) ```
-</code></pre></div></div> <ol> <li>Extract the required values from the response to perform necessary functions on.</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">observation</span> <span class="o">=</span> <span class="nc">PerformSomeAction</span><span class="p">(</span>
-  <span class="n">action</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">ThoughtState</span><span class="p">.</span><span class="n">action</span><span class="p">,</span> 
-  <span class="n">action_input</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">ThoughtState</span><span class="p">.</span><span class="n">action_input</span>
-<span class="p">)</span> 
+<span class="k">def</span> <span class="nf">make_prompt</span><span class="p">():</span> 
+  <span class="n">prompt</span> <span class="o">=</span> <span class="nc">PromptBuilder</span><span class="p">()</span> 
+  <span class="n">prompt</span><span class="p">.</span><span class="nf">add_section</span><span class="p">(</span>
+    <span class="n">text</span><span class="o">=</span><span class="sh">"""</span><span class="s">
+  Goal: {question}
+
+  Your goal is to solve the above QA task in steps. First, think about what information you need to answer the question. 
+  Use `search` to get the information you need. This needs a single keyword or noun as input. If it can</span><span class="sh">'</span><span class="s">t find anything, itll give alternate keywords. You can find them in your thinking history below, use them to search again. 
+  Use `lookup` to find more information from the paragraph returned by search. This matches the action_input you give to setences in search. 
+  Use `finish` to return your final complete answer as input field. Use this if you believe you have enough information to completely answer the task.</span><span class="sh">"""</span><span class="p">,</span>
+    <span class="n">placeholders</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">question</span><span class="sh">"</span><span class="p">]</span>
+  <span class="p">)</span> 
+  <span class="n">prompt</span><span class="p">.</span><span class="nf">add_section</span><span class="p">(</span>
+    <span class="n">define_grammar</span><span class="o">=</span><span class="bp">True</span>
+  <span class="p">)</span> 
+  <span class="n">prompt</span><span class="p">.</span><span class="nf">add_section</span><span class="p">(</span>
+    <span class="n">text</span><span class="o">=</span><span class="sh">"</span><span class="se">\n</span><span class="s">Example thinking process:{example}</span><span class="se">\n</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">placeholders</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">example</span><span class="sh">"</span><span class="p">]</span>
+  <span class="p">)</span>
+  <span class="n">prompt</span><span class="p">.</span><span class="nf">add_section</span><span class="p">(</span>
+    <span class="n">text</span><span class="o">=</span><span class="sh">"</span><span class="s">Create the next Step using the information available you to below.</span><span class="se">\n</span><span class="sh">"</span><span class="p">,</span>
+  <span class="p">)</span>
+  <span class="n">prompt</span><span class="p">.</span><span class="nf">add_section</span><span class="p">(</span>
+    <span class="n">text</span><span class="o">=</span><span class="sh">"</span><span class="s">DO NOT REPEAT THOUGHTS OR ACTIONS FROM YOUR PAST. ENSURE EACH STEP IS UNIQUE. Below is the history of your thinking process and corresponding observations.</span><span class="se">\n</span><span class="s">{history}</span><span class="se">\n</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">placeholders</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">history</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">enable_on</span><span class="o">=</span><span class="n">check_previous_interaction</span>
+  <span class="p">)</span> 
+  <span class="k">return</span> <span class="n">prompt</span> 
+</code></pre></div></div> <p><strong>Here’s an example of the <a href="https://github.com/e-lab/SyntaxShaper/blob/main/README.md#-code-usage">Llama2 Prompt</a>. You can find an in-depth explanation on making prompts <a href="https://github.com/e-lab/SyntaxShaper/blob/main/demo.ipynb">here</a>!</strong></p> <ol> <li>[Optional] If you decide to make your own template, define your <code class="language-plaintext highlighter-rouge">placeholders</code>. ```python example = wrappers.EXAMPLE question = “What government position was held by the woman who portrayed Corliss Archer in the film Kiss and Tell?”</li> </ol> <p>def load_history(history_): “\n”.join([f”Thought {id_}: {value[‘thought’]}\nAction {id_}: {value[‘action’]}\nAction_Input {id_}: {value[‘action_input’]}\nObservation {id_}: {value[‘observation’]}” for id_, value in history.items()])</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+5. Invoke the `Constrain` block with the prompt. Set the configuration metadata, and format the prompt with the required `grammars` and `placeholders`. The below codeblock is taken from the ReAct repository with just a few changes. 
+```python
+from parsechain import Constrain 
+
+def webthink(idx=None, env=env, to_print=False): 
+  # Initializing Stateful vars
+  thought = None 
+  action = None
+  observation = None
+  id_ = 1
+  history, history_ = {}, None
+
+  for i in range(10):
+    if history:
+      history_ = load_history(history_)
+
+    # The only major change we've made! 
+    with Constrain(make_prompt()) as manager: 
+      manager.set_config(
+        format='xml'
+      ) 
+      manager.format_prompt(
+        placeholders={ 
+          "question": question,
+          'example': example, 
+          "history": history_
+        }, 
+        grammars=[{
+          'description': 'Your thinking state', 
+          'model': Step
+        }], 
+        enable_on={
+          'id_':id_ 
+        }
+      ) 
+      
+      response = llm(manager.prompt, temperature=0.01)
+      response = manager.parse(response)  
+
+      thought = response.Step.thought 
+      action = response.Step.action
+      action_input = response.Step.action_input
+
+    observation, r, done, info = step(env, f"{action}[{action_input}]")
+    observation = observation.replace("\\n", " ")
+
+    history[id_] = { 
+      "thought": thought, 
+      "action": action, 
+      "action_input": action_input, 
+      "observation": observation
+    }
+
+    id_ += 1
+    
+    if done: 
+      final = action_input
+      break 
+
+  if not done:
+      final = "Failed!"
+      observation, r, done, info = step(env, "finish[]")
+
+  return final, info['gt_answer'], id_
+</code></pre></div></div> <ol> <li>Extract the required values from the response to perform necessary functions on. The below statements perform these actions in the above code.</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">...</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="nf">llm</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="n">prompt</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>  
+
+        <span class="n">thought</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Step</span><span class="p">.</span><span class="n">thought</span> 
+        <span class="n">action</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Step</span><span class="p">.</span><span class="n">action</span>
+        <span class="n">action_input</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">Step</span><span class="p">.</span><span class="n">action_input</span>
+<span class="bp">...</span>
 </code></pre></div></div> <ol> <li>Continue to the next iteration in your agent chain!</li> </ol> <h3 id="gnbf-grammar">GNBF Grammar</h3> <p>GrammarFlow also has functionality to convert a pydantic model into GNBF grammar.</p> <blockquote> <p>“GBNF (GGML BNF) is a format for defining formal grammars to constrain model outputs in llama.cpp. For example, you can use it to force the model to generate valid JSON, or speak only in emojis.” Read more about it here: https://github.com/ggerganov/llama.cpp/blob/master/grammars/README.md</p> </blockquote> <p>This can then be passed into llama.cpp using llama-cpp-python to ensure that sampling of logits can take place with rules in mind.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define your model 
 </span><span class="k">class</span> <span class="nc">TeamMember</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
@@ -165,372 +232,162 @@ response = manager.parse(llm_response) ```
     }
   }
 }
-</code></pre> <p>This plot supports both light and dark themes.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included vega lite code could look like]]></summary></entry><entry><title type="html">How AI can help you reproduce open-source software!</title><link href="https://akshathraghav.github.io/blog/2024/geojson-map/" rel="alternate" type="text/html" title="How AI can help you reproduce open-source software!"/><published>2024-01-26T17:57:00+00:00</published><updated>2024-01-26T17:57:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/geojson-map</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/geojson-map/"><![CDATA[<p>This is an example post with some <a href="https://geojson.org/">geojson</a> code. The support is provided thanks to <a href="https://leafletjs.com/">Leaflet</a>. To create your own visualization, go to <a href="https://geojson.io/">geojson.io</a>.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">geojson
-</span><span class="sb">{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          [
-            [
-              -60.11363029935569,
-              -2.904625022183211
-            ],
-            [
-              -60.11363029935569,
-              -3.162613728707967
-            ],
-            [
-              -59.820894493858034,
-              -3.162613728707967
-            ],
-            [
-              -59.820894493858034,
-              -2.904625022183211
-            ],
-            [
-              -60.11363029935569,
-              -2.904625022183211
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    }
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-geojson">{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          [
-            [
-              -60.11363029935569,
-              -2.904625022183211
-            ],
-            [
-              -60.11363029935569,
-              -3.162613728707967
-            ],
-            [
-              -59.820894493858034,
-              -3.162613728707967
-            ],
-            [
-              -59.820894493858034,
-              -2.904625022183211
-            ],
-            [
-              -60.11363029935569,
-              -2.904625022183211
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    }
-  ]
-}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><category term="maps"/><summary type="html"><![CDATA[this is what included geojson code could look like]]></summary></entry><entry><title type="html">a post with echarts</title><link href="https://akshathraghav.github.io/blog/2024/echarts/" rel="alternate" type="text/html" title="a post with echarts"/><published>2024-01-26T16:03:00+00:00</published><updated>2024-01-26T16:03:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/echarts</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/echarts/"><![CDATA[<p>This is an example post with some <a href="https://echarts.apache.org/">echarts</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">echarts
-</span><span class="sb">{
-  "title": {
-    "text": "ECharts Getting Started Example"
-  },
-  "responsive": true,
-  "tooltip": {},
-  "legend": {
-    "top": "30px",
-    "data": ["sales"]
-  },
-  "xAxis": {
-    "data": ["Shirts", "Cardigans", "Chiffons", "Pants", "Heels", "Socks"]
-  },
-  "yAxis": {},
-  "series": [
-    {
-      "name": "sales",
-      "type": "bar",
-      "data": [5, 20, 36, 10, 10, 20]
-    }
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-echarts">{
-  "title": {
-    "text": "ECharts Getting Started Example"
-  },
-  "responsive": true,
-  "tooltip": {},
-  "legend": {
-    "top": "30px",
-    "data": ["sales"]
-  },
-  "xAxis": {
-    "data": ["Shirts", "Cardigans", "Chiffons", "Pants", "Heels", "Socks"]
-  },
-  "yAxis": {},
-  "series": [
-    {
-      "name": "sales",
-      "type": "bar",
-      "data": [5, 20, 36, 10, 10, 20]
-    }
-  ]
-}
-</code></pre> <p>Note that this library offer support for both light and dark themes. You can switch between them using the theme switcher in the top right corner of the page.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included echarts code could look like]]></summary></entry><entry><title type="html">a post with chart.js</title><link href="https://akshathraghav.github.io/blog/2024/chartjs/" rel="alternate" type="text/html" title="a post with chart.js"/><published>2024-01-26T01:04:00+00:00</published><updated>2024-01-26T01:04:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/chartjs</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/chartjs/"><![CDATA[<p>This is an example post with some <a href="https://www.chartjs.org/">chart.js</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">chartjs
-</span><span class="sb">{
-  "type": "line",
-  "data": {
-    "labels": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July"
-    ],
-    "datasets": [
-      {
-        "label": "# of bugs",
-        "fill": false,
-        "lineTension": 0.1,
-        "backgroundColor": "rgba(75,192,192,0.4)",
-        "borderColor": "rgba(75,192,192,1)",
-        "borderCapStyle": "butt",
-        "borderDash": [],
-        "borderDashOffset": 0,
-        "borderJoinStyle": "miter",
-        "pointBorderColor": "rgba(75,192,192,1)",
-        "pointBackgroundColor": "#fff",
-        "pointBorderWidth": 1,
-        "pointHoverRadius": 5,
-        "pointHoverBackgroundColor": "rgba(75,192,192,1)",
-        "pointHoverBorderColor": "rgba(220,220,220,1)",
-        "pointHoverBorderWidth": 2,
-        "pointRadius": 1,
-        "pointHitRadius": 10,
-        "data": [
-          65,
-          59,
-          80,
-          81,
-          56,
-          55,
-          40
-        ],
-        "spanGaps": false
-      }
-    ]
-  },
-  "options": {}
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>This is how it looks like:</p> <pre><code class="language-chartjs">{
-  "type": "line",
-  "data": {
-    "labels": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July"
-    ],
-    "datasets": [
-      {
-        "label": "# of bugs",
-        "fill": false,
-        "lineTension": 0.1,
-        "backgroundColor": "rgba(75,192,192,0.4)",
-        "borderColor": "rgba(75,192,192,1)",
-        "borderCapStyle": "butt",
-        "borderDash": [],
-        "borderDashOffset": 0,
-        "borderJoinStyle": "miter",
-        "pointBorderColor": "rgba(75,192,192,1)",
-        "pointBackgroundColor": "#fff",
-        "pointBorderWidth": 1,
-        "pointHoverRadius": 5,
-        "pointHoverBackgroundColor": "rgba(75,192,192,1)",
-        "pointHoverBorderColor": "rgba(220,220,220,1)",
-        "pointHoverBorderWidth": 2,
-        "pointRadius": 1,
-        "pointHitRadius": 10,
-        "data": [
-          65,
-          59,
-          80,
-          81,
-          56,
-          55,
-          40
-        ],
-        "spanGaps": false
-      }
-    ]
-  },
-  "options": {}
-}
-</code></pre> <p>Also another example chart.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">chartjs
-</span><span class="sb">{
-  "type": "doughnut",
-  "data": {
-    "labels": [
-      "Red",
-      "Blue",
-      "Yellow"
-    ],
-    "datasets": [
-      {
-        "data": [
-          300,
-          50,
-          100
-        ],
-        "backgroundColor": [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ],
-        "hoverBackgroundColor": [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ]
-      }
-    ]
-  },
-  "options": {}
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-chartjs">{
-  "type": "doughnut",
-  "data": {
-    "labels": [
-      "Red",
-      "Blue",
-      "Yellow"
-    ],
-    "datasets": [
-      {
-        "data": [
-          300,
-          50,
-          100
-        ],
-        "backgroundColor": [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ],
-        "hoverBackgroundColor": [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ]
-      }
-    ]
-  },
-  "options": {}
-}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included chart.js code could look like]]></summary></entry><entry><title type="html">a post with TikZJax</title><link href="https://akshathraghav.github.io/blog/2023/tikzjax/" rel="alternate" type="text/html" title="a post with TikZJax"/><published>2023-12-12T22:25:00+00:00</published><updated>2023-12-12T22:25:00+00:00</updated><id>https://akshathraghav.github.io/blog/2023/tikzjax</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2023/tikzjax/"><![CDATA[<p>This is an example post with TikZ code. TikZJax converts script tags (containing TikZ code) into SVGs.</p> <script type="text/tikz">
-\begin{tikzpicture}
-    \draw[red,fill=black!60!red] (0,0) circle [radius=1.5];
-    \draw[green,fill=black!60!green] (0,0) circle [x radius=1.5cm, y radius=10mm];
-    \draw[blue,fill=black!60!blue] (0,0) circle [x radius=1cm, y radius=5mm, rotate=30];
-\end{tikzpicture}
-</script>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="diagrams"/><summary type="html"><![CDATA[this is what included TikZ code could look like]]></summary></entry><entry><title type="html">a post with bibliography</title><link href="https://akshathraghav.github.io/blog/2023/post-bibliography/" rel="alternate" type="text/html" title="a post with bibliography"/><published>2023-07-12T13:56:00+00:00</published><updated>2023-07-12T13:56:00+00:00</updated><id>https://akshathraghav.github.io/blog/2023/post-bibliography</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2023/post-bibliography/"><![CDATA[<p>This post shows how to add bibliography to simple blog posts. We support every citation style that <a href="https://github.com/inukshuk/jekyll-scholar">jekyll-scholar</a> does. That means simple citation like <a class="citation" href="#einstein1950meaning">(Einstein &amp; Taub, 1950)</a>, multiple citations like <a class="citation" href="#einstein1950meaning">(Einstein &amp; Taub, 1950; Einstein, 1905)</a>, long references like <span id="einstein1905movement">Einstein, A. (1905). Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat. <i>Ann. Phys.</i>, <i>17</i>, 549–560.</span> or also quotes:</p> <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,<br/>sed do eiusmod tempor.</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p><cite><a class="citation" href="#einstein1905electrodynamics">(Einstein, 1905)</a></cite></blockquote> <p>If you would like something more academic, check the <a href="/blog/2021/distill/">distill style post</a>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="bib"/><summary type="html"><![CDATA[an example of a blog post with bibliography]]></summary></entry><entry><title type="html">a post with jupyter notebook</title><link href="https://akshathraghav.github.io/blog/2023/jupyter-notebook/" rel="alternate" type="text/html" title="a post with jupyter notebook"/><published>2023-07-04T12:57:00+00:00</published><updated>2023-07-04T12:57:00+00:00</updated><id>https://akshathraghav.github.io/blog/2023/jupyter-notebook</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2023/jupyter-notebook/"><![CDATA[<p>To include a jupyter notebook in a post, you can use the following code:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{::nomarkdown}
-<span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">jupyter_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'assets/jupyter/blog.ipynb'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="cp">%}</span>
-<span class="cp">{%</span><span class="w"> </span><span class="nt">capture</span><span class="w"> </span><span class="nv">notebook_exists</span><span class="w"> </span><span class="cp">%}{%</span><span class="w"> </span><span class="nt">file_exists</span><span class="w"> </span>assets/jupyter/blog.ipynb<span class="w"> </span><span class="cp">%}{%</span><span class="w"> </span><span class="nt">endcapture</span><span class="w"> </span><span class="cp">%}</span>
-<span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">notebook_exists</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'true'</span><span class="w"> </span><span class="cp">%}</span>
-  <span class="cp">{%</span><span class="w"> </span><span class="nt">jupyter_notebook</span><span class="w"> </span><span class="nv">jupyter_path</span><span class="w"> </span><span class="cp">%}</span>
-<span class="cp">{%</span><span class="w"> </span><span class="nt">else</span><span class="w"> </span><span class="cp">%}</span>
-  &lt;p&gt;Sorry, the notebook you are looking for does not exist.&lt;/p&gt;
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
-{:/nomarkdown}
-</code></pre></div></div> <p>Let’s break it down: this is possible thanks to <a href="https://github.com/red-data-tools/jekyll-jupyter-notebook">Jekyll Jupyter Notebook plugin</a> that allows you to embed jupyter notebooks in your posts. It basically calls <a href="https://nbconvert.readthedocs.io/en/latest/usage.html#convert-html"><code class="language-plaintext highlighter-rouge">jupyter nbconvert --to html</code></a> to convert the notebook to an html page and then includes it in the post. Since <a href="https://jekyllrb.com/docs/configuration/markdown/">Kramdown</a> is the default Markdown renderer for Jekyll, we need to surround the call to the plugin with the <a href="https://kramdown.gettalong.org/syntax.html#extensions">::nomarkdown</a> tag so that it stops processing this part with Kramdown and outputs the content as-is.</p> <p>The plugin takes as input the path to the notebook, but it assumes the file exists. If you want to check if the file exists before calling the plugin, you can use the <code class="language-plaintext highlighter-rouge">file_exists</code> filter. This avoids getting a 404 error from the plugin and ending up displaying the main page inside of it instead. If the file does not exist, you can output a message to the user. The code displayed above outputs the following:</p> <div class="jupyter-notebook" style="position: relative; width: 100%; margin: 0 auto;"> <div class="jupyter-notebook-iframe-container"> <iframe src="/assets/jupyter/blog.ipynb.html" style="position: absolute; top: 0; left: 0; border-style: none;" width="100%" height="100%" onload="this.parentElement.style.paddingBottom = (this.contentWindow.document.documentElement.scrollHeight + 10) + 'px'"></iframe> </div> </div> <p>Note that the jupyter notebook supports both light and dark themes.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="jupyter"/><summary type="html"><![CDATA[an example of a blog post with jupyter notebook]]></summary></entry><entry><title type="html">a post with custom blockquotes</title><link href="https://akshathraghav.github.io/blog/2023/custom-blockquotes/" rel="alternate" type="text/html" title="a post with custom blockquotes"/><published>2023-05-12T19:53:00+00:00</published><updated>2023-05-12T19:53:00+00:00</updated><id>https://akshathraghav.github.io/blog/2023/custom-blockquotes</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2023/custom-blockquotes/"><![CDATA[<p>This post shows how to add custom styles for blockquotes. Based on <a href="https://github.com/sighingnow/jekyll-gitbook">jekyll-gitbook</a> implementation.</p> <p>We decided to support the same custom blockquotes as in <a href="https://sighingnow.github.io/jekyll-gitbook/jekyll/2022-06-30-tips_warnings_dangers.html">jekyll-gitbook</a>, which are also found in a lot of other sites’ styles. The styles definitions can be found on the <a href="https://github.com/alshedivat/al-folio/blob/master/_sass/_base.scss">_base.scss</a> file, more specifically:</p> <div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Tips, warnings, and dangers */</span>
-<span class="nc">.post</span> <span class="nc">.post-content</span> <span class="nt">blockquote</span> <span class="p">{</span>
-  <span class="k">&amp;</span><span class="nc">.block-tip</span> <span class="p">{</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-tip-block</span><span class="p">);</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-tip-block-bg</span><span class="p">);</span>
+</code></pre> <p>This plot supports both light and dark themes.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included vega lite code could look like]]></summary></entry><entry><title type="html">How AI can help you reproduce open-source software!</title><link href="https://akshathraghav.github.io/blog/2024/geojson-map/" rel="alternate" type="text/html" title="How AI can help you reproduce open-source software!"/><published>2024-01-26T17:57:00+00:00</published><updated>2024-01-26T17:57:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/geojson-map</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/geojson-map/"><![CDATA[<h1 id="getting-started-with-nvidia-toolkit-gcc-and-llamacpp-on-gilbreth-cluster">Getting Started with NVIDIA Toolkit, gcc, and llama.cpp on Gilbreth Cluster</h1> <p>Welcome to the quick start guide for running <code class="language-plaintext highlighter-rouge">llama.cpp</code> on the Gilbreth cluster <strong>without root access</strong>.</p> <h2 id="why-this-guide-is-necessary">Why This Guide is Necessary</h2> <p>On the Gilbreth cluster, users often face the issue of the lack of sudo access. This limitation restricts the ability to install packages or update system libraries (which are very old on these clusters).</p> <p>This repository has a set of bash scripts that allow users to install and configure gcc and the NVIDIA Toolkit in a user-specific directory. This approach ensures that you can run <code class="language-plaintext highlighter-rouge">llama.cpp</code> without the need for administrative privileges.</p> <h3 id="before-you-start">Before You Start</h3> <p>Ensure you have permission to execute scripts and access the Gilbreth cluster. Familiarity with basic terminal commands and the Linux environment will be helpful.</p> <h2 id="0-e-lab-members">0. E-Lab Members</h2> <p>Members of the E-Lab with access to the depot can simply copy the contents of launch.sh into their <code class="language-plaintext highlighter-rouge">~/.bashrc</code> and</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div></div> <p>Skip to <a href="https://github.com/AkshathRaghav/llama_set_up_gilbreth/tree/main?tab=readme-ov-file#running-inference">Running Inference</a>.</p> <h2 id="1-nvidia-toolkit-installation">1. NVIDIA Toolkit Installation</h2> <p>The NVIDIA Toolkit includes libraries and tools essential for developing applications that leverage NVIDIA GPUs.</p> <p>Extras:</p> <ul> <li>https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=CentOS&amp;target_version=7&amp;target_type=runfile_local</li> <li>https://stackoverflow.com/questions/39379792/install-cuda-without-root</li> </ul> <h3 id="steps">Steps:</h3> <ol> <li><strong>Configure Installation Directory</strong>: <ul> <li>Edit <code class="language-plaintext highlighter-rouge">nvidia-toolkit.sh</code> to specify your installation directory by changing the <code class="language-plaintext highlighter-rouge">ROOT_DIR</code> variable.</li> </ul> </li> <li><strong>Execute the Script</strong>: <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash nvidia-toolkit.sh
+</code></pre></div> </div> <p>Complete the setup by following the prompts.</p> </li> </ol> <h3 id="toolkit-setup">Toolkit Setup</h3> <ol> <li>Type <code class="language-plaintext highlighter-rouge">accept</code> in the console.</li> </ol> <div align="center"> <img src="./assets/1.png" alt="1" style="height: 50%;"/> </div> <ol> <li>Use <code class="language-plaintext highlighter-rouge">ENTER</code> to select/deselect settings. Make sure the settings screen looks like the following image:</li> </ol> <div align="center"> <img src="./assets/2.png" alt="1" style="height: 50%;"/> </div> <ol> <li>Hover over the <code class="language-plaintext highlighter-rouge">CUDA Toolkit 12.3</code> option, and press <code class="language-plaintext highlighter-rouge">A</code>. Deselect all of the settings here except <code class="language-plaintext highlighter-rouge">Install manpage documents...</code></li> </ol> <div align="center"> <img src="./assets/3.png" alt="1" style="height: 50%;"/> </div> <ol> <li>Hover over <code class="language-plaintext highlighter-rouge">Change Toolkit Install Path</code>. Hit <code class="language-plaintext highlighter-rouge">ENTER</code> and add the $TOOLKIT variable path here.</li> </ol> <div align="center"> <img src="./assets/4.png" alt="1" style="height: 50%;"/> </div> <ol> <li>Finally, exit out into the main menu, hover over <code class="language-plaintext highlighter-rouge">Install</code> and hit <code class="language-plaintext highlighter-rouge">ENTER</code>.</li> </ol> <p>Now, add these lines to the bottom of your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">TOOLKIT</span><span class="o">={}</span>
 
-    <span class="nt">p</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-tip-block-text</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div></div> <h2 id="2-gcc-installation">2. gcc Installation</h2> <p>gcc (GNU Compiler Collection) is a compiler system supporting various programming languages, crucial for software development and execution. Gilbreth, and other clusters like Negishi, use a version below &lt;11.x.x&gt;. llama.cpp requires a higher version. We will be using the latest version: &lt;12.3.0&gt;.</p> <p>Extra:</p> <ul> <li>https://gcc.gnu.org/install/configure.html</li> <li>https://stackoverflow.com/questions/10279829/installing-glib-in-non-standard-prefix-fails</li> <li>https://github.com/ggerganov/llama.cpp/issues/552</li> </ul> <h3 id="steps-1">Steps:</h3> <ol> <li><strong>Configure Installation Directory</strong>: <ul> <li>Open <code class="language-plaintext highlighter-rouge">gcc.sh</code> in a text editor.</li> <li>Set <code class="language-plaintext highlighter-rouge">ROOT_DIR</code> to your desired installation directory.</li> <li>The script ensures that <code class="language-plaintext highlighter-rouge">srcdir</code> (SRC_DIR) and <code class="language-plaintext highlighter-rouge">objdir</code> (BUILD_DIR) are different directories. If you do wish to change these paths, make sure that they point to different locations.</li> </ul> </li> <li><strong>Run the Script</strong>: <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash gcc.sh
+</code></pre></div> </div> </li> </ol> <p>If you face any issues, run <code class="language-plaintext highlighter-rouge">make -k distclean &amp;&amp; make -k clean</code> to undo what was done by <code class="language-plaintext highlighter-rouge">./configure</code> and <code class="language-plaintext highlighter-rouge">make</code>. Then, debug. Otherwise, this will cause issues down the line.</p> <p>Now, add these lines to the bottom of your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ROOT_DIR</span><span class="o">={}</span>
+<span class="nb">export </span><span class="nv">SRC_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_src <span class="c"># Change this is needed</span>
+<span class="nb">export </span><span class="nv">BUILD_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_build <span class="c"># Change this if neeeded</span>
 
-    <span class="nt">h1</span><span class="o">,</span>
-    <span class="nt">h2</span><span class="o">,</span>
-    <span class="nt">h3</span><span class="o">,</span>
-    <span class="nt">h4</span><span class="o">,</span>
-    <span class="nt">h5</span><span class="o">,</span>
-    <span class="nt">h6</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-tip-block-title</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">CC</span><span class="o">=</span>gcc
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$BUILD_DIR</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$BUILD_DIR</span>/local/lib:<span class="nv">$BUILD_DIR</span>/lib:<span class="nv">$BUILD_DIR</span>/local/lib64:<span class="nv">$BUILD_DIR</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div></div> <h2 id="3-running-llamacpp">3. Running llama.cpp</h2> <p>With gcc and the NVIDIA Toolkit set up, you’re now ready to compile and run <code class="language-plaintext highlighter-rouge">llama.cpp</code>.</p> <p>Extras:</p> <ul> <li>https://github.com/ggerganov/llama.cpp?tab=readme-ov-file</li> <li>https://stackoverflow.com/questions/39649102/how-do-i-select-which-gpu-to-run-a-job-on</li> <li>https://kubito.dev/posts/llama-cpp-linux-nvidia/</li> </ul> <h3 id="steps-2">Steps:</h3> <ol> <li> <p><strong>NOTE:</strong> If you have run the above scripts in a previous session, then ensure you have added the environoment paths to your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file with the same paths you used in <code class="language-plaintext highlighter-rouge">gcc.sh</code> and <code class="language-plaintext highlighter-rouge">nvidia-toolkit.sh</code>. This sets the paths to look at our local installations.</p> </li> <li> <p><strong>Download the llama Script</strong>: <code class="language-plaintext highlighter-rouge">llama.sh</code> is designed to compile and execute <code class="language-plaintext highlighter-rouge">llama.cpp</code> using the previously installed tools.</p> </li> <li><strong>Configure Installation Directory</strong>: <ul> <li>Modify <code class="language-plaintext highlighter-rouge">llama.sh</code>, setting <code class="language-plaintext highlighter-rouge">LLAMA_DIR</code> to the directory where gcc and the NVIDIA Toolkit are installed.</li> </ul> </li> <li><strong>Launch the Script</strong>: <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash llama.sh
+</code></pre></div> </div> <p>This script compiles <code class="language-plaintext highlighter-rouge">llama.cpp</code> and runs it. Follow any instructions or prompts that appear.</p> </li> </ol> <h3 id="running-inference">Running inference</h3> <p>Ensure all of these lines exist within your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ROOT_DIR</span><span class="o">=</span>/depot/euge/data/araviki
+<span class="nb">export </span><span class="nv">TOOLKIT</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/nvidia-toolkit/12.3
+<span class="nb">export </span><span class="nv">SRC_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_src
+<span class="nb">export </span><span class="nv">BUILD_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_build
 
-  <span class="k">&amp;</span><span class="nc">.block-warning</span> <span class="p">{</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-warning-block</span><span class="p">);</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-warning-block-bg</span><span class="p">);</span>
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/bin:<span class="nv">$BUILD_DIR</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/lib64:<span class="nv">$BUILD_DIR</span>/local/lib:<span class="nv">$BUILD_DIR</span>/lib:<span class="nv">$BUILD_DIR</span>/local/lib64:<span class="nv">$BUILD_DIR</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+<span class="nb">export </span><span class="nv">LLAMA</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/llama
+</code></pre></div></div> <p>Now, you are ready to run llama.cpp. I’ve bound the path of my main <code class="language-plaintext highlighter-rouge">llama</code> folder to <code class="language-plaintext highlighter-rouge">$LLAMA</code>, so that I can call it as follows:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># - araviki</span>
+   <span class="c"># - llama</span>
+      <span class="c"># - gguf # Storing quantized models</span>
+      <span class="c"># - llama.cpp # src</span>
+         <span class="c"># - main</span>
+         <span class="c"># - prompts/</span>
+         <span class="c"># - grammars/</span>
 
-    <span class="nt">p</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-warning-block-text</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="nv">$LLAMA</span>/llama.cpp/main <span class="nt">--color</span> <span class="nt">--interactive</span> <span class="nt">--model</span> <span class="nv">$LLAMA</span>/gguf/llama-2-13b.Q5_K_M.gguf <span class="nt">--n-predict</span> 512 <span class="nt">--repeat_penalty</span> 1.0 <span class="nt">--n-gpu-layers</span> 15000 <span class="nt">--reverse-prompt</span> <span class="s2">"User:"</span> <span class="nt">--in-prefix</span> <span class="s2">" "</span> <span class="nt">-f</span> <span class="nv">$LLAMA</span>/llama.cpp/prompts/chat-with-bob.txt
+</code></pre></div></div> <p><strong>The output shown below was ran on a single A100-80GB instance.</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Log start
+main: build <span class="o">=</span> 2295 <span class="o">(</span>87c91c07<span class="o">)</span>
+main: built with gcc <span class="o">(</span>GCC<span class="o">)</span> 12.2.0 <span class="k">for </span>x86_64-pc-linux-gnu
+main: seed  <span class="o">=</span> 1709276455
+llama_model_loader: loaded meta data with 19 key-value pairs and 363 tensors from /depot/euge/data/araviki/llama/gguf/llama-2-13b.Q5_K_M.gguf <span class="o">(</span>version GGUF V2<span class="o">)</span>
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides <span class="k">do </span>not apply <span class="k">in </span>this output.
+llama_model_loader: - kv   0:                       general.architecture str              <span class="o">=</span> llama
+llama_model_loader: - kv   1:                               general.name str              <span class="o">=</span> LLaMA v2
+llama_model_loader: - kv   2:                       llama.context_length u32              <span class="o">=</span> 4096
+llama_model_loader: - kv   3:                     llama.embedding_length u32              <span class="o">=</span> 5120
+llama_model_loader: - kv   4:                          llama.block_count u32              <span class="o">=</span> 40
+llama_model_loader: - kv   5:                  llama.feed_forward_length u32              <span class="o">=</span> 13824
+llama_model_loader: - kv   6:                 llama.rope.dimension_count u32              <span class="o">=</span> 128
+llama_model_loader: - kv   7:                 llama.attention.head_count u32              <span class="o">=</span> 40
+llama_model_loader: - kv   8:              llama.attention.head_count_kv u32              <span class="o">=</span> 40
+llama_model_loader: - kv   9:     llama.attention.layer_norm_rms_epsilon f32              <span class="o">=</span> 0.000010
+llama_model_loader: - kv  10:                          general.file_type u32              <span class="o">=</span> 17
+llama_model_loader: - kv  11:                       tokenizer.ggml.model str              <span class="o">=</span> llama
+llama_model_loader: - kv  12:                      tokenizer.ggml.tokens arr[str,32000]   <span class="o">=</span> <span class="o">[</span><span class="s2">"&lt;unk&gt;"</span>, <span class="s2">"&lt;s&gt;"</span>, <span class="s2">"&lt;/s&gt;"</span>, <span class="s2">"&lt;0x00&gt;"</span>, <span class="s2">"&lt;...
+llama_model_loader: - kv  13:                      tokenizer.ggml.scores arr[f32,32000]   = [0.000000, 0.000000, 0.000000, 0.0000...
+llama_model_loader: - kv  14:                  tokenizer.ggml.token_type arr[i32,32000]   = [2, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, ...
+llama_model_loader: - kv  15:                tokenizer.ggml.bos_token_id u32              = 1
+llama_model_loader: - kv  16:                tokenizer.ggml.eos_token_id u32              = 2
+llama_model_loader: - kv  17:            tokenizer.ggml.unknown_token_id u32              = 0
+llama_model_loader: - kv  18:               general.quantization_version u32              = 2
+llama_model_loader: - type  f32:   81 tensors
+llama_model_loader: - type q5_K:  241 tensors
+llama_model_loader: - type q6_K:   41 tensors
+llm_load_vocab: special tokens definition check successful ( 259/32000 ).
+llm_load_print_meta: format           = GGUF V2
+llm_load_print_meta: arch             = llama
+llm_load_print_meta: vocab type       = SPM
+llm_load_print_meta: n_vocab          = 32000
+llm_load_print_meta: n_merges         = 0
+llm_load_print_meta: n_ctx_train      = 4096
+llm_load_print_meta: n_embd           = 5120
+llm_load_print_meta: n_head           = 40
+llm_load_print_meta: n_head_kv        = 40
+llm_load_print_meta: n_layer          = 40
+llm_load_print_meta: n_rot            = 128
+llm_load_print_meta: n_embd_head_k    = 128
+llm_load_print_meta: n_embd_head_v    = 128
+llm_load_print_meta: n_gqa            = 1
+llm_load_print_meta: n_embd_k_gqa     = 5120
+llm_load_print_meta: n_embd_v_gqa     = 5120
+llm_load_print_meta: f_norm_eps       = 0.0e+00
+llm_load_print_meta: f_norm_rms_eps   = 1.0e-05
+llm_load_print_meta: f_clamp_kqv      = 0.0e+00
+llm_load_print_meta: f_max_alibi_bias = 0.0e+00
+llm_load_print_meta: n_ff             = 13824
+llm_load_print_meta: n_expert         = 0
+llm_load_print_meta: n_expert_used    = 0
+llm_load_print_meta: pooling type     = 0
+llm_load_print_meta: rope type        = 0
+llm_load_print_meta: rope scaling     = linear
+llm_load_print_meta: freq_base_train  = 10000.0
+llm_load_print_meta: freq_scale_train = 1
+llm_load_print_meta: n_yarn_orig_ctx  = 4096
+llm_load_print_meta: rope_finetuned   = unknown
+llm_load_print_meta: model type       = 13B
+llm_load_print_meta: model ftype      = Q5_K - Medium
+llm_load_print_meta: model params     = 13.02 B
+llm_load_print_meta: model size       = 8.60 GiB (5.67 BPW) 
+llm_load_print_meta: general.name     = LLaMA v2
+llm_load_print_meta: BOS token        = 1 '&lt;s&gt;'
+llm_load_print_meta: EOS token        = 2 '&lt;/s&gt;'
+llm_load_print_meta: UNK token        = 0 '&lt;unk&gt;'
+llm_load_print_meta: LF token         = 13 '&lt;0x0A&gt;'
+llm_load_tensors: ggml ctx size =    0.28 MiB
+llm_load_tensors: offloading 40 repeating layers to GPU
+llm_load_tensors: offloading non-repeating layers to GPU
+llm_load_tensors: offloaded 41/41 layers to GPU
+llm_load_tensors:        CPU buffer size =   107.42 MiB
+llm_load_tensors:      CUDA0 buffer size =  8694.21 MiB
+....................................................................................................
+llama_new_context_with_model: n_ctx      = 512
+llama_new_context_with_model: freq_base  = 10000.0
+llama_new_context_with_model: freq_scale = 1
+ggml_init_cublas: GGML_CUDA_FORCE_MMQ:   no
+ggml_init_cublas: CUDA_USE_TENSOR_CORES: yes
+ggml_init_cublas: found 1 CUDA devices:
+  Device 0: NVIDIA A100 80GB PCIe, compute capability 8.0, VMM: yes
+llama_kv_cache_init:      CUDA0 KV buffer size =   400.00 MiB
+llama_new_context_with_model: KV self size  =  400.00 MiB, K (f16):  200.00 MiB, V (f16):  200.00 MiB
+llama_new_context_with_model:  CUDA_Host input buffer size   =    12.01 MiB
+llama_new_context_with_model:      CUDA0 compute buffer size =    81.00 MiB
+llama_new_context_with_model:  CUDA_Host compute buffer size =    10.00 MiB
+llama_new_context_with_model: graph splits (measure): 2
 
-    <span class="nt">h1</span><span class="o">,</span>
-    <span class="nt">h2</span><span class="o">,</span>
-    <span class="nt">h3</span><span class="o">,</span>
-    <span class="nt">h4</span><span class="o">,</span>
-    <span class="nt">h5</span><span class="o">,</span>
-    <span class="nt">h6</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-warning-block-title</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+system_info: n_threads = 32 / 64 | AVX = 1 | AVX_VNNI = 0 | AVX2 = 1 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | FMA = 1 | NEON = 0 | ARM_FMA = 0 | F16C = 1 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 1 | SSSE3 = 1 | VSX = 0 | MATMUL_INT8 = 0 | 
+main: interactive mode on.
+Reverse prompt: 'User:'
+Input prefix: ' '
+sampling: 
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        top_k = 40, tfs_z = 1.000, top_p = 0.950, min_p = 0.050, typical_p = 1.000, temp = 0.800
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
+sampling order: 
+CFG -&gt; Penalties -&gt; top_k -&gt; tfs_z -&gt; typical_p -&gt; top_p -&gt; min_p -&gt; temperature 
+generate: n_ctx = 512, n_batch = 512, n_predict = 512, n_keep = 1
 
-  <span class="k">&amp;</span><span class="nc">.block-danger</span> <span class="p">{</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-danger-block</span><span class="p">);</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-danger-block-bg</span><span class="p">);</span>
 
-    <span class="nt">p</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-danger-block-text</span><span class="p">);</span>
-    <span class="p">}</span>
+== Running in interactive mode. ==
+ - Press Ctrl+C to interject at any time.
+ - Press Return to return control to LLaMa.
+ - To return control without starting a new line, end your input with '/'.
+ - If you want to submit another line, end your input with '</span><span class="se">\'</span><span class="s2">.
 
-    <span class="nt">h1</span><span class="o">,</span>
-    <span class="nt">h2</span><span class="o">,</span>
-    <span class="nt">h3</span><span class="o">,</span>
-    <span class="nt">h4</span><span class="o">,</span>
-    <span class="nt">h5</span><span class="o">,</span>
-    <span class="nt">h6</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-danger-block-title</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div> <p>A regular blockquote can be used as following:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; This is a regular blockquote</span>
-<span class="gt">&gt; and it can be used as usual</span>
-</code></pre></div></div> <blockquote> <p>This is a regular blockquote and it can be used as usual</p> </blockquote> <p>These custom styles can be used by adding the specific class to the blockquote, as follows:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ##### TIP</span>
-<span class="gt">&gt;</span>
-<span class="gt">&gt; A tip can be used when you want to give advice</span>
-<span class="gt">&gt; related to a certain content.</span>
-{: .block-tip }
-</code></pre></div></div> <blockquote class="block-tip"> <h5 id="tip">TIP</h5> <p>A tip can be used when you want to give advice related to a certain content.</p> </blockquote> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ##### WARNING</span>
-<span class="gt">&gt;</span>
-<span class="gt">&gt; This is a warning, and thus should</span>
-<span class="gt">&gt; be used when you want to warn the user</span>
-{: .block-warning }
-</code></pre></div></div> <blockquote class="block-warning"> <h5 id="warning">WARNING</h5> <p>This is a warning, and thus should be used when you want to warn the user</p> </blockquote> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ##### DANGER</span>
-<span class="gt">&gt;</span>
-<span class="gt">&gt; This is a danger zone, and thus should</span>
-<span class="gt">&gt; be used carefully</span>
-{: .block-danger }
-</code></pre></div></div> <blockquote class="block-danger"> <h5 id="danger">DANGER</h5> <p>This is a danger zone, and thus should be used carefully</p> </blockquote> ]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="blockquotes"/><summary type="html"><![CDATA[an example of a blog post with custom blockquotes]]></summary></entry><entry><title type="html">a post with table of contents on a sidebar</title><link href="https://akshathraghav.github.io/blog/2023/sidebar-table-of-contents/" rel="alternate" type="text/html" title="a post with table of contents on a sidebar"/><published>2023-04-25T14:14:00+00:00</published><updated>2023-04-25T14:14:00+00:00</updated><id>https://akshathraghav.github.io/blog/2023/sidebar-table-of-contents</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2023/sidebar-table-of-contents/"><![CDATA[<p>This post shows how to add a table of contents as a sidebar.</p> <h2 id="adding-a-table-of-contents">Adding a Table of Contents</h2> <p>To add a table of contents to a post as a sidebar, simply add</p> <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">toc</span><span class="pi">:</span>
-  <span class="na">sidebar</span><span class="pi">:</span> <span class="s">left</span>
-</code></pre></div></div> <p>to the front matter of the post. The table of contents will be automatically generated from the headings in the post. If you wish to display the sidebar to the right, simply change <code class="language-plaintext highlighter-rouge">left</code> to <code class="language-plaintext highlighter-rouge">right</code>.</p> <h3 id="example-of-sub-heading-1">Example of Sub-Heading 1</h3> <p>Jean shorts raw denim Vice normcore, art party High Life PBR skateboard stumptown vinyl kitsch. Four loko meh 8-bit, tousled banh mi tilde forage Schlitz dreamcatcher twee 3 wolf moon. Chambray asymmetrical paleo salvia, sartorial umami four loko master cleanse drinking vinegar brunch. <a href="https://www.pinterest.com">Pinterest</a> DIY authentic Schlitz, hoodie Intelligentsia butcher trust fund brunch shabby chic Kickstarter forage flexitarian. Direct trade <a href="https://en.wikipedia.org/wiki/Cold-pressed_juice">cold-pressed</a> meggings stumptown plaid, pop-up taxidermy. Hoodie XOXO fingerstache scenester Echo Park. Plaid ugh Wes Anderson, freegan pug selvage fanny pack leggings pickled food truck DIY irony Banksy.</p> <h3 id="example-of-another-sub-heading-1">Example of another Sub-Heading 1</h3> <p>Jean shorts raw denim Vice normcore, art party High Life PBR skateboard stumptown vinyl kitsch. Four loko meh 8-bit, tousled banh mi tilde forage Schlitz dreamcatcher twee 3 wolf moon. Chambray asymmetrical paleo salvia, sartorial umami four loko master cleanse drinking vinegar brunch. <a href="https://www.pinterest.com">Pinterest</a> DIY authentic Schlitz, hoodie Intelligentsia butcher trust fund brunch shabby chic Kickstarter forage flexitarian. Direct trade <a href="https://en.wikipedia.org/wiki/Cold-pressed_juice">cold-pressed</a> meggings stumptown plaid, pop-up taxidermy. Hoodie XOXO fingerstache scenester Echo Park. Plaid ugh Wes Anderson, freegan pug selvage fanny pack leggings pickled food truck DIY irony Banksy.</p> <h2 id="customizing-your-table-of-contents">Customizing Your Table of Contents</h2> <p data-toc-text="Customizing">If you want to learn more about how to customize the table of contents of your sidebar, you can check the <a href="https://afeld.github.io/bootstrap-toc/">bootstrap-toc</a> documentation. Notice that you can even customize the text of the heading that will be displayed on the sidebar.</p> <h3 id="example-of-sub-heading-2">Example of Sub-Heading 2</h3> <p>Jean shorts raw denim Vice normcore, art party High Life PBR skateboard stumptown vinyl kitsch. Four loko meh 8-bit, tousled banh mi tilde forage Schlitz dreamcatcher twee 3 wolf moon. Chambray asymmetrical paleo salvia, sartorial umami four loko master cleanse drinking vinegar brunch. <a href="https://www.pinterest.com">Pinterest</a> DIY authentic Schlitz, hoodie Intelligentsia butcher trust fund brunch shabby chic Kickstarter forage flexitarian. Direct trade <a href="https://en.wikipedia.org/wiki/Cold-pressed_juice">cold-pressed</a> meggings stumptown plaid, pop-up taxidermy. Hoodie XOXO fingerstache scenester Echo Park. Plaid ugh Wes Anderson, freegan pug selvage fanny pack leggings pickled food truck DIY irony Banksy.</p> <h3 id="example-of-another-sub-heading-2">Example of another Sub-Heading 2</h3> <p>Jean shorts raw denim Vice normcore, art party High Life PBR skateboard stumptown vinyl kitsch. Four loko meh 8-bit, tousled banh mi tilde forage Schlitz dreamcatcher twee 3 wolf moon. Chambray asymmetrical paleo salvia, sartorial umami four loko master cleanse drinking vinegar brunch. <a href="https://www.pinterest.com">Pinterest</a> DIY authentic Schlitz, hoodie Intelligentsia butcher trust fund brunch shabby chic Kickstarter forage flexitarian. Direct trade <a href="https://en.wikipedia.org/wiki/Cold-pressed_juice">cold-pressed</a> meggings stumptown plaid, pop-up taxidermy. Hoodie XOXO fingerstache scenester Echo Park. Plaid ugh Wes Anderson, freegan pug selvage fanny pack leggings pickled food truck DIY irony Banksy.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="toc"/><category term="sidebar"/><summary type="html"><![CDATA[an example of a blog post with table of contents on a sidebar]]></summary></entry></feed>
+ Transcript of a dialog, where the User interacts with an Assistant named Bob. Bob is helpful, kind, honest, good at writing, and never fails to answer the User's requests immediately and with precision.
+
+User: Hello, Bob.
+Bob: Hello. How may I help you today?
+User: Please tell me the largest city in Europe.
+Bob: Sure. The largest city in Europe is Moscow, the capital of Russia.
+User: 
+
+llama_print_timings:        load time =    1439.09 ms
+llama_print_timings:      sample time =       0.00 ms /     1 runs   (    0.00 ms per token,      inf tokens per second)
+llama_print_timings: prompt eval time =      73.35 ms /    99 tokens (    0.74 ms per token,  1349.66 tokens per second)
+llama_print_timings:        eval time =       0.00 ms /     1 runs   (    0.00 ms per token,      inf tokens per second)
+llama_print_timings:       total time =    1017.78 ms /   100 tokens
+</span></code></pre></div></div>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><category term="maps"/><summary type="html"><![CDATA[this is what included geojson code could look like]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog"/><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
