@@ -5,5 +5,5 @@ inline: true
 related_posts: false
 ---
 
-First iteration of <a href='https://github.com/e-lab/'>our</a> multi-tool autonomous agent hosted <a href='https://eugenio-a3n.streamlit.app/'>here</a>. <a href='https://viktor1223.github.io/AI-Assistant/'>Demo and Technical Report can be found here</a>. Pursuing multi-modality for a Large World Model aimed at an intuitive learning style. 
+First iteration of <a href='https://github.com/e-lab/'>our</a> multi-tool autonomous agent hosted <a href='https://eugenio-a3n.streamlit.app/'>here</a>. <a href='https://github.com/e-lab/AI-Assistant'>Demo and Technical Report can be found here</a>. Pursuing multi-modality for a Large World Model aimed at an intuitive learning style. 
 

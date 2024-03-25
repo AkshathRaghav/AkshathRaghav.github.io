@@ -1,43 +1,32 @@
 ---
 layout: post
-title: How AI can help you reproduce open-source software! 
-date: 2024-01-26 17:57:00
-description: this is what included geojson code could look like
-tags: formatting charts maps
-categories: sample-posts
+title: Set up Llama.cpp on university compute clusters 🦙
+date: 2024-03-26 17:57:00
+description: Scripts + Guide to automate installations
+tags: llama.cpp compute RCAC 
+categories: misc
 map: true
 ---
 
-# Getting Started with NVIDIA Toolkit, gcc, and llama.cpp on Gilbreth Cluster
-
-Welcome to the quick start guide for running `llama.cpp` on the Gilbreth cluster **without root access**.
+Welcome to the quick start guide for running `llama.cpp` on academic/research community compute clusters **without root access**.
 
 ## Why This Guide is Necessary
 
-On the Gilbreth cluster, users often face the issue of the lack of sudo access. This limitation restricts the ability to install packages or update system libraries (which are very old on these clusters).
+On Purdue's RCAC clusters, users often face the issue of the lack of sudo access. This limitation restricts the ability to install packages or update system libraries (which are very old on these clusters). They contain module systems which help to load and install cudatoolkit and gcc, but I've faced issues with GLIB versions reflecting on conda environmnets using this method. 
 
 This repository has a set of bash scripts that allow users to install and configure gcc and the NVIDIA Toolkit in a user-specific directory. This approach ensures that you can run `llama.cpp` without the need for administrative privileges.
 
 ### Before You Start
 
-Ensure you have permission to execute scripts and access the Gilbreth cluster. Familiarity with basic terminal commands and the Linux environment will be helpful.
-
-## 0. E-Lab Members
-
-Members of the E-Lab with access to the depot can simply copy the contents of launch.sh into their `~/.bashrc` and 
-```bash 
-source ~/.bashrc
-```
-
-Skip to [Running Inference](https://github.com/AkshathRaghav/llama_set_up_gilbreth/tree/main?tab=readme-ov-file#running-inference).
+Ensure you have permission to execute scripts and access clusters. Familiarity with basic terminal commands and the Linux environment will be helpful.
 
 ## 1. NVIDIA Toolkit Installation
 
 The NVIDIA Toolkit includes libraries and tools essential for developing applications that leverage NVIDIA GPUs.
 
 Extras: 
-- https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=CentOS&target_version=7&target_type=runfile_local
-- https://stackoverflow.com/questions/39379792/install-cuda-without-root
+- [Toolkit Download](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=CentOS&target_version=7&target_type=runfile_local)
+- [StackOverflow Thread](https://stackoverflow.com/questions/39379792/install-cuda-without-root)
 
 ### Steps:
 
@@ -54,23 +43,23 @@ Extras:
 
 1. Type `accept` in the console.
 <div align="center">
-  <img src='./assets/1.png' alt="1" style="height: 50%;"/>
+  <img src='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/1.png' alt="1" style="height: 50%;"/>
 </div>
 
 2. Use `ENTER` to select/deselect settings. Make sure the settings screen looks like the following image: 
 <div align="center">
-  <img src='./assets/2.png' alt="1" style="height: 50%;"/>
+  <img src='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/2.png' alt="1" style="height: 50%;"/>
 </div>
 
 3. Hover over the `CUDA Toolkit 12.3` option, and press `A`. Deselect all of the settings here except `Install manpage documents...` 
 <div align="center">
-  <img src='./assets/3.png' alt="1" style="height: 50%;"/>
+  <img src='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/3.png' alt="1" style="height: 50%;"/>
 </div>
 
 
 4. Hover over `Change Toolkit Install Path`. Hit `ENTER` and add the $TOOLKIT variable path here. 
 <div align="center">
-  <img src='./assets/4.png' alt="1" style="height: 50%;"/>
+  <img src='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/4.png' alt="1" style="height: 50%;"/>
 </div>
 
 5. Finally, exit out into the main menu, hover over `Install` and hit `ENTER`. 
@@ -92,9 +81,9 @@ source ~/.bashrc
 gcc (GNU Compiler Collection) is a compiler system supporting various programming languages, crucial for software development and execution. Gilbreth, and other clusters like Negishi, use a version below <11.x.x>. llama.cpp requires a higher version. We will be using the latest version: <12.3.0>.
 
 Extra:
-- https://gcc.gnu.org/install/configure.html 
-- https://stackoverflow.com/questions/10279829/installing-glib-in-non-standard-prefix-fails
-- https://github.com/ggerganov/llama.cpp/issues/552
+- [GNU Docs](https://gcc.gnu.org/install/configure.html)
+- [StackOverflow Thread](https://stackoverflow.com/questions/10279829/installing-glib-in-non-standard-prefix-fails)
+- [Llama.cpp discussion](https://github.com/ggerganov/llama.cpp/issues/552)
 
 ### Steps:
 
@@ -130,9 +119,9 @@ source ~/.bashrc
 With gcc and the NVIDIA Toolkit set up, you're now ready to compile and run `llama.cpp`.
 
 Extras: 
-- https://github.com/ggerganov/llama.cpp?tab=readme-ov-file
-- https://stackoverflow.com/questions/39649102/how-do-i-select-which-gpu-to-run-a-job-on
-- https://kubito.dev/posts/llama-cpp-linux-nvidia/
+- [Llama.cpp](https://github.com/ggerganov/llama.cpp?tab=readme-ov-file)
+- [Jobs on GPU](https://stackoverflow.com/questions/39649102/how-do-i-select-which-gpu-to-run-a-job-on)
+- [Llama.cpp flags](https://kubito.dev/posts/llama-cpp-linux-nvidia/)
 
 ### Steps:
 

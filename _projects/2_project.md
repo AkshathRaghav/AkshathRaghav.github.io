@@ -4,9 +4,28 @@ title: forest-fire-forecast
 description: Deployed a global fire-risk prediction into Ambee's proprietary API (Funded) 🔥
 img: assets/img/image24.jpg
 importance: 2
-category: research
+category: research 
 related_publications: true 
+images:
+  compare: true
+  slider: true
 ---
+
+
+<swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/image5.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/image7.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/image13.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/image16.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/image18.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+</swiper-container>
+
+
+<img-comparison-slider>
+  {% include figure.liquid path="assets/img/left.png" class="img-fluid rounded z-depth-1" slot="first" %}
+  {% include figure.liquid path="assets/img/right.png" class="img-fluid rounded z-depth-1" slot="second" %}
+</img-comparison-slider>
+
 
 Every project has a beautiful feature showcase page.
 It's easy to include images in a flexible 3-column grid format.

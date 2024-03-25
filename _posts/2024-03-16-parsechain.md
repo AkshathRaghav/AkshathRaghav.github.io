@@ -1,187 +1,129 @@
 ---
 layout: post
-title: Working with `GrammarFlow` to constrain your LLM chains 🪢
+title: Supercharging LLM agent-chains with GrammarFlow 🪢
 date: 2024-01-27 19:22:00
-description: this is how you can display code diffs
-tags: formatting code
-categories: sample-posts
+description: 'GrammarFlow' usage guide! 
+tags: grammarflow llm constrain agents AI
+categories: software
 code_diff: true
 ---
 
-# 🪢 [GrammarFlow](https://github.com/e-lab/SyntaxShaper/tree/main)
+<div align="center">
 
-Find a larger list of examples to get started with [here](https://github.com/e-lab/SyntaxShaper/blob/main/demo.ipynb)!
+# 🪢 GrammarFlow
+
+🚀 Powering Agent Chains by Constraining LLM Outputs  🚀
+
+</div>
+
+# Table of contents
+1. [What is this](https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-what-is-this)
+2. [Quick Install](https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-quick-install)
+3. [Code Usage](https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-code-usage)
+4. [Examples (@ samples/)](https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#examples--samples)
+5. [GNBF Grammar](https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#gnbf-grammar)
+6. [Remarks!](https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#remarks)
+7. [Citation](https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#citation)
+
 
 ## 🤔 What is this?
 
-[This repository](https://github.com/e-lab/SyntaxShaper/) contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by `json.loads` (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the `llama.cpp` package for sampling logits smartly. 
+This repository contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by `json.loads` (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the `llama.cpp` package for sampling logits smartly. 
 
-The goal of this package was to overcome the issues faced when using langchain's output parsers with local language models. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts. Moreover, across LLMs, it's a pain for me to keep re-defining grammar formats into my prompt and then making custom parsers. I use this in my workflow daily to simplify the process and speed-up my productivity. 
+The goal of this package was to overcome the issues faced when using langchain's output parsers with instruct language models. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts. 
 
-## 📚 Quick Install
+> Please reach out to `araviki [at] purdue [dot] edu` or open an issue on Github if you have any questions or inquiry related to GrammarFlow and its usage.
 
-`pip install parsechain`
+## ⚡ Quick Install
 
-## 📃 Walkthrough
+`pip install grammarflow`
 
-Let's try out making a agent-thinking-chain. I used something similar in [euGenie](https://viktor1223.github.io/AI-Assistant/)! 
+## 📃 Code Usage 
 
-### Quick Background 
+1. Map out what your agent chain is doing. Understand what it's goals are and what data needs to be carried forward from one step to the next. 
+For example, consider the [ReAct prompting framework](https://react-lm.github.io/). In every call, we want to pass in the Action and subsequent Observation to the next call. 
 
-> HotpotQA is a question answering dataset featuring natural, multi-hop questions, with strong supervision for supporting facts to enable more explainable question answering systems.
-
-[ReAct](https://github.com/ysymyth/ReAct) adds a bunch of useful helper functions to their evaluation code for prompting against this dataset. This sample directory cleans up their code and adds GrammarFlow to it. 
-
-1. Create a Pydantic model to constrain our thinking state. We'll ask the model for 'thought', 'action', and 'action_input'. 
-2. Create a Prompt for our ReAct flow. Our `make_prompt()` function below takes care of it. 
-3. Within the original `webthink()` function, we make changes along the lines of: 
-    - Tracking and logging all steps between iterations\n
-    - Use `Constrain()` from GrammarFlow to make the extraction of 'Thought', 'Action' and 'Action_Input' pythonic and error-prone. 
-Note: Prompts are stateful, and thus need to be discarded after every `Constrain()` block. That's why we use `make_prompt()` within every run. 
-
-### Implementation 
-
-1. Map out what your agent chain is doing. Understand what it's goals are and what data needs to be carried forward from one step to the next. In every call, we want to pass in the Action and subsequent Observation to the next call. 
+1.1. Load grammarflow 
+```
+from grammarflow import * 
+```
 
 2. Make a Pydantic Model for the above case. Here's a sample: 
 ```python 
-class Step(BaseModel):
-    thought: str 
-    action: str = Field(..., description="You only have 3 options: search | lookup | finish")
-    action_input: str = Field(..., description="Your input to the above action.")
+class ThoughtState(BaseModel):
+    thought: str
+    goal: str
+    tool: str = Field(...,
+                      description="Choose one of ['Web_QA', 'Web_Search', 'Web_Scraping', 'Web_Automation', 'Web_Research']")
+    action: str = Field(...,
+                        description="Choose one of ['Create', 'Update', 'Delete', 'Read']")
+    action_input: str = Field(..., description="The input data for the action")
+    thought_id: Optional[str] = Field(
+        None, description="1 if it is the first thought, 0 if it is the final thought.")
 ```
 
-3. [Optional] Create a prompt template using parsechain's PromptBuilder. 
-For simpler prompts, you do not need to create a PromptBuilder() object, but for the purpose of showing what can be done, we will. 
+3. [Optional] Create a prompt template using grammarflow's PromptBuilder. Below is an example of the Llama prompt template. 
+```python 
+llama_prompt = PromptBuilder()
+llama_prompt.add_section(
+    text="<s>[INST] <<SYS>>\n{system_context}\n<</SYS>>",
+    placeholder="system_context",
+    define_grammar=True,
+)
+llama_prompt.add_section(
+    text="{user_message}[/INST]",
+    placeholder="user_message",
+)
+```
+You can find an in-depth explanation on making prompts [here](https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb)!
+
+4. [Optional] If you decide to make your own template, define your system_context and user_message `placeholders`. 
+```python
+system_context = """Your goal is to think and plan out how to solve questions using agent tools provided to you. Think about all aspects of your thought process."""
+user_message = """Who is Vladmir Putin?"""
+```
+
+5. Invoke the `Constrain` block with the prompt. Set the configuration metadata, and format the prompt with the required `grammars` and `placeholders`.
+```python
+with Constrain(llama_prompt) as manager:
+    manager.set_config(
+        format='json', # or 'xml', 'toml'. 
+        return_sequence='single_response' # or 'multi_response', if you need multiple grammars. 
+    )
+
+    # Makes the changes to the prompt
+    manager.format_prompt(placeholders={ # if you have placeholders in the prompt
+                          'user_message': user_message,
+                          'system_context': system_context
+                          },
+                          grammars=[{
+                              'description': 'This format describes your current thinking state', # Description of the response format
+                              'model': [ThoughtState]}
+                          ]
+    )
+
+    # Assume `llm` to be a call to a model
+    llm_response = llm.request(manager.prompt, temperature=0.01)
+
+    # Parse the response into a custom dataclass for holding values
+    response = manager.parse(llm_response)
+```
+
+6. Extract the required values from the response to perform necessary functions on. 
 
 ```python 
-from parsechain import PromptBuilder
-
-# Using this to ignore certain sections in my main loop
-def check_previous_interaction(id_): return id_ > 1
-
-def make_prompt(): 
-  prompt = PromptBuilder() 
-  prompt.add_section(
-    text="""
-  Goal: {question}
-
-  Your goal is to solve the above QA task in steps. First, think about what information you need to answer the question. 
-  Use `search` to get the information you need. This needs a single keyword or noun as input. If it can't find anything, itll give alternate keywords. You can find them in your thinking history below, use them to search again. 
-  Use `lookup` to find more information from the paragraph returned by search. This matches the action_input you give to setences in search. 
-  Use `finish` to return your final complete answer as input field. Use this if you believe you have enough information to completely answer the task.""",
-    placeholders=["question"]
-  ) 
-  prompt.add_section(
-    define_grammar=True
-  ) 
-  prompt.add_section(
-    text="\nExample thinking process:{example}\n", 
-    placeholders=["example"]
-  )
-  prompt.add_section(
-    text="Create the next Step using the information available you to below.\n",
-  )
-  prompt.add_section(
-    text="DO NOT REPEAT THOUGHTS OR ACTIONS FROM YOUR PAST. ENSURE EACH STEP IS UNIQUE. Below is the history of your thinking process and corresponding observations.\n{history}\n",
-    placeholders=["history"],
-    enable_on=check_previous_interaction
-  ) 
-  return prompt 
-```
-
-**Here's an example of the [Llama2 Prompt](https://github.com/e-lab/SyntaxShaper/blob/main/README.md#-code-usage). 
-You can find an in-depth explanation on making prompts [here](https://github.com/e-lab/SyntaxShaper/blob/main/demo.ipynb)!**
-
-4. [Optional] If you decide to make your own template, define your `placeholders`. 
-```python
-example = wrappers.EXAMPLE
-question = "What government position was held by the woman who portrayed Corliss Archer in the film Kiss and Tell?" 
-
-def load_history(history_):
-    "\n".join([f"Thought {id_}: {value['thought']}\nAction {id_}: {value['action']}\nAction_Input {id_}: {value['action_input']}\nObservation {id_}: {value['observation']}" for id_, value in history.items()])
-```
-
-5. Invoke the `Constrain` block with the prompt. Set the configuration metadata, and format the prompt with the required `grammars` and `placeholders`. The below codeblock is taken from the ReAct repository with just a few changes. 
-```python
-from parsechain import Constrain 
-
-def webthink(idx=None, env=env, to_print=False): 
-  # Initializing Stateful vars
-  thought = None 
-  action = None
-  observation = None
-  id_ = 1
-  history, history_ = {}, None
-
-  for i in range(10):
-    if history:
-      history_ = load_history(history_)
-
-    # The only major change we've made! 
-    with Constrain(make_prompt()) as manager: 
-      manager.set_config(
-        format='xml'
-      ) 
-      manager.format_prompt(
-        placeholders={ 
-          "question": question,
-          'example': example, 
-          "history": history_
-        }, 
-        grammars=[{
-          'description': 'Your thinking state', 
-          'model': Step
-        }], 
-        enable_on={
-          'id_':id_ 
-        }
-      ) 
-      
-      response = llm(manager.prompt, temperature=0.01)
-      response = manager.parse(response)  
-
-      thought = response.Step.thought 
-      action = response.Step.action
-      action_input = response.Step.action_input
-
-    observation, r, done, info = step(env, f"{action}[{action_input}]")
-    observation = observation.replace("\\n", " ")
-
-    history[id_] = { 
-      "thought": thought, 
-      "action": action, 
-      "action_input": action_input, 
-      "observation": observation
-    }
-
-    id_ += 1
-    
-    if done: 
-      final = action_input
-      break 
-
-  if not done:
-      final = "Failed!"
-      observation, r, done, info = step(env, "finish[]")
-
-  return final, info['gt_answer'], id_
-```
-
-6. Extract the required values from the response to perform necessary functions on. The below statements perform these actions in the above code. 
-
-```python 
-...
-        response = llm(manager.prompt, temperature=0.01)
-        response = manager.parse(response)  
-
-        thought = response.Step.thought 
-        action = response.Step.action
-        action_input = response.Step.action_input
-...
+observation = PerformSomeAction(
+  action = response.ThoughtState.action, 
+  action_input = response.ThoughtState.action_input
+) 
 ```
 
 7. Continue to the next iteration in your agent chain! 
+
+### Examples (@ samples/)
+1. For a general overview of what GrammarFlow can do, look at [demo.ipynb](https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb). 
+2. For my modification to [ReAct's](https://github.com/ysymyth/ReAct) evaluation code on [HotPotQA](https://hotpotqa.github.io/), look at [hotpotqa_modified](https://github.com/e-lab/SyntaxShaper/blob/main/samples/hotpotqa/hotpotqa_modified.ipynb).
+3. I've also added an implementation of a [data annotator](https://github.com/e-lab/SyntaxShaper/blob/main/samples/bert_finetuning/annotator.ipynb) for this [BERT fine-tuning guide](https://www.datasciencecentral.com/how-to-fine-tune-bert-transformer-with-spacy-3/).
 
 ### GNBF Grammar 
 
@@ -217,7 +159,7 @@ class Project(BaseModel):
     grammars: Task
 
 # Convert to grammar
-from parsechain import GNBF
+from grammarflow import GNBF
 
 grammar = GNBF(Project).generate_grammar()
 
@@ -234,5 +176,29 @@ with Constrain(llama_prompt) as manager:
         grammar=grammar, max_tokens=-1
     )
     response = manager.parse(llm_response)
+```
+
+## Remarks!
+
+Please keep in mind that this package is purely software driven and aims to make developers lives a little simpler. Powerful models like GPT, Llama and Mixtral Instruct work well with this package. MoE systems are able to evaluate which model can provide reasoning and constrainability (purely how well it handles 'instructions').
+
+However, with an increase in the complexity of the prompt, most models fail. This has to do with the model itself, and can be improved using token sampling using llama.cpp. But, a purely prompt-based approach cannot solve everything. 
+
+Take, for example, you want to evaluate hotpotqa as explained in this notebook. When you run the scipt, you might find that Mixtral outputs parseable returns for JSON and XML formats in the first 2 runs. Post this, the model gets confused because of the way the prompt itself is constructed + ReAct's helper functions formats. 
+
+## Citation
+
+We appreciate it if you would please cite this repo if you found the library useful for your work:
+
+```
+@software{GrammarFlow,
+  author = {Ravikiran, Akshath Raghav and Culurciello, Eugenio},
+  title = {GrammarFlow: Powering Agent Chains by Constraining LLM Outputs},
+  year = {2024},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/e-lab/GrammarFlow}}, 
+  version = {0.0.9}
+}
 ```
 
