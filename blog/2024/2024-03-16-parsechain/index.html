@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://akshathraghav.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://akshathraghav.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2024-03-25T21:24:20+00:00</updated><id>https://akshathraghav.github.io/feed.xml</id><title type="html">&lt;u&gt;a&lt;/u&gt;kshath raghav &lt;u&gt;raviki&lt;/u&gt;ran</title><subtitle></subtitle><entry><title type="html"></title><link href="https://akshathraghav.github.io/blog/2024/2024-03-16-parsechain/" rel="alternate" type="text/html" title=""/><published>2024-03-25T21:24:20+00:00</published><updated>2024-03-25T21:24:20+00:00</updated><id>https://akshathraghav.github.io/blog/2024/2024-03-16-parsechain</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/2024-03-16-parsechain/"><![CDATA[<div align="center"> # 🪢 GrammarFlow 🚀 Powering Agent Chains by Constraining LLM Outputs 🚀 </div> <h1 id="table-of-contents">Table of contents</h1> <ol> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-what-is-this">What is this</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-quick-install">Quick Install</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-code-usage">Code Usage</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#examples--samples">Examples (@ samples/)</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#gnbf-grammar">GNBF Grammar</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#remarks">Remarks!</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#citation">Citation</a></li> </ol> <h2 id="-what-is-this">🤔 What is this?</h2> <p>This repository contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by <code class="language-plaintext highlighter-rouge">json.loads</code> (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the <code class="language-plaintext highlighter-rouge">llama.cpp</code> package for sampling logits smartly.</p> <p>The goal of this package was to overcome the issues faced when using langchain’s output parsers with instruct language models. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts.</p> <blockquote> <p>Please reach out to <code class="language-plaintext highlighter-rouge">araviki [at] purdue [dot] edu</code> or open an issue on Github if you have any questions or inquiry related to GrammarFlow and its usage.</p> </blockquote> <h2 id="-quick-install">⚡ Quick Install</h2> <p><code class="language-plaintext highlighter-rouge">pip install grammarflow</code></p> <h2 id="-code-usage">📃 Code Usage</h2> <ol> <li>Map out what your agent chain is doing. Understand what it’s goals are and what data needs to be carried forward from one step to the next. For example, consider the <a href="https://react-lm.github.io/">ReAct prompting framework</a>. In every call, we want to pass in the Action and subsequent Observation to the next call.</li> </ol> <p>1.1. Load grammarflow</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from grammarflow import * 
-</code></pre></div></div> <ol> <li>Make a Pydantic Model for the above case. Here’s a sample: <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ThoughtState</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"> <html><body> <div align="center"> # 🪢 GrammarFlow 🚀 Powering Agent Chains by Constraining LLM Outputs 🚀 </div> <h1 id="table-of-contents">Table of contents</h1> <ol> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-what-is-this" rel="external nofollow noopener" target="_blank">What is this</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-quick-install" rel="external nofollow noopener" target="_blank">Quick Install</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-code-usage" rel="external nofollow noopener" target="_blank">Code Usage</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#examples--samples" rel="external nofollow noopener" target="_blank">Examples (@ samples/)</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#gnbf-grammar" rel="external nofollow noopener" target="_blank">GNBF Grammar</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#remarks" rel="external nofollow noopener" target="_blank">Remarks!</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#citation" rel="external nofollow noopener" target="_blank">Citation</a></li> </ol> <h2 id="-what-is-this">🤔 What is this?</h2> <p>This repository contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by <code class="language-plaintext highlighter-rouge">json.loads</code> (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the <code class="language-plaintext highlighter-rouge">llama.cpp</code> package for sampling logits smartly.</p> <p>The goal of this package was to overcome the issues faced when using langchain’s output parsers with instruct language models. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts.</p> <blockquote> <p>Please reach out to <code class="language-plaintext highlighter-rouge">araviki [at] purdue [dot] edu</code> or open an issue on Github if you have any questions or inquiry related to GrammarFlow and its usage.</p> </blockquote> <h2 id="-quick-install">⚡ Quick Install</h2> <p><code class="language-plaintext highlighter-rouge">pip install grammarflow</code></p> <h2 id="-code-usage">📃 Code Usage</h2> <ol> <li>Map out what your agent chain is doing. Understand what it’s goals are and what data needs to be carried forward from one step to the next. For example, consider the <a href="https://react-lm.github.io/" rel="external nofollow noopener" target="_blank">ReAct prompting framework</a>. In every call, we want to pass in the Action and subsequent Observation to the next call.</li> </ol> <p>1.1. Load grammarflow</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from grammarflow import * 
+</code></pre></div></div> <ol> <li>Make a Pydantic Model for the above case. Here’s a sample: <div class="language-python highlighter-rouge"> <div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ThoughtState</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
  <span class="n">thought</span><span class="p">:</span> <span class="nb">str</span>
  <span class="n">goal</span><span class="p">:</span> <span class="nb">str</span>
  <span class="n">tool</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(...,</span>
@@ -9,7 +9,7 @@
  <span class="n">action_input</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(...,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">The input data for the action</span><span class="sh">"</span><span class="p">)</span>
  <span class="n">thought_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span>
      <span class="bp">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">1 if it is the first thought, 0 if it is the final thought.</span><span class="sh">"</span><span class="p">)</span>
-</code></pre></div> </div> </li> <li>[Optional] Create a prompt template using grammarflow’s PromptBuilder. Below is an example of the Llama prompt template. <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">llama_prompt</span> <span class="o">=</span> <span class="nc">PromptBuilder</span><span class="p">()</span>
+</code></pre></div> </div> </li> <li>[Optional] Create a prompt template using grammarflow’s PromptBuilder. Below is an example of the Llama prompt template. <div class="language-python highlighter-rouge"> <div class="highlight"><pre class="highlight"><code><span class="n">llama_prompt</span> <span class="o">=</span> <span class="nc">PromptBuilder</span><span class="p">()</span>
 <span class="n">llama_prompt</span><span class="p">.</span><span class="nf">add_section</span><span class="p">(</span>
  <span class="n">text</span><span class="o">=</span><span class="sh">"</span><span class="s">&lt;s&gt;[INST] &lt;&lt;SYS&gt;&gt;</span><span class="se">\n</span><span class="s">{system_context}</span><span class="se">\n</span><span class="s">&lt;&lt;/SYS&gt;&gt;</span><span class="sh">"</span><span class="p">,</span>
  <span class="n">placeholder</span><span class="o">=</span><span class="sh">"</span><span class="s">system_context</span><span class="sh">"</span><span class="p">,</span>
@@ -19,9 +19,9 @@
  <span class="n">text</span><span class="o">=</span><span class="sh">"</span><span class="s">{user_message}[/INST]</span><span class="sh">"</span><span class="p">,</span>
  <span class="n">placeholder</span><span class="o">=</span><span class="sh">"</span><span class="s">user_message</span><span class="sh">"</span><span class="p">,</span>
 <span class="p">)</span>
-</code></pre></div> </div> <p>You can find an in-depth explanation on making prompts <a href="https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb">here</a>!</p> </li> <li>[Optional] If you decide to make your own template, define your system_context and user_message <code class="language-plaintext highlighter-rouge">placeholders</code>. <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system_context</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">Your goal is to think and plan out how to solve questions using agent tools provided to you. Think about all aspects of your thought process.</span><span class="sh">"""</span>
+</code></pre></div> </div> <p>You can find an in-depth explanation on making prompts <a href="https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb" rel="external nofollow noopener" target="_blank">here</a>!</p> </li> <li>[Optional] If you decide to make your own template, define your system_context and user_message <code class="language-plaintext highlighter-rouge">placeholders</code>. <div class="language-python highlighter-rouge"> <div class="highlight"><pre class="highlight"><code><span class="n">system_context</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">Your goal is to think and plan out how to solve questions using agent tools provided to you. Think about all aspects of your thought process.</span><span class="sh">"""</span>
 <span class="n">user_message</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">Who is Vladmir Putin?</span><span class="sh">"""</span>
-</code></pre></div> </div> </li> <li>Invoke the <code class="language-plaintext highlighter-rouge">Constrain</code> block with the prompt. Set the configuration metadata, and format the prompt with the required <code class="language-plaintext highlighter-rouge">grammars</code> and <code class="language-plaintext highlighter-rouge">placeholders</code>. <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nc">Constrain</span><span class="p">(</span><span class="n">llama_prompt</span><span class="p">)</span> <span class="k">as</span> <span class="n">manager</span><span class="p">:</span>
+</code></pre></div> </div> </li> <li>Invoke the <code class="language-plaintext highlighter-rouge">Constrain</code> block with the prompt. Set the configuration metadata, and format the prompt with the required <code class="language-plaintext highlighter-rouge">grammars</code> and <code class="language-plaintext highlighter-rouge">placeholders</code>. <div class="language-python highlighter-rouge"> <div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nc">Constrain</span><span class="p">(</span><span class="n">llama_prompt</span><span class="p">)</span> <span class="k">as</span> <span class="n">manager</span><span class="p">:</span>
  <span class="n">manager</span><span class="p">.</span><span class="nf">set_config</span><span class="p">(</span>
      <span class="nb">format</span><span class="o">=</span><span class="sh">'</span><span class="s">json</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># or 'xml', 'toml'. 
 </span>     <span class="n">return_sequence</span><span class="o">=</span><span class="sh">'</span><span class="s">single_response</span><span class="sh">'</span> <span class="c1"># or 'multi_response', if you need multiple grammars. 
@@ -47,7 +47,7 @@
   <span class="n">action</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">ThoughtState</span><span class="p">.</span><span class="n">action</span><span class="p">,</span> 
   <span class="n">action_input</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">ThoughtState</span><span class="p">.</span><span class="n">action_input</span>
 <span class="p">)</span> 
-</code></pre></div></div> <ol> <li>Continue to the next iteration in your agent chain!</li> </ol> <h3 id="examples--samples">Examples (@ samples/)</h3> <ol> <li>For a general overview of what GrammarFlow can do, look at <a href="https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb">demo.ipynb</a>.</li> <li>For my modification to <a href="https://github.com/ysymyth/ReAct">ReAct’s</a> evaluation code on <a href="https://hotpotqa.github.io/">HotPotQA</a>, look at <a href="https://github.com/e-lab/SyntaxShaper/blob/main/samples/hotpotqa/hotpotqa_modified.ipynb">hotpotqa_modified</a>.</li> <li>I’ve also added an implementation of a <a href="https://github.com/e-lab/SyntaxShaper/blob/main/samples/bert_finetuning/annotator.ipynb">data annotator</a> for this <a href="https://www.datasciencecentral.com/how-to-fine-tune-bert-transformer-with-spacy-3/">BERT fine-tuning guide</a>.</li> </ol> <h3 id="gnbf-grammar">GNBF Grammar</h3> <p>GrammarFlow also has functionality to convert a pydantic model into GNBF grammar.</p> <blockquote> <p>“GBNF (GGML BNF) is a format for defining formal grammars to constrain model outputs in llama.cpp. For example, you can use it to force the model to generate valid JSON, or speak only in emojis.” Read more about it here: https://github.com/ggerganov/llama.cpp/blob/master/grammars/README.md</p> </blockquote> <p>This can then be passed into llama.cpp using llama-cpp-python to ensure that sampling of logits can take place with rules in mind.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define your model 
+</code></pre></div></div> <ol> <li>Continue to the next iteration in your agent chain!</li> </ol> <h3 id="examples--samples">Examples (@ samples/)</h3> <ol> <li>For a general overview of what GrammarFlow can do, look at <a href="https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb" rel="external nofollow noopener" target="_blank">demo.ipynb</a>.</li> <li>For my modification to <a href="https://github.com/ysymyth/ReAct" rel="external nofollow noopener" target="_blank">ReAct’s</a> evaluation code on <a href="https://hotpotqa.github.io/" rel="external nofollow noopener" target="_blank">HotPotQA</a>, look at <a href="https://github.com/e-lab/SyntaxShaper/blob/main/samples/hotpotqa/hotpotqa_modified.ipynb" rel="external nofollow noopener" target="_blank">hotpotqa_modified</a>.</li> <li>I’ve also added an implementation of a <a href="https://github.com/e-lab/SyntaxShaper/blob/main/samples/bert_finetuning/annotator.ipynb" rel="external nofollow noopener" target="_blank">data annotator</a> for this <a href="https://www.datasciencecentral.com/how-to-fine-tune-bert-transformer-with-spacy-3/" rel="external nofollow noopener" target="_blank">BERT fine-tuning guide</a>.</li> </ol> <h3 id="gnbf-grammar">GNBF Grammar</h3> <p>GrammarFlow also has functionality to convert a pydantic model into GNBF grammar.</p> <blockquote> <p>“GBNF (GGML BNF) is a format for defining formal grammars to constrain model outputs in llama.cpp. For example, you can use it to force the model to generate valid JSON, or speak only in emojis.” Read more about it here: https://github.com/ggerganov/llama.cpp/blob/master/grammars/README.md</p> </blockquote> <p>This can then be passed into llama.cpp using llama-cpp-python to ensure that sampling of logits can take place with rules in mind.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define your model 
 </span><span class="k">class</span> <span class="nc">TeamMember</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">role</span><span class="p">:</span> <span class="nb">str</span>
@@ -98,86 +98,4 @@
   howpublished = {\url{https://github.com/e-lab/GrammarFlow}}, 
   version = {0.0.9}
 }
-</code></pre></div></div>]]></content><author><name></name></author></entry><entry><title type="html">MaskFormer</title><link href="https://akshathraghav.github.io/blog/2024/rais/" rel="alternate" type="text/html" title="MaskFormer"/><published>2024-01-27T00:20:00+00:00</published><updated>2024-01-27T00:20:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/rais</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/rais/"><![CDATA[<p>This is an example post with some <a href="https://vega.github.io/vega-lite/">vega lite</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">vega_lite
-</span><span class="sb">{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A dot plot showing each movie in the database, and the difference from the average movie rating. The display is sorted by year to visualize everything in sequential order. The graph is for all Movies before 2019.",
-  "data": {
-    "url": "https://raw.githubusercontent.com/vega/vega/main/docs/data/movies.json"
-  },
-  "transform": [
-    {"filter": "datum['IMDB Rating'] != null"},
-    {"filter": {"timeUnit": "year", "field": "Release Date", "range": [null, 2019]}},
-    {
-      "joinaggregate": [{
-        "op": "mean",
-        "field": "IMDB Rating",
-        "as": "AverageRating"
-      }]
-    },
-    {
-      "calculate": "datum['IMDB Rating'] - datum.AverageRating",
-      "as": "RatingDelta"
-    }
-  ],
-  "mark": "point",
-  "encoding": {
-    "x": {
-      "field": "Release Date",
-      "type": "temporal"
-    },
-    "y": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "title": "Rating Delta"
-    },
-    "color": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "scale": {"domainMid": 0},
-      "title": "Rating Delta"
-    }
-  }
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-vega_lite">{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A dot plot showing each movie in the database, and the difference from the average movie rating. The display is sorted by year to visualize everything in sequential order. The graph is for all Movies before 2019.",
-  "data": {
-    "url": "https://raw.githubusercontent.com/vega/vega/main/docs/data/movies.json"
-  },
-  "transform": [
-    {"filter": "datum['IMDB Rating'] != null"},
-    {"filter": {"timeUnit": "year", "field": "Release Date", "range": [null, 2019]}},
-    {
-      "joinaggregate": [{
-        "op": "mean",
-        "field": "IMDB Rating",
-        "as": "AverageRating"
-      }]
-    },
-    {
-      "calculate": "datum['IMDB Rating'] - datum.AverageRating",
-      "as": "RatingDelta"
-    }
-  ],
-  "mark": "point",
-  "encoding": {
-    "x": {
-      "field": "Release Date",
-      "type": "temporal"
-    },
-    "y": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "title": "Rating Delta"
-    },
-    "color": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "scale": {"domainMid": 0},
-      "title": "Rating Delta"
-    }
-  }
-}
-</code></pre> <p>This plot supports both light and dark themes.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included vega lite code could look like]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog"/><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
+</code></pre></div></div> </body></html>
