@@ -1,0 +1,158 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Set up Llama.cpp on university compute clusters 🦙 | <u>a</u>kshath raghav <u>raviki</u>ran </title> <meta name="author" content="Akshath Raghav Ravikiran"> <meta name="description" content="Scripts + Guide to automate installations"> <meta name="keywords" content="akshath, raghav, ravikiran, araviki, portfolio, resume, cv"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://akshathraghav.github.io/blog/2024/geojson-map/"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script src="/assets/js/theme.js?0afe9f0ae161375728f7bcc5eb5b4ab4"></script> <link defer rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <u>a</u>kshath raghav <u>raviki</u>ran </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/assets/pdf/AkshathRaghavR_Resume.pdf">cv </a> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="fa-solid fa-moon"></i> <i class="fa-solid fa-sun"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Set up Llama.cpp on university compute clusters 🦙</h1> <p class="post-meta"> March 23, 2024 </p> <p class="post-tags"> <a href="/blog/2024"> <i class="fa-solid fa-calendar fa-sm"></i> 2024 </a>   ·   <a href="/blog/tag/guide"> <i class="fa-solid fa-hashtag fa-sm"></i> guide</a>   <a href="/blog/tag/software"> <i class="fa-solid fa-hashtag fa-sm"></i> software</a>   <a href="/blog/tag/research"> <i class="fa-solid fa-hashtag fa-sm"></i> research</a>     ·   <a href="/blog/category/software"> <i class="fa-solid fa-tag fa-sm"></i> software</a>   </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Welcome to the quick start guide for running <code class="language-plaintext highlighter-rouge">llama.cpp</code> on academic/research community compute clusters <strong>without root access</strong>.</p> <h2 id="why-this-guide-is-necessary">Why This Guide is Necessary</h2> <p>On Purdue’s RCAC clusters, users often face the issue of the lack of sudo access. This limitation restricts the ability to install packages or update system libraries (which are very old on these clusters). They contain module systems which help to load and install cudatoolkit and gcc, but I’ve faced issues with GLIB versions reflecting on conda environmnets using this method.</p> <p>This repository has a set of bash scripts that allow users to install and configure gcc and the NVIDIA Toolkit in a user-specific directory. This approach ensures that you can run <code class="language-plaintext highlighter-rouge">llama.cpp</code> without the need for administrative privileges.</p> <h3 id="before-you-start">Before You Start</h3> <p>Ensure you have permission to execute scripts and access clusters. Familiarity with basic terminal commands and the Linux environment will be helpful.</p> <h2 id="1-nvidia-toolkit-installation">1. NVIDIA Toolkit Installation</h2> <p>The NVIDIA Toolkit includes libraries and tools essential for developing applications that leverage NVIDIA GPUs.</p> <p>Extras:</p> <ul> <li><a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=CentOS&amp;target_version=7&amp;target_type=runfile_local" rel="external nofollow noopener" target="_blank">Toolkit Download</a></li> <li><a href="https://stackoverflow.com/questions/39379792/install-cuda-without-root" rel="external nofollow noopener" target="_blank">StackOverflow Thread</a></li> </ul> <h3 id="steps">Steps:</h3> <ol> <li> <strong>Configure Installation Directory</strong>: <ul> <li>Edit <code class="language-plaintext highlighter-rouge">nvidia-toolkit.sh</code> to specify your installation directory by changing the <code class="language-plaintext highlighter-rouge">ROOT_DIR</code> variable.</li> </ul> </li> <li> <strong>Execute the Script</strong>: <div class="language-bash highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>bash nvidia-toolkit.sh
+</code></pre></div> </div> <p>Complete the setup by following the prompts.</p> </li> </ol> <h3 id="toolkit-setup">Toolkit Setup</h3> <ol> <li>Type <code class="language-plaintext highlighter-rouge">accept</code> in the console.</li> </ol> <div align="center"> <img src="https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/1.png" alt="1" style="height: 50%;"> </div> <ol> <li>Use <code class="language-plaintext highlighter-rouge">ENTER</code> to select/deselect settings. Make sure the settings screen looks like the following image:</li> </ol> <div align="center"> <img src="https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/2.png" alt="1" style="height: 50%;"> </div> <ol> <li>Hover over the <code class="language-plaintext highlighter-rouge">CUDA Toolkit 12.3</code> option, and press <code class="language-plaintext highlighter-rouge">A</code>. Deselect all of the settings here except <code class="language-plaintext highlighter-rouge">Install manpage documents...</code> </li> </ol> <div align="center"> <img src="https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/3.png" alt="1" style="height: 50%;"> </div> <ol> <li>Hover over <code class="language-plaintext highlighter-rouge">Change Toolkit Install Path</code>. Hit <code class="language-plaintext highlighter-rouge">ENTER</code> and add the $TOOLKIT variable path here.</li> </ol> <div align="center"> <img src="https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/4.png" alt="1" style="height: 50%;"> </div> <ol> <li>Finally, exit out into the main menu, hover over <code class="language-plaintext highlighter-rouge">Install</code> and hit <code class="language-plaintext highlighter-rouge">ENTER</code>.</li> </ol> <p>Now, add these lines to the bottom of your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">TOOLKIT</span><span class="o">={}</span>
+
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div></div> <h2 id="2-gcc-installation">2. gcc Installation</h2> <p>gcc (GNU Compiler Collection) is a compiler system supporting various programming languages, crucial for software development and execution. Gilbreth, and other clusters like Negishi, use a version below &lt;11.x.x&gt;. llama.cpp requires a higher version. We will be using the latest version: &lt;12.3.0&gt;.</p> <p>Extra:</p> <ul> <li><a href="https://gcc.gnu.org/install/configure.html" rel="external nofollow noopener" target="_blank">GNU Docs</a></li> <li><a href="https://stackoverflow.com/questions/10279829/installing-glib-in-non-standard-prefix-fails" rel="external nofollow noopener" target="_blank">StackOverflow Thread</a></li> <li><a href="https://github.com/ggerganov/llama.cpp/issues/552" rel="external nofollow noopener" target="_blank">Llama.cpp discussion</a></li> </ul> <h3 id="steps-1">Steps:</h3> <ol> <li> <strong>Configure Installation Directory</strong>: <ul> <li>Open <code class="language-plaintext highlighter-rouge">gcc.sh</code> in a text editor.</li> <li>Set <code class="language-plaintext highlighter-rouge">ROOT_DIR</code> to your desired installation directory.</li> <li>The script ensures that <code class="language-plaintext highlighter-rouge">srcdir</code> (SRC_DIR) and <code class="language-plaintext highlighter-rouge">objdir</code> (BUILD_DIR) are different directories. If you do wish to change these paths, make sure that they point to different locations.</li> </ul> </li> <li> <strong>Run the Script</strong>: <div class="language-bash highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>bash gcc.sh
+</code></pre></div> </div> </li> </ol> <p>If you face any issues, run <code class="language-plaintext highlighter-rouge">make -k distclean &amp;&amp; make -k clean</code> to undo what was done by <code class="language-plaintext highlighter-rouge">./configure</code> and <code class="language-plaintext highlighter-rouge">make</code>. Then, debug. Otherwise, this will cause issues down the line.</p> <p>Now, add these lines to the bottom of your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ROOT_DIR</span><span class="o">={}</span>
+<span class="nb">export </span><span class="nv">SRC_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_src <span class="c"># Change this is needed</span>
+<span class="nb">export </span><span class="nv">BUILD_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_build <span class="c"># Change this if neeeded</span>
+
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">CC</span><span class="o">=</span>gcc
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$BUILD_DIR</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$BUILD_DIR</span>/local/lib:<span class="nv">$BUILD_DIR</span>/lib:<span class="nv">$BUILD_DIR</span>/local/lib64:<span class="nv">$BUILD_DIR</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div></div> <h2 id="3-running-llamacpp">3. Running llama.cpp</h2> <p>With gcc and the NVIDIA Toolkit set up, you’re now ready to compile and run <code class="language-plaintext highlighter-rouge">llama.cpp</code>.</p> <p>Extras:</p> <ul> <li><a href="https://github.com/ggerganov/llama.cpp?tab=readme-ov-file" rel="external nofollow noopener" target="_blank">Llama.cpp</a></li> <li><a href="https://stackoverflow.com/questions/39649102/how-do-i-select-which-gpu-to-run-a-job-on" rel="external nofollow noopener" target="_blank">Jobs on GPU</a></li> <li><a href="https://kubito.dev/posts/llama-cpp-linux-nvidia/" rel="external nofollow noopener" target="_blank">Llama.cpp flags</a></li> </ul> <h3 id="steps-2">Steps:</h3> <ol> <li> <p><strong>NOTE:</strong> If you have run the above scripts in a previous session, then ensure you have added the environoment paths to your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file with the same paths you used in <code class="language-plaintext highlighter-rouge">gcc.sh</code> and <code class="language-plaintext highlighter-rouge">nvidia-toolkit.sh</code>. This sets the paths to look at our local installations.</p> </li> <li> <p><strong>Download the llama Script</strong>: <code class="language-plaintext highlighter-rouge">llama.sh</code> is designed to compile and execute <code class="language-plaintext highlighter-rouge">llama.cpp</code> using the previously installed tools.</p> </li> <li> <strong>Configure Installation Directory</strong>: <ul> <li>Modify <code class="language-plaintext highlighter-rouge">llama.sh</code>, setting <code class="language-plaintext highlighter-rouge">LLAMA_DIR</code> to the directory where gcc and the NVIDIA Toolkit are installed.</li> </ul> </li> <li> <strong>Launch the Script</strong>: <div class="language-bash highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>bash llama.sh
+</code></pre></div> </div> <p>This script compiles <code class="language-plaintext highlighter-rouge">llama.cpp</code> and runs it. Follow any instructions or prompts that appear.</p> </li> </ol> <h3 id="running-inference">Running inference</h3> <p>Ensure all of these lines exist within your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ROOT_DIR</span><span class="o">=</span>/depot/euge/data/araviki
+<span class="nb">export </span><span class="nv">TOOLKIT</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/nvidia-toolkit/12.3
+<span class="nb">export </span><span class="nv">SRC_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_src
+<span class="nb">export </span><span class="nv">BUILD_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_build
+
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/bin:<span class="nv">$BUILD_DIR</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/lib64:<span class="nv">$BUILD_DIR</span>/local/lib:<span class="nv">$BUILD_DIR</span>/lib:<span class="nv">$BUILD_DIR</span>/local/lib64:<span class="nv">$BUILD_DIR</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+<span class="nb">export </span><span class="nv">LLAMA</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/llama
+</code></pre></div></div> <p>Now, you are ready to run llama.cpp. I’ve bound the path of my main <code class="language-plaintext highlighter-rouge">llama</code> folder to <code class="language-plaintext highlighter-rouge">$LLAMA</code>, so that I can call it as follows:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># - araviki</span>
+   <span class="c"># - llama</span>
+      <span class="c"># - gguf # Storing quantized models</span>
+      <span class="c"># - llama.cpp # src</span>
+         <span class="c"># - main</span>
+         <span class="c"># - prompts/</span>
+         <span class="c"># - grammars/</span>
+
+<span class="nv">$LLAMA</span>/llama.cpp/main <span class="nt">--color</span> <span class="nt">--interactive</span> <span class="nt">--model</span> <span class="nv">$LLAMA</span>/gguf/llama-2-13b.Q5_K_M.gguf <span class="nt">--n-predict</span> 512 <span class="nt">--repeat_penalty</span> 1.0 <span class="nt">--n-gpu-layers</span> 15000 <span class="nt">--reverse-prompt</span> <span class="s2">"User:"</span> <span class="nt">--in-prefix</span> <span class="s2">" "</span> <span class="nt">-f</span> <span class="nv">$LLAMA</span>/llama.cpp/prompts/chat-with-bob.txt
+</code></pre></div></div> <p><strong>The output shown below was ran on a single A100-80GB instance.</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Log start
+main: build <span class="o">=</span> 2295 <span class="o">(</span>87c91c07<span class="o">)</span>
+main: built with gcc <span class="o">(</span>GCC<span class="o">)</span> 12.2.0 <span class="k">for </span>x86_64-pc-linux-gnu
+main: seed  <span class="o">=</span> 1709276455
+llama_model_loader: loaded meta data with 19 key-value pairs and 363 tensors from /depot/euge/data/araviki/llama/gguf/llama-2-13b.Q5_K_M.gguf <span class="o">(</span>version GGUF V2<span class="o">)</span>
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides <span class="k">do </span>not apply <span class="k">in </span>this output.
+llama_model_loader: - kv   0:                       general.architecture str              <span class="o">=</span> llama
+llama_model_loader: - kv   1:                               general.name str              <span class="o">=</span> LLaMA v2
+llama_model_loader: - kv   2:                       llama.context_length u32              <span class="o">=</span> 4096
+llama_model_loader: - kv   3:                     llama.embedding_length u32              <span class="o">=</span> 5120
+llama_model_loader: - kv   4:                          llama.block_count u32              <span class="o">=</span> 40
+llama_model_loader: - kv   5:                  llama.feed_forward_length u32              <span class="o">=</span> 13824
+llama_model_loader: - kv   6:                 llama.rope.dimension_count u32              <span class="o">=</span> 128
+llama_model_loader: - kv   7:                 llama.attention.head_count u32              <span class="o">=</span> 40
+llama_model_loader: - kv   8:              llama.attention.head_count_kv u32              <span class="o">=</span> 40
+llama_model_loader: - kv   9:     llama.attention.layer_norm_rms_epsilon f32              <span class="o">=</span> 0.000010
+llama_model_loader: - kv  10:                          general.file_type u32              <span class="o">=</span> 17
+llama_model_loader: - kv  11:                       tokenizer.ggml.model str              <span class="o">=</span> llama
+llama_model_loader: - kv  12:                      tokenizer.ggml.tokens arr[str,32000]   <span class="o">=</span> <span class="o">[</span><span class="s2">"&lt;unk&gt;"</span>, <span class="s2">"&lt;s&gt;"</span>, <span class="s2">"&lt;/s&gt;"</span>, <span class="s2">"&lt;0x00&gt;"</span>, <span class="s2">"&lt;...
+llama_model_loader: - kv  13:                      tokenizer.ggml.scores arr[f32,32000]   = [0.000000, 0.000000, 0.000000, 0.0000...
+llama_model_loader: - kv  14:                  tokenizer.ggml.token_type arr[i32,32000]   = [2, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, ...
+llama_model_loader: - kv  15:                tokenizer.ggml.bos_token_id u32              = 1
+llama_model_loader: - kv  16:                tokenizer.ggml.eos_token_id u32              = 2
+llama_model_loader: - kv  17:            tokenizer.ggml.unknown_token_id u32              = 0
+llama_model_loader: - kv  18:               general.quantization_version u32              = 2
+llama_model_loader: - type  f32:   81 tensors
+llama_model_loader: - type q5_K:  241 tensors
+llama_model_loader: - type q6_K:   41 tensors
+llm_load_vocab: special tokens definition check successful ( 259/32000 ).
+llm_load_print_meta: format           = GGUF V2
+llm_load_print_meta: arch             = llama
+llm_load_print_meta: vocab type       = SPM
+llm_load_print_meta: n_vocab          = 32000
+llm_load_print_meta: n_merges         = 0
+llm_load_print_meta: n_ctx_train      = 4096
+llm_load_print_meta: n_embd           = 5120
+llm_load_print_meta: n_head           = 40
+llm_load_print_meta: n_head_kv        = 40
+llm_load_print_meta: n_layer          = 40
+llm_load_print_meta: n_rot            = 128
+llm_load_print_meta: n_embd_head_k    = 128
+llm_load_print_meta: n_embd_head_v    = 128
+llm_load_print_meta: n_gqa            = 1
+llm_load_print_meta: n_embd_k_gqa     = 5120
+llm_load_print_meta: n_embd_v_gqa     = 5120
+llm_load_print_meta: f_norm_eps       = 0.0e+00
+llm_load_print_meta: f_norm_rms_eps   = 1.0e-05
+llm_load_print_meta: f_clamp_kqv      = 0.0e+00
+llm_load_print_meta: f_max_alibi_bias = 0.0e+00
+llm_load_print_meta: n_ff             = 13824
+llm_load_print_meta: n_expert         = 0
+llm_load_print_meta: n_expert_used    = 0
+llm_load_print_meta: pooling type     = 0
+llm_load_print_meta: rope type        = 0
+llm_load_print_meta: rope scaling     = linear
+llm_load_print_meta: freq_base_train  = 10000.0
+llm_load_print_meta: freq_scale_train = 1
+llm_load_print_meta: n_yarn_orig_ctx  = 4096
+llm_load_print_meta: rope_finetuned   = unknown
+llm_load_print_meta: model type       = 13B
+llm_load_print_meta: model ftype      = Q5_K - Medium
+llm_load_print_meta: model params     = 13.02 B
+llm_load_print_meta: model size       = 8.60 GiB (5.67 BPW) 
+llm_load_print_meta: general.name     = LLaMA v2
+llm_load_print_meta: BOS token        = 1 '&lt;s&gt;'
+llm_load_print_meta: EOS token        = 2 '&lt;/s&gt;'
+llm_load_print_meta: UNK token        = 0 '&lt;unk&gt;'
+llm_load_print_meta: LF token         = 13 '&lt;0x0A&gt;'
+llm_load_tensors: ggml ctx size =    0.28 MiB
+llm_load_tensors: offloading 40 repeating layers to GPU
+llm_load_tensors: offloading non-repeating layers to GPU
+llm_load_tensors: offloaded 41/41 layers to GPU
+llm_load_tensors:        CPU buffer size =   107.42 MiB
+llm_load_tensors:      CUDA0 buffer size =  8694.21 MiB
+....................................................................................................
+llama_new_context_with_model: n_ctx      = 512
+llama_new_context_with_model: freq_base  = 10000.0
+llama_new_context_with_model: freq_scale = 1
+ggml_init_cublas: GGML_CUDA_FORCE_MMQ:   no
+ggml_init_cublas: CUDA_USE_TENSOR_CORES: yes
+ggml_init_cublas: found 1 CUDA devices:
+  Device 0: NVIDIA A100 80GB PCIe, compute capability 8.0, VMM: yes
+llama_kv_cache_init:      CUDA0 KV buffer size =   400.00 MiB
+llama_new_context_with_model: KV self size  =  400.00 MiB, K (f16):  200.00 MiB, V (f16):  200.00 MiB
+llama_new_context_with_model:  CUDA_Host input buffer size   =    12.01 MiB
+llama_new_context_with_model:      CUDA0 compute buffer size =    81.00 MiB
+llama_new_context_with_model:  CUDA_Host compute buffer size =    10.00 MiB
+llama_new_context_with_model: graph splits (measure): 2
+
+system_info: n_threads = 32 / 64 | AVX = 1 | AVX_VNNI = 0 | AVX2 = 1 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | FMA = 1 | NEON = 0 | ARM_FMA = 0 | F16C = 1 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 1 | SSSE3 = 1 | VSX = 0 | MATMUL_INT8 = 0 | 
+main: interactive mode on.
+Reverse prompt: 'User:'
+Input prefix: ' '
+sampling: 
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        top_k = 40, tfs_z = 1.000, top_p = 0.950, min_p = 0.050, typical_p = 1.000, temp = 0.800
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
+sampling order: 
+CFG -&gt; Penalties -&gt; top_k -&gt; tfs_z -&gt; typical_p -&gt; top_p -&gt; min_p -&gt; temperature 
+generate: n_ctx = 512, n_batch = 512, n_predict = 512, n_keep = 1
+
+
+== Running in interactive mode. ==
+ - Press Ctrl+C to interject at any time.
+ - Press Return to return control to LLaMa.
+ - To return control without starting a new line, end your input with '/'.
+ - If you want to submit another line, end your input with '</span><span class="se">\'</span><span class="s2">.
+
+ Transcript of a dialog, where the User interacts with an Assistant named Bob. Bob is helpful, kind, honest, good at writing, and never fails to answer the User's requests immediately and with precision.
+
+User: Hello, Bob.
+Bob: Hello. How may I help you today?
+User: Please tell me the largest city in Europe.
+Bob: Sure. The largest city in Europe is Moscow, the capital of Russia.
+User: 
+
+llama_print_timings:        load time =    1439.09 ms
+llama_print_timings:      sample time =       0.00 ms /     1 runs   (    0.00 ms per token,      inf tokens per second)
+llama_print_timings: prompt eval time =      73.35 ms /    99 tokens (    0.74 ms per token,  1349.66 tokens per second)
+llama_print_timings:        eval time =       0.00 ms /     1 runs   (    0.00 ms per token,      inf tokens per second)
+llama_print_timings:       total time =    1017.78 ms /   100 tokens
+</span></code></pre></div></div> </div> </article> <br> <hr> <br> <ul class="list-disc pl-8"></ul> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/grammarflow/">Supercharging your agent chains with GrammarFlow 🪢</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/rais/">Defining Reproducibility in AI/ML Research!</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2022/displaying-external-posts-on-your-al-folio-blog/">Displaying External Posts on Your al-folio Blog</a> </li> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2024 Akshath Raghav Ravikiran. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a> </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js" type="text/javascript"></script> <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> <script>document.onreadystatechange=(()=>{"complete"===document.readyState&&document.querySelectorAll("pre>code.language-geojson").forEach(e=>{const t=e.textContent,a=e.parentElement;a.classList.add("unloaded");let o=document.createElement("div");o.classList.add("map"),a.after(o);var n=L.map(o);L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(n);let d=L.geoJSON(JSON.parse(t)).addTo(n);n.fitBounds(d.getBounds())})});</script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2930004b8d7fcd0a8e00fdcfc8fc9f24"></script> <script defer src="/assets/js/common.js?da39b660470d1ba6e6b8bf5f37070b6e"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script type="text/javascript">window.MathJax={tex:{tags:"ams"}};</script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script> <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script type="text/javascript">function progressBarSetup(){"max"in document.createElement("progress")?(initializeProgressElement(),$(document).on("scroll",function(){progressBar.attr({value:getCurrentScrollPosition()})}),$(window).on("resize",initializeProgressElement)):(resizeProgressBar(),$(document).on("scroll",resizeProgressBar),$(window).on("resize",resizeProgressBar))}function getCurrentScrollPosition(){return $(window).scrollTop()}function initializeProgressElement(){let e=$("#navbar").outerHeight(!0);$("body").css({"padding-top":e}),$("progress-container").css({"padding-top":e}),progressBar.css({top:e}),progressBar.attr({max:getDistanceToScroll(),value:getCurrentScrollPosition()})}function getDistanceToScroll(){return $(document).height()-$(window).height()}function resizeProgressBar(){progressBar.css({width:getWidthPercentage()+"%"})}function getWidthPercentage(){return getCurrentScrollPosition()/getDistanceToScroll()*100}const progressBar=$("#progress");window.onload=function(){setTimeout(progressBarSetup,50)};</script> </body> </html>

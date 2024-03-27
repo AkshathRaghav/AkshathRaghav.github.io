@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://akshathraghav.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://akshathraghav.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2024-03-25T21:24:20+00:00</updated><id>https://akshathraghav.github.io/feed.xml</id><title type="html">&lt;u&gt;a&lt;/u&gt;kshath raghav &lt;u&gt;raviki&lt;/u&gt;ran</title><subtitle></subtitle><entry><title type="html"></title><link href="https://akshathraghav.github.io/blog/2024/2024-03-16-parsechain/" rel="alternate" type="text/html" title=""/><published>2024-03-25T21:24:20+00:00</published><updated>2024-03-25T21:24:20+00:00</updated><id>https://akshathraghav.github.io/blog/2024/2024-03-16-parsechain</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/2024-03-16-parsechain/"><![CDATA[<div align="center"> # 🪢 GrammarFlow 🚀 Powering Agent Chains by Constraining LLM Outputs 🚀 </div> <h1 id="table-of-contents">Table of contents</h1> <ol> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-what-is-this">What is this</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-quick-install">Quick Install</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-code-usage">Code Usage</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#examples--samples">Examples (@ samples/)</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#gnbf-grammar">GNBF Grammar</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#remarks">Remarks!</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#citation">Citation</a></li> </ol> <h2 id="-what-is-this">🤔 What is this?</h2> <p>This repository contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by <code class="language-plaintext highlighter-rouge">json.loads</code> (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the <code class="language-plaintext highlighter-rouge">llama.cpp</code> package for sampling logits smartly.</p> <p>The goal of this package was to overcome the issues faced when using langchain’s output parsers with instruct language models. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts.</p> <blockquote> <p>Please reach out to <code class="language-plaintext highlighter-rouge">araviki [at] purdue [dot] edu</code> or open an issue on Github if you have any questions or inquiry related to GrammarFlow and its usage.</p> </blockquote> <h2 id="-quick-install">⚡ Quick Install</h2> <p><code class="language-plaintext highlighter-rouge">pip install grammarflow</code></p> <h2 id="-code-usage">📃 Code Usage</h2> <ol> <li>Map out what your agent chain is doing. Understand what it’s goals are and what data needs to be carried forward from one step to the next. For example, consider the <a href="https://react-lm.github.io/">ReAct prompting framework</a>. In every call, we want to pass in the Action and subsequent Observation to the next call.</li> </ol> <p>1.1. Load grammarflow</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from grammarflow import * 
-</code></pre></div></div> <ol> <li>Make a Pydantic Model for the above case. Here’s a sample: <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ThoughtState</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://akshathraghav.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://akshathraghav.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2024-03-27T23:57:50+00:00</updated><id>https://akshathraghav.github.io/feed.xml</id><title type="html">&lt;u&gt;a&lt;/u&gt;kshath raghav &lt;u&gt;raviki&lt;/u&gt;ran</title><subtitle></subtitle><entry><title type="html">Supercharging your agent chains with GrammarFlow 🪢</title><link href="https://akshathraghav.github.io/blog/2024/grammarflow/" rel="alternate" type="text/html" title="Supercharging your agent chains with GrammarFlow 🪢"/><published>2024-03-26T17:57:00+00:00</published><updated>2024-03-26T17:57:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/grammarflow</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/grammarflow/"><![CDATA[<h1 id="-grammarflow">🪢 GrammarFlow</h1> <p>🚀 Powering Agent Chains by Constraining LLM Outputs 🚀</p> <h1 id="table-of-contents">Table of contents</h1> <ol> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-what-is-this">What is this</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-quick-install">Quick Install</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-code-usage">Code Usage</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#examples--samples">Examples (@ samples/)</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#gnbf-grammar">GNBF Grammar</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#remarks">Remarks!</a></li> <li><a href="https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#citation">Citation</a></li> </ol> <h2 id="-what-is-this">🤔 What is this?</h2> <p>This repository contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by <code class="language-plaintext highlighter-rouge">json.loads</code> (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the <code class="language-plaintext highlighter-rouge">llama.cpp</code> package for sampling logits smartly.</p> <p>The goal of this package was to overcome the issues faced when using langchain’s output parsers with instruct language models. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts.</p> <blockquote> <p>Please reach out to <code class="language-plaintext highlighter-rouge">araviki [at] purdue [dot] edu</code> or open an issue on Github if you have any questions or inquiry related to GrammarFlow and its usage.</p> </blockquote> <h2 id="-quick-install">⚡ Quick Install</h2> <p><code class="language-plaintext highlighter-rouge">pip install grammarflow</code></p> <h2 id="-code-usage">📃 Code Usage</h2> <ol> <li> <p>Map out what your agent chain is doing. Understand what it’s goals are and what data needs to be carried forward from one step to the next. For example, consider the <a href="https://react-lm.github.io/">ReAct prompting framework</a>. In every call, we want to pass in the Action and subsequent Observation to the next call.</p> </li> <li>Load grammarflow <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from grammarflow import * 
+</code></pre></div> </div> </li> <li>Make a Pydantic Model for the above case. Here’s a sample: <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ThoughtState</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
  <span class="n">thought</span><span class="p">:</span> <span class="nb">str</span>
  <span class="n">goal</span><span class="p">:</span> <span class="nb">str</span>
  <span class="n">tool</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(...,</span>
@@ -98,7 +98,164 @@
   howpublished = {\url{https://github.com/e-lab/GrammarFlow}}, 
   version = {0.0.9}
 }
-</code></pre></div></div>]]></content><author><name></name></author></entry><entry><title type="html">MaskFormer</title><link href="https://akshathraghav.github.io/blog/2024/rais/" rel="alternate" type="text/html" title="MaskFormer"/><published>2024-01-27T00:20:00+00:00</published><updated>2024-01-27T00:20:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/rais</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/rais/"><![CDATA[<p>This is an example post with some <a href="https://vega.github.io/vega-lite/">vega lite</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">vega_lite
+</code></pre></div></div>]]></content><author><name></name></author><category term="software"/><category term="software"/><category term="research"/><summary type="html"><![CDATA[Constraining LLM outputs with Grammars]]></summary></entry><entry><title type="html">Set up Llama.cpp on university compute clusters 🦙</title><link href="https://akshathraghav.github.io/blog/2024/geojson-map/" rel="alternate" type="text/html" title="Set up Llama.cpp on university compute clusters 🦙"/><published>2024-03-23T17:57:00+00:00</published><updated>2024-03-23T17:57:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/geojson-map</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/geojson-map/"><![CDATA[<p>Welcome to the quick start guide for running <code class="language-plaintext highlighter-rouge">llama.cpp</code> on academic/research community compute clusters <strong>without root access</strong>.</p> <h2 id="why-this-guide-is-necessary">Why This Guide is Necessary</h2> <p>On Purdue’s RCAC clusters, users often face the issue of the lack of sudo access. This limitation restricts the ability to install packages or update system libraries (which are very old on these clusters). They contain module systems which help to load and install cudatoolkit and gcc, but I’ve faced issues with GLIB versions reflecting on conda environmnets using this method.</p> <p>This repository has a set of bash scripts that allow users to install and configure gcc and the NVIDIA Toolkit in a user-specific directory. This approach ensures that you can run <code class="language-plaintext highlighter-rouge">llama.cpp</code> without the need for administrative privileges.</p> <h3 id="before-you-start">Before You Start</h3> <p>Ensure you have permission to execute scripts and access clusters. Familiarity with basic terminal commands and the Linux environment will be helpful.</p> <h2 id="1-nvidia-toolkit-installation">1. NVIDIA Toolkit Installation</h2> <p>The NVIDIA Toolkit includes libraries and tools essential for developing applications that leverage NVIDIA GPUs.</p> <p>Extras:</p> <ul> <li><a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=CentOS&amp;target_version=7&amp;target_type=runfile_local">Toolkit Download</a></li> <li><a href="https://stackoverflow.com/questions/39379792/install-cuda-without-root">StackOverflow Thread</a></li> </ul> <h3 id="steps">Steps:</h3> <ol> <li><strong>Configure Installation Directory</strong>: <ul> <li>Edit <code class="language-plaintext highlighter-rouge">nvidia-toolkit.sh</code> to specify your installation directory by changing the <code class="language-plaintext highlighter-rouge">ROOT_DIR</code> variable.</li> </ul> </li> <li><strong>Execute the Script</strong>: <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash nvidia-toolkit.sh
+</code></pre></div> </div> <p>Complete the setup by following the prompts.</p> </li> </ol> <h3 id="toolkit-setup">Toolkit Setup</h3> <ol> <li>Type <code class="language-plaintext highlighter-rouge">accept</code> in the console.</li> </ol> <div align="center"> <img src="https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/1.png" alt="1" style="height: 50%;"/> </div> <ol> <li>Use <code class="language-plaintext highlighter-rouge">ENTER</code> to select/deselect settings. Make sure the settings screen looks like the following image:</li> </ol> <div align="center"> <img src="https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/2.png" alt="1" style="height: 50%;"/> </div> <ol> <li>Hover over the <code class="language-plaintext highlighter-rouge">CUDA Toolkit 12.3</code> option, and press <code class="language-plaintext highlighter-rouge">A</code>. Deselect all of the settings here except <code class="language-plaintext highlighter-rouge">Install manpage documents...</code></li> </ol> <div align="center"> <img src="https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/3.png" alt="1" style="height: 50%;"/> </div> <ol> <li>Hover over <code class="language-plaintext highlighter-rouge">Change Toolkit Install Path</code>. Hit <code class="language-plaintext highlighter-rouge">ENTER</code> and add the $TOOLKIT variable path here.</li> </ol> <div align="center"> <img src="https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/4.png" alt="1" style="height: 50%;"/> </div> <ol> <li>Finally, exit out into the main menu, hover over <code class="language-plaintext highlighter-rouge">Install</code> and hit <code class="language-plaintext highlighter-rouge">ENTER</code>.</li> </ol> <p>Now, add these lines to the bottom of your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">TOOLKIT</span><span class="o">={}</span>
+
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div></div> <h2 id="2-gcc-installation">2. gcc Installation</h2> <p>gcc (GNU Compiler Collection) is a compiler system supporting various programming languages, crucial for software development and execution. Gilbreth, and other clusters like Negishi, use a version below &lt;11.x.x&gt;. llama.cpp requires a higher version. We will be using the latest version: &lt;12.3.0&gt;.</p> <p>Extra:</p> <ul> <li><a href="https://gcc.gnu.org/install/configure.html">GNU Docs</a></li> <li><a href="https://stackoverflow.com/questions/10279829/installing-glib-in-non-standard-prefix-fails">StackOverflow Thread</a></li> <li><a href="https://github.com/ggerganov/llama.cpp/issues/552">Llama.cpp discussion</a></li> </ul> <h3 id="steps-1">Steps:</h3> <ol> <li><strong>Configure Installation Directory</strong>: <ul> <li>Open <code class="language-plaintext highlighter-rouge">gcc.sh</code> in a text editor.</li> <li>Set <code class="language-plaintext highlighter-rouge">ROOT_DIR</code> to your desired installation directory.</li> <li>The script ensures that <code class="language-plaintext highlighter-rouge">srcdir</code> (SRC_DIR) and <code class="language-plaintext highlighter-rouge">objdir</code> (BUILD_DIR) are different directories. If you do wish to change these paths, make sure that they point to different locations.</li> </ul> </li> <li><strong>Run the Script</strong>: <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash gcc.sh
+</code></pre></div> </div> </li> </ol> <p>If you face any issues, run <code class="language-plaintext highlighter-rouge">make -k distclean &amp;&amp; make -k clean</code> to undo what was done by <code class="language-plaintext highlighter-rouge">./configure</code> and <code class="language-plaintext highlighter-rouge">make</code>. Then, debug. Otherwise, this will cause issues down the line.</p> <p>Now, add these lines to the bottom of your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ROOT_DIR</span><span class="o">={}</span>
+<span class="nb">export </span><span class="nv">SRC_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_src <span class="c"># Change this is needed</span>
+<span class="nb">export </span><span class="nv">BUILD_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_build <span class="c"># Change this if neeeded</span>
+
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">CC</span><span class="o">=</span>gcc
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$BUILD_DIR</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$BUILD_DIR</span>/local/lib:<span class="nv">$BUILD_DIR</span>/lib:<span class="nv">$BUILD_DIR</span>/local/lib64:<span class="nv">$BUILD_DIR</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.bashrc
+</code></pre></div></div> <h2 id="3-running-llamacpp">3. Running llama.cpp</h2> <p>With gcc and the NVIDIA Toolkit set up, you’re now ready to compile and run <code class="language-plaintext highlighter-rouge">llama.cpp</code>.</p> <p>Extras:</p> <ul> <li><a href="https://github.com/ggerganov/llama.cpp?tab=readme-ov-file">Llama.cpp</a></li> <li><a href="https://stackoverflow.com/questions/39649102/how-do-i-select-which-gpu-to-run-a-job-on">Jobs on GPU</a></li> <li><a href="https://kubito.dev/posts/llama-cpp-linux-nvidia/">Llama.cpp flags</a></li> </ul> <h3 id="steps-2">Steps:</h3> <ol> <li> <p><strong>NOTE:</strong> If you have run the above scripts in a previous session, then ensure you have added the environoment paths to your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file with the same paths you used in <code class="language-plaintext highlighter-rouge">gcc.sh</code> and <code class="language-plaintext highlighter-rouge">nvidia-toolkit.sh</code>. This sets the paths to look at our local installations.</p> </li> <li> <p><strong>Download the llama Script</strong>: <code class="language-plaintext highlighter-rouge">llama.sh</code> is designed to compile and execute <code class="language-plaintext highlighter-rouge">llama.cpp</code> using the previously installed tools.</p> </li> <li><strong>Configure Installation Directory</strong>: <ul> <li>Modify <code class="language-plaintext highlighter-rouge">llama.sh</code>, setting <code class="language-plaintext highlighter-rouge">LLAMA_DIR</code> to the directory where gcc and the NVIDIA Toolkit are installed.</li> </ul> </li> <li><strong>Launch the Script</strong>: <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash llama.sh
+</code></pre></div> </div> <p>This script compiles <code class="language-plaintext highlighter-rouge">llama.cpp</code> and runs it. Follow any instructions or prompts that appear.</p> </li> </ol> <h3 id="running-inference">Running inference</h3> <p>Ensure all of these lines exist within your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ROOT_DIR</span><span class="o">=</span>/depot/euge/data/araviki
+<span class="nb">export </span><span class="nv">TOOLKIT</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/nvidia-toolkit/12.3
+<span class="nb">export </span><span class="nv">SRC_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_src
+<span class="nb">export </span><span class="nv">BUILD_DIR</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/gcc/gcc_build
+
+<span class="c"># Leave as is</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/bin:<span class="nv">$BUILD_DIR</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$TOOLKIT</span>/lib64:<span class="nv">$BUILD_DIR</span>/local/lib:<span class="nv">$BUILD_DIR</span>/lib:<span class="nv">$BUILD_DIR</span>/local/lib64:<span class="nv">$BUILD_DIR</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+<span class="nb">export </span><span class="nv">LLAMA</span><span class="o">=</span><span class="nv">$ROOT_DIR</span>/llama
+</code></pre></div></div> <p>Now, you are ready to run llama.cpp. I’ve bound the path of my main <code class="language-plaintext highlighter-rouge">llama</code> folder to <code class="language-plaintext highlighter-rouge">$LLAMA</code>, so that I can call it as follows:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># - araviki</span>
+   <span class="c"># - llama</span>
+      <span class="c"># - gguf # Storing quantized models</span>
+      <span class="c"># - llama.cpp # src</span>
+         <span class="c"># - main</span>
+         <span class="c"># - prompts/</span>
+         <span class="c"># - grammars/</span>
+
+<span class="nv">$LLAMA</span>/llama.cpp/main <span class="nt">--color</span> <span class="nt">--interactive</span> <span class="nt">--model</span> <span class="nv">$LLAMA</span>/gguf/llama-2-13b.Q5_K_M.gguf <span class="nt">--n-predict</span> 512 <span class="nt">--repeat_penalty</span> 1.0 <span class="nt">--n-gpu-layers</span> 15000 <span class="nt">--reverse-prompt</span> <span class="s2">"User:"</span> <span class="nt">--in-prefix</span> <span class="s2">" "</span> <span class="nt">-f</span> <span class="nv">$LLAMA</span>/llama.cpp/prompts/chat-with-bob.txt
+</code></pre></div></div> <p><strong>The output shown below was ran on a single A100-80GB instance.</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Log start
+main: build <span class="o">=</span> 2295 <span class="o">(</span>87c91c07<span class="o">)</span>
+main: built with gcc <span class="o">(</span>GCC<span class="o">)</span> 12.2.0 <span class="k">for </span>x86_64-pc-linux-gnu
+main: seed  <span class="o">=</span> 1709276455
+llama_model_loader: loaded meta data with 19 key-value pairs and 363 tensors from /depot/euge/data/araviki/llama/gguf/llama-2-13b.Q5_K_M.gguf <span class="o">(</span>version GGUF V2<span class="o">)</span>
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides <span class="k">do </span>not apply <span class="k">in </span>this output.
+llama_model_loader: - kv   0:                       general.architecture str              <span class="o">=</span> llama
+llama_model_loader: - kv   1:                               general.name str              <span class="o">=</span> LLaMA v2
+llama_model_loader: - kv   2:                       llama.context_length u32              <span class="o">=</span> 4096
+llama_model_loader: - kv   3:                     llama.embedding_length u32              <span class="o">=</span> 5120
+llama_model_loader: - kv   4:                          llama.block_count u32              <span class="o">=</span> 40
+llama_model_loader: - kv   5:                  llama.feed_forward_length u32              <span class="o">=</span> 13824
+llama_model_loader: - kv   6:                 llama.rope.dimension_count u32              <span class="o">=</span> 128
+llama_model_loader: - kv   7:                 llama.attention.head_count u32              <span class="o">=</span> 40
+llama_model_loader: - kv   8:              llama.attention.head_count_kv u32              <span class="o">=</span> 40
+llama_model_loader: - kv   9:     llama.attention.layer_norm_rms_epsilon f32              <span class="o">=</span> 0.000010
+llama_model_loader: - kv  10:                          general.file_type u32              <span class="o">=</span> 17
+llama_model_loader: - kv  11:                       tokenizer.ggml.model str              <span class="o">=</span> llama
+llama_model_loader: - kv  12:                      tokenizer.ggml.tokens arr[str,32000]   <span class="o">=</span> <span class="o">[</span><span class="s2">"&lt;unk&gt;"</span>, <span class="s2">"&lt;s&gt;"</span>, <span class="s2">"&lt;/s&gt;"</span>, <span class="s2">"&lt;0x00&gt;"</span>, <span class="s2">"&lt;...
+llama_model_loader: - kv  13:                      tokenizer.ggml.scores arr[f32,32000]   = [0.000000, 0.000000, 0.000000, 0.0000...
+llama_model_loader: - kv  14:                  tokenizer.ggml.token_type arr[i32,32000]   = [2, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, ...
+llama_model_loader: - kv  15:                tokenizer.ggml.bos_token_id u32              = 1
+llama_model_loader: - kv  16:                tokenizer.ggml.eos_token_id u32              = 2
+llama_model_loader: - kv  17:            tokenizer.ggml.unknown_token_id u32              = 0
+llama_model_loader: - kv  18:               general.quantization_version u32              = 2
+llama_model_loader: - type  f32:   81 tensors
+llama_model_loader: - type q5_K:  241 tensors
+llama_model_loader: - type q6_K:   41 tensors
+llm_load_vocab: special tokens definition check successful ( 259/32000 ).
+llm_load_print_meta: format           = GGUF V2
+llm_load_print_meta: arch             = llama
+llm_load_print_meta: vocab type       = SPM
+llm_load_print_meta: n_vocab          = 32000
+llm_load_print_meta: n_merges         = 0
+llm_load_print_meta: n_ctx_train      = 4096
+llm_load_print_meta: n_embd           = 5120
+llm_load_print_meta: n_head           = 40
+llm_load_print_meta: n_head_kv        = 40
+llm_load_print_meta: n_layer          = 40
+llm_load_print_meta: n_rot            = 128
+llm_load_print_meta: n_embd_head_k    = 128
+llm_load_print_meta: n_embd_head_v    = 128
+llm_load_print_meta: n_gqa            = 1
+llm_load_print_meta: n_embd_k_gqa     = 5120
+llm_load_print_meta: n_embd_v_gqa     = 5120
+llm_load_print_meta: f_norm_eps       = 0.0e+00
+llm_load_print_meta: f_norm_rms_eps   = 1.0e-05
+llm_load_print_meta: f_clamp_kqv      = 0.0e+00
+llm_load_print_meta: f_max_alibi_bias = 0.0e+00
+llm_load_print_meta: n_ff             = 13824
+llm_load_print_meta: n_expert         = 0
+llm_load_print_meta: n_expert_used    = 0
+llm_load_print_meta: pooling type     = 0
+llm_load_print_meta: rope type        = 0
+llm_load_print_meta: rope scaling     = linear
+llm_load_print_meta: freq_base_train  = 10000.0
+llm_load_print_meta: freq_scale_train = 1
+llm_load_print_meta: n_yarn_orig_ctx  = 4096
+llm_load_print_meta: rope_finetuned   = unknown
+llm_load_print_meta: model type       = 13B
+llm_load_print_meta: model ftype      = Q5_K - Medium
+llm_load_print_meta: model params     = 13.02 B
+llm_load_print_meta: model size       = 8.60 GiB (5.67 BPW) 
+llm_load_print_meta: general.name     = LLaMA v2
+llm_load_print_meta: BOS token        = 1 '&lt;s&gt;'
+llm_load_print_meta: EOS token        = 2 '&lt;/s&gt;'
+llm_load_print_meta: UNK token        = 0 '&lt;unk&gt;'
+llm_load_print_meta: LF token         = 13 '&lt;0x0A&gt;'
+llm_load_tensors: ggml ctx size =    0.28 MiB
+llm_load_tensors: offloading 40 repeating layers to GPU
+llm_load_tensors: offloading non-repeating layers to GPU
+llm_load_tensors: offloaded 41/41 layers to GPU
+llm_load_tensors:        CPU buffer size =   107.42 MiB
+llm_load_tensors:      CUDA0 buffer size =  8694.21 MiB
+....................................................................................................
+llama_new_context_with_model: n_ctx      = 512
+llama_new_context_with_model: freq_base  = 10000.0
+llama_new_context_with_model: freq_scale = 1
+ggml_init_cublas: GGML_CUDA_FORCE_MMQ:   no
+ggml_init_cublas: CUDA_USE_TENSOR_CORES: yes
+ggml_init_cublas: found 1 CUDA devices:
+  Device 0: NVIDIA A100 80GB PCIe, compute capability 8.0, VMM: yes
+llama_kv_cache_init:      CUDA0 KV buffer size =   400.00 MiB
+llama_new_context_with_model: KV self size  =  400.00 MiB, K (f16):  200.00 MiB, V (f16):  200.00 MiB
+llama_new_context_with_model:  CUDA_Host input buffer size   =    12.01 MiB
+llama_new_context_with_model:      CUDA0 compute buffer size =    81.00 MiB
+llama_new_context_with_model:  CUDA_Host compute buffer size =    10.00 MiB
+llama_new_context_with_model: graph splits (measure): 2
+
+system_info: n_threads = 32 / 64 | AVX = 1 | AVX_VNNI = 0 | AVX2 = 1 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | FMA = 1 | NEON = 0 | ARM_FMA = 0 | F16C = 1 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 1 | SSSE3 = 1 | VSX = 0 | MATMUL_INT8 = 0 | 
+main: interactive mode on.
+Reverse prompt: 'User:'
+Input prefix: ' '
+sampling: 
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        top_k = 40, tfs_z = 1.000, top_p = 0.950, min_p = 0.050, typical_p = 1.000, temp = 0.800
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
+sampling order: 
+CFG -&gt; Penalties -&gt; top_k -&gt; tfs_z -&gt; typical_p -&gt; top_p -&gt; min_p -&gt; temperature 
+generate: n_ctx = 512, n_batch = 512, n_predict = 512, n_keep = 1
+
+
+== Running in interactive mode. ==
+ - Press Ctrl+C to interject at any time.
+ - Press Return to return control to LLaMa.
+ - To return control without starting a new line, end your input with '/'.
+ - If you want to submit another line, end your input with '</span><span class="se">\'</span><span class="s2">.
+
+ Transcript of a dialog, where the User interacts with an Assistant named Bob. Bob is helpful, kind, honest, good at writing, and never fails to answer the User's requests immediately and with precision.
+
+User: Hello, Bob.
+Bob: Hello. How may I help you today?
+User: Please tell me the largest city in Europe.
+Bob: Sure. The largest city in Europe is Moscow, the capital of Russia.
+User: 
+
+llama_print_timings:        load time =    1439.09 ms
+llama_print_timings:      sample time =       0.00 ms /     1 runs   (    0.00 ms per token,      inf tokens per second)
+llama_print_timings: prompt eval time =      73.35 ms /    99 tokens (    0.74 ms per token,  1349.66 tokens per second)
+llama_print_timings:        eval time =       0.00 ms /     1 runs   (    0.00 ms per token,      inf tokens per second)
+llama_print_timings:       total time =    1017.78 ms /   100 tokens
+</span></code></pre></div></div>]]></content><author><name></name></author><category term="software"/><category term="guide"/><category term="software"/><category term="research"/><summary type="html"><![CDATA[Scripts + Guide to automate installations]]></summary></entry><entry><title type="html">Defining Reproducibility in AI/ML Research!</title><link href="https://akshathraghav.github.io/blog/2024/rais/" rel="alternate" type="text/html" title="Defining Reproducibility in AI/ML Research!"/><published>2024-02-27T00:20:00+00:00</published><updated>2024-02-27T00:20:00+00:00</updated><id>https://akshathraghav.github.io/blog/2024/rais</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2024/rais/"><![CDATA[<p>This is an example post with some <a href="https://vega.github.io/vega-lite/">vega lite</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">vega_lite
 </span><span class="sb">{
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "A dot plot showing each movie in the database, and the difference from the average movie rating. The display is sorted by year to visualize everything in sequential order. The graph is for all Movies before 2019.",
@@ -180,4 +337,4 @@
     }
   }
 }
-</code></pre> <p>This plot supports both light and dark themes.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included vega lite code could look like]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog"/><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
+</code></pre> <p>This plot supports both light and dark themes.</p>]]></content><author><name></name></author><category term="software"/><category term="research"/><summary type="html"><![CDATA[This]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog"/><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="https://akshathraghav.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
