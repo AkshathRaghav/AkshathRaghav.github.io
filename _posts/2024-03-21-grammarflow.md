@@ -1,20 +1,17 @@
 ---
 layout: post
-title: Supercharging LLM agent-chains with GrammarFlow 🪢
-date: 2024-01-27 19:22:00
-description: 'GrammarFlow' usage guide! 
-tags: grammarflow llm constrain agents AI
+title: Supercharging your agent chains with GrammarFlow 🪢 
+date: 2024-03-26 17:57:00
+description: Constraining LLM outputs with Grammars
+tags: software research 
 categories: software
-code_diff: true
+map: true
 ---
 
-<div align="center">
 
 # 🪢 GrammarFlow
 
 🚀 Powering Agent Chains by Constraining LLM Outputs  🚀
-
-</div>
 
 # Table of contents
 1. [What is this](https://github.com/e-lab/SyntaxShaper/tree/main?tab=readme-ov-file#-what-is-this)
@@ -40,10 +37,10 @@ The goal of this package was to overcome the issues faced when using langchain's
 
 ## 📃 Code Usage 
 
-1. Map out what your agent chain is doing. Understand what it's goals are and what data needs to be carried forward from one step to the next. 
+0. Map out what your agent chain is doing. Understand what it's goals are and what data needs to be carried forward from one step to the next. 
 For example, consider the [ReAct prompting framework](https://react-lm.github.io/). In every call, we want to pass in the Action and subsequent Observation to the next call. 
 
-1.1. Load grammarflow 
+1. Load grammarflow 
 ```
 from grammarflow import * 
 ```

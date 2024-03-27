@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Set up Llama.cpp on university compute clusters 🦙
-date: 2024-03-26 17:57:00
+date: 2024-03-23 17:57:00
 description: Scripts + Guide to automate installations
-tags: llama.cpp compute RCAC 
-categories: misc
+tags: guide software research 
+categories: software
 map: true
 ---
 
