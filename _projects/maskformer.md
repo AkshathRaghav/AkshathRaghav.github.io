@@ -15,7 +15,7 @@ This page is the culmination of the work I did at [Duality Lab](https://github.c
 * Wrote the evaluation module, including the implementation of panoptic inference metrics to work with tf2's inbuilt task workflow. Fixed and integrated code for multi-scale (auxillary) losses to address inability of loss convergence. 
 * Responsible for the PR to [TF Model Garden](https://github.com/tensorflow/models), from re-writing modules (across layers) for guidelines adherence to creating/annotating results for the report. Also wrote unit tests for all modules used in the architecture for tensor shape validation and expected results. 
 
-## Description
+# Description
 
 MaskFormer, a universal architecture based on MaskFormer meta-architecture that achieves SOTA on panoptic, instance and semantic segmentation across four popular datasets (ADE20K, Cityscapes, COCO, Mapillary Vistas).
 
@@ -25,7 +25,7 @@ MaskFormer transforms any per-pixel classification model into a mask classificat
   <img src="https://drive.google.com/thumbnail?id=1NWXhqU1NutsWhQnfFNzk7vgTYG09OaW0&sz=w1000" alt="examples" style="width: 50%;"/>
 </p>
 
-## Results 
+# Results 
 
 Here are our results: 
 
@@ -34,7 +34,8 @@ Here are our results:
 </p>
 
 
-## Getting Started: 
+# Getting Started
+---
 
 ```
 git clone https://github.com/PurdueDualityLab/tf-maskformer.git
