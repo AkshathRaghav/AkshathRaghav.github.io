@@ -33,7 +33,7 @@ The code and data (/sources) extracted from are considered proprietary, and henc
 
 *FRP is not a weather-based calculation. It is solely expressed as the rate of outgoing thermal radiative energy coming from a burning landscape fire, integrated over all emitted wavelengths and over the hemisphere*
 
-{% include figure.liquid path="assets/img/ambee/image2.png" title="example image" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid path="assets/img/ambee/image20.png" title="example image" class="img-fluid rounded z-depth-1" %}
 {% include figure.liquid path="assets/img/ambee/image3.png" title="example image" class="img-fluid rounded z-depth-1" %}
 {% include figure.liquid path="assets/img/ambee/image8.png" title="example image" class="img-fluid rounded z-depth-1" %}
 {% include figure.liquid path="assets/img/ambee/image9.png" title="example image" class="img-fluid rounded z-depth-1" %}
@@ -106,14 +106,16 @@ Here are some comparisons between the real and predicted FRP maps.
 
 ### [NIFC](https://www.nifc.gov/nicc-files/predictive/outlooks/monthly_seasonal_outlook.pdf)
 
-        {% include figure.liquid loading="eager" path="assets/img/ambee/america/image2.png" title="example image" class="img-fluid rounded z-depth-1" %}
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image4.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/ambee/america/image2.png" title="example image" class="img-fluid rounded z-depth-1" %}
+
 <div class="caption">
     Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
 </div>
 
-        {% include figure.liquid loading="eager" path="assets/img/ambee/america/image14.png" title="example image" class="img-fluid rounded z-depth-1" %}
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image23.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/ambee/america/image14.png" title="example image" class="img-fluid rounded z-depth-1" %}
+
 <div class="caption">
     Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
 </div>

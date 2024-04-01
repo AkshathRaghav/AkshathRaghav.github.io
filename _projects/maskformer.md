@@ -22,8 +22,10 @@ MaskFormer, a universal architecture based on MaskFormer meta-architecture that 
 MaskFormer transforms any per-pixel classification model into a mask classification method. It utilizes a Transformer decoder to compute a set of pairs, each comprising a class prediction and a mask embedding vector. The binary mask prediction is obtained via a dot product between the mask embedding vector and per-pixel embedding from a fully-convolutional network. This model addresses both semantic and instance-level segmentation tasks without requiring changes to the model, losses, or training procedure. For both semantic and panoptic segmentation tasks, MaskFormer is supervised using the same per-pixel binary mask loss and a single classification loss per mask. A straightforward inference strategy is designed to convert MaskFormer outputs into a task-dependent prediction format.
 
 <p align="center">
-  <img src="https://drive.google.com/thumbnail?id=1NWXhqU1NutsWhQnfFNzk7vgTYG09OaW0&sz=w1000" alt="examples" />
+{% include figure.liquid loading="eager" path="assets/img/maskformer/maskformer_real.png" class="img-fluid rounded z-depth-1" %}
 </p>
+
+
 
 # Results 
 
