@@ -33,29 +33,17 @@ The code and data (/sources) extracted from are considered proprietary, and henc
 
 *FRP is not a weather-based calculation. It is solely expressed as the rate of outgoing thermal radiative energy coming from a burning landscape fire, integrated over all emitted wavelengths and over the hemisphere*
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/ambee/image2.png" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/ambee/image3.png" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
+{% include figure.liquid path="assets/img/ambee/image2.png" title="example image" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid path="assets/img/ambee/image3.png" title="example image" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid path="assets/img/ambee/image8.png" title="example image" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid path="assets/img/ambee/image9.png" title="example image" class="img-fluid rounded z-depth-1" %}
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/ambee/image8.png" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/ambee/image9.png" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-Below are some plots discussing the FRP aspect within our dataset for transparency purposes. 
+Below are some plots discussing our FRP distributions across the years. 
 
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
-  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/distributions/image16.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/distributions/image18.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/distributions/image16.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
 </swiper-container>
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/onevsyr/image13.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
@@ -73,6 +61,10 @@ Here are some comparisons between the real and predicted FRP maps.
   {% include figure.liquid path="assets/img/ambee/2/image_part_002.jpg" class="img-fluid rounded z-depth-1" slot="second" %}
 </img-comparison-slider>
 <img-comparison-slider>
+  {% include figure.liquid path="assets/img/ambee/8/image_part_001.jpg" class="img-fluid rounded z-depth-1" slot="first" %}
+  {% include figure.liquid path="assets/img/ambee/8/image_part_002.jpg" class="img-fluid rounded z-depth-1" slot="second" %}
+</img-comparison-slider>
+<img-comparison-slider>
   {% include figure.liquid path="assets/img/ambee/3/image_part_001.jpg" class="img-fluid rounded z-depth-1" slot="first" %}
   {% include figure.liquid path="assets/img/ambee/3/image_part_002.jpg" class="img-fluid rounded z-depth-1" slot="second" %}
 </img-comparison-slider>
@@ -81,8 +73,8 @@ Here are some comparisons between the real and predicted FRP maps.
   {% include figure.liquid path="assets/img/ambee/6/image_part_002.jpg" class="img-fluid rounded z-depth-1" slot="second" %}
 </img-comparison-slider>
 <img-comparison-slider>
-  {% include figure.liquid path="assets/img/ambee/8/image_part_001.jpg" class="img-fluid rounded z-depth-1" slot="first" %}
-  {% include figure.liquid path="assets/img/ambee/8/image_part_002.jpg" class="img-fluid rounded z-depth-1" slot="second" %}
+  {% include figure.liquid path="assets/img/ambee/oct/image_part_001.jpg" class="img-fluid rounded z-depth-1" slot="first" %}
+  {% include figure.liquid path="assets/img/ambee/oct/image_part_002.jpg" class="img-fluid rounded z-depth-1" slot="second" %}
 </img-comparison-slider>
 
 --- 
@@ -114,26 +106,14 @@ Here are some comparisons between the real and predicted FRP maps.
 
 ### [NIFC](https://www.nifc.gov/nicc-files/predictive/outlooks/monthly_seasonal_outlook.pdf)
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image2.png" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image4.png" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
 <div class="caption">
     Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
 </div>
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image14.png" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image23.png" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
 <div class="caption">
     Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
 </div>
