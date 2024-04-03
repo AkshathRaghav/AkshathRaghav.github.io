@@ -8,10 +8,10 @@ category: research
 ---
 
 
-# (euGenio)[https://eugenio-a3n.streamlit.app/]
+# (Demo)[https://eugenio-a3n.streamlit.app/]
 
-<iframe src="https://www.youtube.com/watch?v=-d7hI4Q0vXw" width="640" height="500" allow="autoplay"></iframe>
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-d7hI4Q0vXw?si=Qjipc3Q4010uJMsh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+ 
 ## ⚠️ Project Status:
 This project is currently in the developmental phase and actively undergoing enhancements. The Language Model (LLM) backend is presently powered by GPT-4, with imminent plans to transition towards a multi-modal approach, specifically leveraging the Llama2 Large World Model (LWM).
 
