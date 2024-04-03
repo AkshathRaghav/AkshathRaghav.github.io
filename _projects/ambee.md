@@ -33,10 +33,22 @@ The code and data (/sources) extracted from are considered proprietary, and henc
 
 *FRP is not a weather-based calculation. It is solely expressed as the rate of outgoing thermal radiative energy coming from a burning landscape fire, integrated over all emitted wavelengths and over the hemisphere*
 
-{% include figure.liquid path="assets/img/ambee/image20.png" title="example image" class="img-fluid rounded z-depth-1" %}
-{% include figure.liquid path="assets/img/ambee/image3.png" title="example image" class="img-fluid rounded z-depth-1" %}
-{% include figure.liquid path="assets/img/ambee/image8.png" title="example image" class="img-fluid rounded z-depth-1" %}
-{% include figure.liquid path="assets/img/ambee/image9.png" title="example image" class="img-fluid rounded z-depth-1" %}
+<swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
+  <swiper-slide>{% include figure.liquid path="assets/img/ambee/image8.png" title="example image" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid path="assets/img/ambee/image20.png" title="example image" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid path="assets/img/ambee/image3.png" title="example image" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid path="assets/img/ambee/image9.png" title="example image" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+</swiper-container>
+
+<swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/canada/1.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/canada/2.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/canada/3.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/canada/4.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/canada/5.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/canada/6.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+</swiper-container>
+
 
 Below are some plots discussing our FRP distributions across the years. 
 
@@ -84,7 +96,7 @@ Here are some comparisons between the real and predicted FRP maps.
 
 --- 
 
-### [CWFIS](https://cwfis.cfs.nrcan.gc.ca/maps/forecasts)
+### [CWFIS](https://cwfis.cfs.nrcan.gc.ca/maps/forecasts): Canadian Wildland Fire Information System
 
 <div class="row">
       {% include figure.liquid loading="eager" path="assets/img/ambee/canada/image10.png" title="example image" class="img-fluid rounded z-depth-1" %}
@@ -104,7 +116,7 @@ Here are some comparisons between the real and predicted FRP maps.
 
 --- 
 
-### [NIFC](https://www.nifc.gov/nicc-files/predictive/outlooks/monthly_seasonal_outlook.pdf)
+### [NIFC](https://www.nifc.gov/nicc-files/predictive/outlooks/monthly_seasonal_outlook.pdf): National Interagency Fire Center
 
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image4.png" title="example image" class="img-fluid rounded z-depth-1" %}
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image2.png" title="example image" class="img-fluid rounded z-depth-1" %}
