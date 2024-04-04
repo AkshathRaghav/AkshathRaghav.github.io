@@ -9,7 +9,8 @@ last_name:  Ravikiran
 email: araviki@purdue.edu
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   
-footer_text: Last updated: 2024(Y)-03(M)-04(D)
+footer_text: > 
+  Last updated: 2024(Y)-03(M)-04(D)
 keywords: akshath, raghav, ravikiran, araviki, portfolio, resume, cv # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon:  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
