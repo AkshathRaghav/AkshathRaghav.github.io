@@ -43,23 +43,23 @@ Extras:
 
 1. Type `accept` in the console.
 <div align="center">
-  <img src='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/1.png' alt="1" style="height: 50%;"/>
+  <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/1.png' alt="1" style="height: 50%;"/>
 </div>
 
 2. Use `ENTER` to select/deselect settings. Make sure the settings screen looks like the following image: 
 <div align="center">
-  <img src='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/2.png' alt="1" style="height: 50%;"/>
+  <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/2.png' alt="1" style="height: 50%;"/>
 </div>
 
 3. Hover over the `CUDA Toolkit 12.3` option, and press `A`. Deselect all of the settings here except `Install manpage documents...` 
 <div align="center">
-  <img src='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/3.png' alt="1" style="height: 50%;"/>
+  <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/3.png' alt="1" style="height: 50%;"/>
 </div>
 
 
 4. Hover over `Change Toolkit Install Path`. Hit `ENTER` and add the $TOOLKIT variable path here. 
 <div align="center">
-  <img src='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/4.png' alt="1" style="height: 50%;"/>
+  <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/4.png' alt="1" style="height: 50%;"/>
 </div>
 
 5. Finally, exit out into the main menu, hover over `Install` and hit `ENTER`. 
@@ -90,7 +90,7 @@ Extra:
 1. **Configure Installation Directory**:
    - Open `gcc.sh` in a text editor.
    - Set `ROOT_DIR` to your desired installation directory.
-   - The script ensures that `srcdir` (SRC_DIR) and `objdir` (BUILD_DIR) are different directories. If you do wish to change these paths, make sure that they point to different locations. 
+   - The script ensures that `hrefdir` (href_DIR) and `objdir` (BUILD_DIR) are different directories. If you do wish to change these paths, make sure that they point to different locations. 
 
 2. **Run the Script**:
    ```bash
@@ -102,7 +102,7 @@ If you face any issues, run `make -k distclean && make -k clean` to undo what wa
 Now, add these lines to the bottom of your `~/.bashrc` file. 
 ```bash 
 export ROOT_DIR={}
-export SRC_DIR=$ROOT_DIR/gcc/gcc_src # Change this is needed
+export href_DIR=$ROOT_DIR/gcc/gcc_href # Change this is needed
 export BUILD_DIR=$ROOT_DIR/gcc/gcc_build # Change this if neeeded
 
 # Leave as is
@@ -144,7 +144,7 @@ Ensure all of these lines exist within your `~/.bashrc` file.
 ```bash 
 export ROOT_DIR=/depot/euge/data/araviki
 export TOOLKIT=$ROOT_DIR/nvidia-toolkit/12.3
-export SRC_DIR=$ROOT_DIR/gcc/gcc_src
+export href_DIR=$ROOT_DIR/gcc/gcc_href
 export BUILD_DIR=$ROOT_DIR/gcc/gcc_build
 
 # Leave as is
@@ -158,7 +158,7 @@ Now, you are ready to run llama.cpp. I've bound the path of my main `llama` fold
 # - araviki
    # - llama
       # - gguf # Storing quantized models
-      # - llama.cpp # src
+      # - llama.cpp # href
          # - main
          # - prompts/
          # - grammars/

@@ -22,4 +22,4 @@ My primary interest revolves arould building robust user-facing solutions at the
 
 <b>Automatability</b>, <b>replicability</b> and <b>accessability</b> remain the core of my work. 
 
-I'm currently looking to involved in any of the following (ranked) -- *Vision Generation Algorithms*, *Robot-Environment Interactions*, *GPU Programming*, *Digital Design ↔️ ML/DL*. I'd highly appreciate any mentorship or suggestions for research labs @ Purdue that focus on these topics!
+I'm currently looking to involved in the following: *Vision Generation Algorithms*, *Robot-Environment Interactions*, *GPU Programming*, *Digital Design ↔️ ML/DL*. I'd highly appreciate any mentorship or suggestions for research labs @ Purdue that focus on these topics!
