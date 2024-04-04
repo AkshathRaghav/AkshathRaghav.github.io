@@ -18,8 +18,16 @@ social: true # includes social icons at the bottom of the page
 
 I'm a second-year undergraduate @ Purdue, pursuing a B.Sc in CompE.
 
-My primary interest revolves arould building robust user-facing solutions at the intersection of applied AI, reproducible (open-source) softwares and interoperablility principles. I enjoy research-driven environments aimed at taking concepts to tangible products. 
+My primary interest revolves arould building robust user-facing solutions at the intersection of applied AI, algorithmic learning and interoperablility principles. I enjoy research-driven environments aimed at taking concepts to tangible products. 
 
-<b>Automatability</b>, <b>replicability</b> and <b>accessability</b> remain the core of my work. 
+<b>Automatability</b>, <b>innovation</b> and <b>accessability</b> remain the core of my work. 
 
-I'm currently looking to involved in the following: *Vision Generation Algorithms*, *Robot-Environment Interactions*, *GPU Programming*, *Digital Design ↔️ ML/DL*. I'd highly appreciate any mentorship or suggestions for research labs @ Purdue that focus on these topics!
+
+
+I'm currently looking to involved in the following: 
+- *Vision Generation Algorithms*, 
+- *Robot-Environment Interactions*, 
+- *GPU Programming*, 
+- *Digital Design ↔️ ML/DL*. 
+
+I'd highly appreciate any mentorship or suggestions for research labs @ Purdue that focus on these topics!

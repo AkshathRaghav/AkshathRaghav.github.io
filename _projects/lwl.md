@@ -31,7 +31,7 @@ Wildfires are caused by the complex interactions of the fire drivers (weather co
 According to [federal data cited](https://www.nps.gov/articles/wildfire-causes-and-evaluation.htm) (*Wildland Fire Management Information (WFMI))* by the National Park Service, **humans** cause about 85 percent of all wildfires yearly in the United States. 
 Using data from the National Interagency Fire Center ([NIFC](https://www.predictiveservices.nifc.gov/intelligence/2021_statssumm/intro_summary21.pdf)), the picture attached below outlines the statistics of human-caused and **lightning-caused** wildfires. 
     
-{% include figure.liquid loading="eager" path="assets/img/lwl/nifc.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/lwl/Untitled.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
 
 <div class="caption">
     This data is limited to the US, but we can see that lightning-caused fires have clearly led to significant damage.
@@ -123,37 +123,39 @@ You can find the code for the visualizations and data here.
 
 #### February 2022
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-4 mt-3 mt-md-0">
     {% include figure.liquid loading="eager" path="assets/img/lwl/lf1.gif" title="left" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
     {% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined_1.gif" title="right" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
     
 #### April 2022 
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid loading="eager" path="assets/img/lwl/lf2.gif" title="left" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/lwl/lfe2.gif" title="left" class="img-fluid rounded z-depth-1" %}
     {% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined.gif" title="right" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
 
 # Prototype Classifier
 
 Below is the algorithm I used for identifying 'lightning-ignited fires' based on GLM and VIIRS (/MODIS) data. 
 
-1. **Canvas Grid Definition**: Let \(G\) represent the \(n \times m\) canvas grid where \(n\) and \(m\) are the dimensions of the grid. Each element of \(G\), denoted as \(G_{ij}\), can take a value of either 0 or 1, where \(i\) and \(j\) indicate the row and column indices, respectively. A value of 1 at \(G_{ij}\) indicates the presence of fire at that location on the grid.
 
-2. **Time Difference Consideration**: Let \(G^{t}\) denote the state of the grid at time \(t\), and \(G^{t-1}\) denote the state of the grid at time \(t-1\). If for any \(i, j\), \(G_{ij}^{t-1} = 0\) and \(G_{ij}^{t} = 1\), this indicates that the point \((i, j)\) is the ignition point for fire at time \(t\).
+$$
+\text{Let } G_{ij}^{t} \text{ represent the state of a cell in an } n \times m \text{ canvas grid at time } t, \text{ where } i \text{ and } j \text{ are the row and column indices, respectively.}
+$$
 
-3. **Alternate Grid for Lightning**: Let \(L\) represent an alternate \(n \times m\) grid for lightning, with the same dimension as \(G\). Each element of \(L\), denoted as \(L_{ij}\), also takes a value of 0 or 1, where a value of 1 indicates the presence of lightning at that location on the grid.
+$$
+G_{ij}^{t} \in \{0, 1\} \text{, where 1 indicates the presence of fire.}
+$$
 
-4. **"IPL" Definition**: If for any \(i, j\), both \(G_{ij}\) and \(L_{ij}\) are 1, then the index \((i, j)\) is called an "ipl", indicating a point of intersection between fire and lightning.
+$$
+\text{An ignition point at time } t \text{ is defined by: } G_{ij}^{t} = 1 \text{ and } G_{ij}^{t-1} = 0.
+$$
+
+$$
+\text{Let } L_{ij} \text{ represent the state of a cell in an alternate } n \times m \text{ grid for lightning, with } L_{ij} \in \{0, 1\} \text{ where 1 indicates the presence of lightning.}
+$$
+
+$$
+\text{An "ipl" (intersection point between fire and lightning) is defined by: } G_{ij} = L_{ij} = 1.
+$$
+
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-4 mt-3 mt-md-0">
@@ -166,15 +168,9 @@ Below is the algorithm I used for identifying 'lightning-ignited fires' based on
 
 # Next Steps 
 
-Using this data as a base, I propose using the IPL point-map as a way to narrow our search for relevant incidents for modelling. Post-this, we should include weather-data to train a binary classifier in a method similar to what is proposed in this [paper](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/met.1973).
+Using this data as a base, I'm working on using the IPL point-map as a way to narrow the search for relevant incidents for modelling. I intend to collect and identify correlations between weather-data with the convex-hull region around IPLs to train a binary classifier in a method similar to what is proposed in this [paper](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/met.1973).
 
-### Data Required 
-
-The paper uses IFS data from ECMWF to get features for training. This requires access from an academic perspective. 
-
-{% include figure.liquid loading="eager" path="assets/img/lwl/nifc.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
-
-Instead, I suggest using reliable ERA5 data which has the variables but free and scrapable. We can match up the values as below. 
+Here's some data I have acquired and transformed for the purpose. It is modelled after the IFS used by the paper 
 
 | IFS (Paper) | ERA5 (Proposed Alt) |
 | --- | --- |
@@ -193,18 +189,11 @@ Instead, I suggest using reliable ERA5 data which has the variables but free and
 | avg 20 days soil moisture | [2] |
 | CAPE | Convective available potential energy |
 
-*[1] 2m RH can be found from Dewpoint Temp
-[2] can be calculated post-download*
+*[1] 2m RH found from Dewpoint Temp*
+*[2] calculated post-download*
 
-
-### Target Modelling 
-
-1. (n_samples, time_steps, features)
-Add mean, slope and variance to the matrix on the 3rd dimension with a periodicity of a 3-4 days
-2.1. Convert into a 2D dataset with (n_samples * time_steps, features)
-2.2. Calculate mean, var and slope temps for every (t-4 to t) 3 day splits of a week 
-Re-add it into the dataset and reshape it back 
-3. (n_samples, time_steps, features)
-4. Finally, shape this into ***[coordinates, n_timesteps * n_features]***
-
----
+After that, I want to prose the problem as a forecasting problem with a supervised-learning approach of ([t-1]^(nxm), [t]^(nxm)) predictions. The data needs to be translated into the following structure for it to work with *XGBoost*: 
+- Construct a 3-dimensional array (n_samples, time_steps, features) incorporating mean, slope, and variance across a periodicity of 3-4 days to enrich the dataset.
+- Transform the dataset into a 2D format (n_samples * time_steps, features), focusing on calculating mean, variance, and slope temperatures for every 3-day segment within a week.
+- Reintegrate these calculations into the dataset and revert it to its original 3D structure (n_samples, time_steps, features).
+- Finalize the dataset format as [coordinates, n_timesteps * n_features], optimizing it for the intended modeling processes.

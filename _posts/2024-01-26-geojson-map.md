@@ -42,23 +42,23 @@ Extras:
 ### Toolkit Setup 
 
 1. Type `accept` in the console.
-<div align="center">
+<div>
   <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/1.png' alt="1" style="height: 50%;"/>
 </div>
 
 2. Use `ENTER` to select/deselect settings. Make sure the settings screen looks like the following image: 
-<div align="center">
+<div >
   <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/2.png' alt="1" style="height: 50%;"/>
 </div>
 
 3. Hover over the `CUDA Toolkit 12.3` option, and press `A`. Deselect all of the settings here except `Install manpage documents...` 
-<div align="center">
+<div>
   <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/3.png' alt="1" style="height: 50%;"/>
 </div>
 
 
 4. Hover over `Change Toolkit Install Path`. Hit `ENTER` and add the $TOOLKIT variable path here. 
-<div align="center">
+<div>
   <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/4.png' alt="1" style="height: 50%;"/>
 </div>
 
@@ -290,4 +290,47 @@ llama_print_timings:      sample time =       0.00 ms /     1 runs   (    0.00 m
 llama_print_timings: prompt eval time =      73.35 ms /    99 tokens (    0.74 ms per token,  1349.66 tokens per second)
 llama_print_timings:        eval time =       0.00 ms /     1 runs   (    0.00 ms per token,      inf tokens per second)
 llama_print_timings:       total time =    1017.78 ms /   100 tokens
+```
+
+## Barebones python connector 
+
+```python
+class LocalLlama: 
+  def __init__(self, gguf_path: str, llama_cpp_path=os.environ['LLAMA']):
+    self.llama_cpp_path = llama_cpp_path
+    self.gguf_path = gguf_path
+    self.flags = { 
+        "repeat_penalty": 1.5, 
+        "n-gpu-layers": 15000, 
+        'ctx_size': 2048
+    }
+
+  @timeoutable()
+  def __call__(self, prompt: str, flags=None, grammar=None, stop_at="", temperature=0.1, timeout=20):
+      if flags: 
+        self.flags.update(flags)
+
+      flags = self.flags
+
+      if grammar: 
+        with open('./grammar.gnbf', 'w') as f: 
+          f.write(grammar)
+        self.flags.update({'grammar-file': './grammar.gnbf'})
+
+      self.write_file(prompt)
+
+      with suppress_stdout_stderr():
+        output = subprocess.check_output(self.format_command(prompt, flags), shell=True).decode('utf-8')
+
+      if stop_at:
+        return output.split(stop_at)[1]
+
+      return output
+
+  def write_file(self, prompt): 
+      with open('./prompt.txt', 'w') as f: 
+        f.write(prompt) 
+
+  def format_command(self, prompt: str, flags, temperature=0.1):
+      return f"{self.llama_cpp_path}/main  --model {self.gguf_path} {" ".join([f"--{k} {v}" for k, v in flags.items()])} --file ./prompt.txt --temp {temperature}"
 ```
