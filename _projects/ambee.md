@@ -96,9 +96,7 @@ Here are how our results compare with the real FWI maps during 2022.
   {% include figure.liquid path="assets/img/ambee/oct/image_part_002.jpg" class="img-fluid rounded z-depth-1" slot="second" %}
 </img-comparison-slider>
 
-<div class="caption">
-    Recall how NAR saw the worst fires it has during the Sept-Oct period of '22. This shows the limitation of our methodology.
-</div>
+> You might notice the last plot having bad results. For this, recall how NAR saw the worst fires it has during the Sept-Oct period of '22. This sudden difference in the seasonality shows the limitations in our methodology. However, that is just the point we try to make. Seasonality is not everything, but it can help everything else. 
 
 ## Talking Numbers! 
 
@@ -123,10 +121,17 @@ Furthermore, upon analyzing the two models - using One-Shot and Year-By-Year enc
 
 An interesting thing to note is that the One-Shot model places a lower emphasis on the 'geo', 'ECO_ID', and 'BIOME_NUM' features, which can be interpreted as the model's ability to generalize over the entire region, regardless of the fuel type and land over, while focusing purely on the historical nature of the data. 
 
+On the other hand, the second model also prioritizes the 'month_encoded' values for the next month, while also placing greater importance on the 'Extreme Risk' encoded values. Interestingly, it attributes a comparatively higher significance to the 'No Risk' and 'Extreme Risk' values for both the current month's 'month_encoded' risk levels and risk 'percentage' levels. This observation could be attributed to the consistent prevalence of 'No Risk' levels across a significant portion of the North American region throughout the entire training data period. 
+
+But, the important observation here is the ability of the model to prioritize the 'Extreme Risk' level more, since the areas which generally have an extreme fire risk have consistently high 'month_encoded' values for the same. 
+
+Overall, both models demonstrate a common focus on predicting the risk level for the next month, while accounting for the unique characteristics of the North American Region.
 
 In order to showcase the accuracy and performance of our fire risk prediction models, as a whole, we consider a real-life example of how these models would be used. First, we trained the model using data up to May 2023 only. Subsequently, we put the model to the test by predicting fire risk values for the next two months, June and July, of the same year. By comparing these predictions with the actual fire risk values observed to date, we have generated the following accuracy comparison plots and tables. 
 
 {% include figure.liquid loading="eager" path="assets/img/ambee/last.png" title="example image" class="img-fluid rounded z-depth-1" %}
+
+Our test comparing the prediction of real-time July 2023 data with both the One-Shot and Year-By-Year models revealed compelling insights. The One-Shot model outperformed the Year-By-Year model across all aspects, demonstrating its superior predictive capabilities. In the feature importances analysis of both models, we observed that the One-Shot model exhibited better generalization over the entire North American region.
 
 --- 
 
@@ -142,12 +147,16 @@ In order to showcase the accuracy and performance of our fire risk prediction mo
       {% include figure.liquid loading="eager" path="assets/img/ambee/canada/image11.png" title="example image" class="img-fluid rounded z-depth-1" %}
 </div>
 <div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
+  July 2023. (Real Forecast Comparisons at time of writing)
 </div>
 
 <div class="row">
       {% include figure.liquid loading="eager" path="assets/img/ambee/canada/image21.png" title="example image" class="img-fluid rounded z-depth-1" %}
       {% include figure.liquid loading="eager" path="assets/img/ambee/canada/image25.png" title="example image" class="img-fluid rounded z-depth-1" %}
+</div>
+
+<div class="caption">
+  August 2023. (Real Forecast Comparisons at time of writing)
 </div>
 
 For the July forecast comparisons, both models identify an area of increased risk around the Great Salt Lake in the Northwest Territories. Additionally, both forecasts indicate elevated fire risk areas across the provinces of British Columbia, Alberta, and Saskatchewan. Ontario and Quebec show comparable regions of No Risk to Low Risk. 
@@ -167,14 +176,13 @@ The upper parts of the same states have a comparatively lower risk but still sho
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image2.png" title="example image" class="img-fluid rounded z-depth-1" %}
 
 <div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
+  July 2023. (Real Forecast Comparisons at time of writing)
 </div>
 
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image23.png" title="example image" class="img-fluid rounded z-depth-1" %}
         {% include figure.liquid loading="eager" path="assets/img/ambee/america/image14.png" title="example image" class="img-fluid rounded z-depth-1" %}
-
 <div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
+  August 2023. (Real Forecast Comparisons at time of writing)
 </div>
 
 In July, the forecasted fire risk due to weather aggravates in regions such as Washington, Oregon, Arizona, and parts of Texas, aligning with the summer season for North-West, South-West, and North America. Conversely, we found that the fire risk reduces in Arizona and some parts of Texas in August. Notably, the central region of California exhibits lower risk compared to its surrounding areas, a trend also evident in our model's plots.
@@ -185,7 +193,10 @@ Similarly, the extent of the green area in California decreases from July to Aug
 
 These consistent and validated observations reinforce the high accuracy and reliability of our model's fire risk predictions when compared to the widely recognized NIFC agency's forecast maps for the United States.
 
-
 --- 
 
+## Conclusion
 
+The next steps forward involve integrating forecasted weather data, along with crucial factors such as drought, lightning, and extreme weather events, to create a more comprehensive and robust predictive model. Incorporating forecasted weather data into the existing models would allow us to account for the dynamic nature of wildfire risk, capturing how weather conditions may influence fire behavior over time.
+
+---

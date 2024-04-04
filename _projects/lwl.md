@@ -12,9 +12,11 @@ related_publications: false
 * Responsible for supervising code development and organizing research flow within the lab; Handling evaluation and integration of new scripts to make an efficient system for other researchers to query and visualize information
 * Developed scripts using Xarray and Geopandas to package LandSAT data from NASA/NOAA satellites; Used Rasterio to visualize and plot GeoTIFF datasets for analyzing lightning causation
 
+I worked on the Data Handling team as Lead under [Michael Wang](https://www.linkedin.com/in/michael-joshua-wang-476a34226/) (NASA) (PI: [Yuan Wang](https://wang-lab.stanford.edu/people) (Stanford X NASA)). Our goal was to replicate [DeepCube's Use Case 3](https://github.com/DeepCube-org/uc3-public-notebooks), but with a lightning-based focus. Some of my code: [GOES-R Scraper + Visualizer](https://colab.research.google.com/drive/1ZOuvLm3WKvbQYZsp53hw_uzs04zLvwd7?usp=sharing), [LANDSAT (USGS) Burner Area Finder](https://colab.research.google.com/drive/1DuRPH6dLdH5A8tzqiKDerA-0Ev8gTDXp?usp=sharing), [Extracting grids from ERA5](https://colab.research.google.com/drive/1oR1lKBaQKRYfITyd5qSv88LPv11GUlCK?usp=sharing), [Fork](https://github.com/AkshathRaghav/usgs-machine-to-machine-API). 
+
 --- 
 
-Below is the proposal I pitched to the folks at [Ambee](https://www.getambee.com/) in the Spring '23. You can read more about what I did with Ambee [here](https://akshathraghav.github.io/projects/ambee/).
+Below is the proposal I pitched to the folks at [Ambee](https://www.getambee.com/) in Spring '23. You can read more about what I did with Ambee [here](https://akshathraghav.github.io/projects/ambee/).
 
 {% include figure.liquid loading="eager" path="assets/img/frp_workflow.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
 
@@ -22,12 +24,12 @@ Below is the proposal I pitched to the folks at [Ambee](https://www.getambee.com
 
 Wildfires are caused by the complex interactions of the fire drivers (weather conditions, land and vegetation characteristics, human activities). 
 
-    - Weather conditions: Lightning and Thunderstorms, Wind, Heat, High atmospheric temperatures and low humidity, etc.
-    - Land characteristics: Droughts and dry seasons (soil), vegetation (naturally flammable), etc.
-    - Human activities: Campfires left unattended, the burning of debris, equipment use and malfunctions, negligently discarded cigarettes, and intentional acts of arson.
+- Weather conditions: Lightning and Thunderstorms, Wind, Heat, High atmospheric temperatures and low humidity, etc.
+- Land characteristics: Droughts and dry seasons (soil), vegetation (naturally flammable), etc.
+- Human activities: Campfires left unattended, the burning of debris, equipment use and malfunctions, negligently discarded cigarettes, and intentional acts of arson.
 
-* According to [federal data cited](https://www.nps.gov/articles/wildfire-causes-and-evaluation.htm) (*Wildland Fire Management Information (WFMI))* by the National Park Service, **humans** cause about 85 percent of all wildfires yearly in the United States. 
-* Using data from the National Interagency Fire Center ([NIFC](https://www.predictiveservices.nifc.gov/intelligence/2021_statssumm/intro_summary21.pdf)), the picture attached below outlines the statistics of human-caused and **lightning-caused** wildfires. 
+According to [federal data cited](https://www.nps.gov/articles/wildfire-causes-and-evaluation.htm) (*Wildland Fire Management Information (WFMI))* by the National Park Service, **humans** cause about 85 percent of all wildfires yearly in the United States. 
+Using data from the National Interagency Fire Center ([NIFC](https://www.predictiveservices.nifc.gov/intelligence/2021_statssumm/intro_summary21.pdf)), the picture attached below outlines the statistics of human-caused and **lightning-caused** wildfires. 
     
 {% include figure.liquid loading="eager" path="assets/img/lwl/nifc.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
 
@@ -35,43 +37,38 @@ Wildfires are caused by the complex interactions of the fire drivers (weather co
     This data is limited to the US, but we can see that lightning-caused fires have clearly led to significant damage.
 </div>
     
-<aside>
-💡 Lightning is the second most common cause of wildfires (behind human causes); thus, predicting the location and timing of future storms and strikes is of great importance to predicting fire occurrence.
+Lightning is the second most common cause of wildfires (behind human causes); thus, predicting the location and timing of future storms and strikes is of great importance to predicting fire occurrence.
 https://cdnsciencepub.com/doi/full/10.1139/er-2020-0019
-</aside>
         
-* **Drought** (and in-turn, **land vegetation**) has a very complicated relationship with wildfire.
-    - “Fire depends on two things: having enough fuel and drying that fuel out so it can catch fire. So in the short term, more droughts probably mean more fire as the vegetation dries out,” said Cook. “If those droughts continue for a long period, like a megadrought, however, it can actually mean less fire, because the vegetation will not grow back as vigorously, and you may run out of fuel to burn. It’s definitely complicated.” https://climate.nasa.gov/news/2891/a-drier-future-sets-the-stage-for-more-wildfires/
-    - Both these factors are not, in and of themselves, the trigger for a wildfire to begin, but it most defintely plays a big role in its persistence.
+**Drought** (and in-turn, **land vegetation**) has a very complicated relationship with wildfire.
+- “Fire depends on two things: having enough fuel and drying that fuel out so it can catch fire. So in the short term, more droughts probably mean more fire as the vegetation dries out,” said Cook. “If those droughts continue for a long period, like a megadrought, however, it can actually mean less fire, because the vegetation will not grow back as vigorously, and you may run out of fuel to burn. It’s definitely complicated.” https://climate.nasa.gov/news/2891/a-drier-future-sets-the-stage-for-more-wildfires/
+- Both these factors are not, in and of themselves, the trigger for a wildfire to begin, but it most defintely plays a big role in its persistence.
 
 --- 
 
 # Previous Research 
 
 - [Using machine learning to predict fire-ignition occurrences from lightning forecasts](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/met.1973)
-- Data:
-    - Global Fire Assimilation System (GFAS) data has analyzed using Fire Radiative Power (FRP) to find which points in a data field have more temperature over a period of time over it’s surroundings
-    - Decision Tree is used to iteratively find new IPs
-        - Those spread to different areas
-        - Coming in from diff areas
-    - Fuel ignition is rarely dependent on the fuel moisture of the area and the soil, but the sustainability of it is highly dependent.
-    - Soil Moisture and Ocean Salinity (SMOS) is used for finding soil moisture and is used as a tuning parameter rather than a variable since “simplicity of the land surface schemes” make it inappropriate to be used towards the same end.
-    - “Data are available in swath segments on the ISEA 4H9 grid, with grid data provided as discrete global grid (DGG) points, only available along the satellite track with a nominal resolution of 15 km.”
-    - Low Fuel Moisture situations:
-        - DC and DMC has duff moister code and corresponding moisture data of deep, organic layers until 10cm depth.
-        - Data is classifid based on ranges
-    - Identified parameters with EDA plots:
-        - 2m temp
-        - 2m relative humidity
-        - vegetation coverage
-        - soil type
-- Method:
-    - Decision Trees with Adaboost vs RF
-        - DT and RF both give 2m RH and t2m
-        - Low ranking params like those above (in the data section) are not considered
-
-    {% include figure.liquid loading="eager" path="assets/img/misc_lwl.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
-
+    - Data:
+        - Global Fire Assimilation System (GFAS) data has analyzed using Fire Radiative Power (FRP) to find which points in a data field have more temperature over a period of time over it’s surroundings
+        - Decision Tree is used to iteratively find new IPs
+            - Those spread to different areas
+            - Coming in from diff areas
+        - Fuel ignition is rarely dependent on the fuel moisture of the area and the soil, but the sustainability of it is highly dependent.
+        - Soil Moisture and Ocean Salinity (SMOS) is used for finding soil moisture and is used as a tuning parameter rather than a variable since “simplicity of the land surface schemes” make it inappropriate to be used towards the same end.
+        - “Data are available in swath segments on the ISEA 4H9 grid, with grid data provided as discrete global grid (DGG) points, only available along the satellite track with a nominal resolution of 15 km.”
+        - Low Fuel Moisture situations:
+            - DC and DMC has duff moister code and corresponding moisture data of deep, organic layers until 10cm depth.
+            - Data is classifid based on ranges
+        - Identified parameters with EDA plots:
+            - 2m temp
+            - 2m relative humidity
+            - vegetation coverage
+            - soil type
+    - Method:
+        - Decision Trees with Adaboost vs RF
+            - DT and RF both give 2m RH and t2m
+            - Low ranking params like those above (in the data section) are not considered
         - Analyzing how to find model’s optimal performance estimates:
             - Assumes the cloud to ground density product is accurate
             - Assumes all non-IPLs are removed
@@ -85,6 +82,8 @@ https://cdnsciencepub.com/doi/full/10.1139/er-2020-0019
         - Hyper-parameterization using scikit-learn
             - GridSearchCV was used for the boosting algoritms (Adaboost)
             - RandomSearchCV was used for bagging (RF)
+    {% include figure.liquid loading="eager" path="assets/img/misc_lwl.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
+
 
 - [Near Real-Time Wildfire Progression Monitoring with Sentinel-1 SAR Time Series and Deep Learning ](https://www.nature.com/articles/s41598-019-56967-x)
   - Data:
@@ -106,7 +105,7 @@ https://cdnsciencepub.com/doi/full/10.1139/er-2020-0019
 
 --- 
 
-# Initial Inferences
+# Initial Analysis
 
 To have a more concrete understanding of the relationship between lightning and fire, I have conducted a case-study of South America across 2022's seasons. Here's a quick brief: 
 
@@ -124,46 +123,88 @@ You can find the code for the visualizations and data here.
 
 #### February 2022
 
-{% include figure.liquid loading="eager" path="assets/img/lwl/nifc.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
-
-<div class="caption">
-    This data is limited to the US, but we can see that lightning-caused fires have clearly led to significant damage.
-</div>
-    
-
-{% include figure.liquid loading="eager" path="assets/img/lwl/nifc.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
-
-<div class="caption">
-    This data is limited to the US, but we can see that lightning-caused fires have clearly led to significant damage.
+<div class="row justify-content-sm-center">
+    <div class="col-sm-4 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/lwl/lf1.gif" title="left" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm-4 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined_1.gif" title="right" class="img-fluid rounded z-depth-1" %}
+    </div>
 </div>
     
 #### April 2022 
 
-{% include figure.liquid loading="eager" path="assets/img/lwl/nifc.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
-
-<div class="caption">
-    This data is limited to the US, but we can see that lightning-caused fires have clearly led to significant damage.
+<div class="row justify-content-sm-center">
+    <div class="col-sm-4 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/lwl/lf2.gif" title="left" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm-4 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined.gif" title="right" class="img-fluid rounded z-depth-1" %}
+    </div>
 </div>
-    
-{% include figure.liquid loading="eager" path="assets/img/lwl/nifc.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
 
-<div class="caption">
-    This data is limited to the US, but we can see that lightning-caused fires have clearly led to significant damage.
+# Prototype Classifier
+
+Below is the algorithm I used for identifying 'lightning-ignited fires' based on GLM and VIIRS (/MODIS) data. 
+
+1. **Canvas Grid Definition**: Let \(G\) represent the \(n \times m\) canvas grid where \(n\) and \(m\) are the dimensions of the grid. Each element of \(G\), denoted as \(G_{ij}\), can take a value of either 0 or 1, where \(i\) and \(j\) indicate the row and column indices, respectively. A value of 1 at \(G_{ij}\) indicates the presence of fire at that location on the grid.
+
+2. **Time Difference Consideration**: Let \(G^{t}\) denote the state of the grid at time \(t\), and \(G^{t-1}\) denote the state of the grid at time \(t-1\). If for any \(i, j\), \(G_{ij}^{t-1} = 0\) and \(G_{ij}^{t} = 1\), this indicates that the point \((i, j)\) is the ignition point for fire at time \(t\).
+
+3. **Alternate Grid for Lightning**: Let \(L\) represent an alternate \(n \times m\) grid for lightning, with the same dimension as \(G\). Each element of \(L\), denoted as \(L_{ij}\), also takes a value of 0 or 1, where a value of 1 indicates the presence of lightning at that location on the grid.
+
+4. **"IPL" Definition**: If for any \(i, j\), both \(G_{ij}\) and \(L_{ij}\) are 1, then the index \((i, j)\) is called an "ipl", indicating a point of intersection between fire and lightning.
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-4 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined.gif" title="left" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm-4 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/lwl/IPL.gif" title="right" class="img-fluid rounded z-depth-1" %}
+    </div>
 </div>
-    
 
-# Proposed idea 
+# Next Steps 
+
+Using this data as a base, I propose using the IPL point-map as a way to narrow our search for relevant incidents for modelling. Post-this, we should include weather-data to train a binary classifier in a method similar to what is proposed in this [paper](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/met.1973).
 
 ### Data Required 
 
+The paper uses IFS data from ECMWF to get features for training. This requires access from an academic perspective. 
+
+{% include figure.liquid loading="eager" path="assets/img/lwl/nifc.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
+
+Instead, I suggest using reliable ERA5 data which has the variables but free and scrapable. We can match up the values as below. 
+
+| IFS (Paper) | ERA5 (Proposed Alt) |
+| --- | --- |
+| Volumetric Soil Water Layer | Volumetric soil water layer 1 |
+| 2m temp | 2m temperature |
+| 2m relative humidity | 2m dewpoint temp [1] |
+| soil type | soil type |
+| low vegetation cover | low vegetation cover |
+| high vegetation cover | high vegetation cover |
+| daily accumulated precipitation | total precipitation  |
+| avg 5 days precipitation | [2] |
+| avg 3 days soil moisture | [2] |
+| avg 5 days soil moisture | [2] |
+| avg 10 days soil moisture | [2] |
+| avg 15 days soil moisture | [2] |
+| avg 20 days soil moisture | [2] |
+| CAPE | Convective available potential energy |
+
+*[1] 2m RH can be found from Dewpoint Temp
+[2] can be calculated post-download*
+
+
 ### Target Modelling 
 
-<aside>
-💡 “The study used supervised learning to find a mapping function between weather and environmental variables and a specific target. The target was a binary label identifying whether a fire event occurred and if it were caused by lightning. The ground truth used to train the model was, in turn, the result of the other model used to construct the data set of fire IPs possibly caused by lightning.”
+1. (n_samples, time_steps, features)
+Add mean, slope and variance to the matrix on the 3rd dimension with a periodicity of a 3-4 days
+2.1. Convert into a 2D dataset with (n_samples * time_steps, features)
+2.2. Calculate mean, var and slope temps for every (t-4 to t) 3 day splits of a week 
+Re-add it into the dataset and reshape it back 
+3. (n_samples, time_steps, features)
+4. Finally, shape this into ***[coordinates, n_timesteps * n_features]***
 
-</aside>
-
-- Target would be categorical 0, 1 bins if the point tested by trained model is an IPL → At the end of the decision tree
-- Ground truth would be a label with 0, 1 if it is an IPL or not → A data variable in the final dataset
-
-# Preliminary Results
+---
