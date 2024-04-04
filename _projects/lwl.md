@@ -12,11 +12,11 @@ related_publications: false
 * Responsible for supervising code development and organizing research flow within the lab; Handling evaluation and integration of new scripts to make an efficient system for other researchers to query and visualize information
 * Developed scripts using Xarray and Geopandas to package LandSAT data from NASA/NOAA satellites; Used Rasterio to visualize and plot GeoTIFF datasets for analyzing lightning causation
 
-I worked on the Data Handling team as Lead under [Michael Wang](https://www.linkedin.com/in/michael-joshua-wang-476a34226/) (NASA) (PI: [Yuan Wang](https://wang-lab.stanford.edu/people) (Stanford X NASA)). Our goal was to replicate [DeepCube's Use Case 3](https://github.com/DeepCube-org/uc3-public-notebooks), but with a lightning-based focus. Some of my code: [GOES-R Scraper + Visualizer](https://colab.research.google.com/drive/1ZOuvLm3WKvbQYZsp53hw_uzs04zLvwd7?usp=sharing), [LANDSAT (USGS) Burner Area Finder](https://colab.research.google.com/drive/1DuRPH6dLdH5A8tzqiKDerA-0Ev8gTDXp?usp=sharing), [Extracting grids from ERA5](https://colab.research.google.com/drive/1oR1lKBaQKRYfITyd5qSv88LPv11GUlCK?usp=sharing), [Fork](https://github.com/AkshathRaghav/usgs-machine-to-machine-API). 
+I worked on the Data Handling team as Lead under [Michael Wang](https://www.linkedin.com/in/michael-joshua-wang-476a34226/) (NASA) (PI: [Yuan Wang](https://wang-lab.stanford.edu/people) (Stanford X NASA)). Our goal was to replicate [DeepCube's Use Case 3](https://github.com/DeepCube-org/uc3-public-notebooks), but with a lightning-based focus. Some of my code: [GOES-R Scraper + Visualizer](https://colab.research.google.com/drive/1ZOuvLm3WKvbQYZsp53hw_uzs04zLvwd7?usp=sharing), [LandSAT Burner Area Finder](https://colab.research.google.com/drive/1DuRPH6dLdH5A8tzqiKDerA-0Ev8gTDXp?usp=sharing), [Extracting grids from ERA5](https://colab.research.google.com/drive/1oR1lKBaQKRYfITyd5qSv88LPv11GUlCK?usp=sharing), [USGS Pkg Fork](https://github.com/AkshathRaghav/usgs-machine-to-machine-API). 
 
 --- 
 
-Below is the proposal I pitched to the folks at [Ambee](https://www.getambee.com/) in Spring '23. You can read more about what I did with Ambee [here](https://akshathraghav.github.io/projects/ambee/).
+Building upon this, I pitched a proposal to the folks at [Ambee](https://www.getambee.com/) -- in Spring '23 -- for a related project. You can read more about what I did with Ambee [here](https://akshathraghav.github.io/projects/ambee/).
 
 {% include figure.liquid loading="eager" path="assets/img/frp_workflow.png" title="nifc data" class="img-fluid rounded z-depth-1" %}
 
@@ -37,16 +37,17 @@ Using data from the National Interagency Fire Center ([NIFC](https://www.predict
     This data is limited to the US, but we can see that lightning-caused fires have clearly led to significant damage.
 </div>
     
-Lightning is the second most common cause of wildfires (behind human causes); thus, predicting the location and timing of future storms and strikes is of great importance to predicting fire occurrence.
-https://cdnsciencepub.com/doi/full/10.1139/er-2020-0019
+
+Lightning is the second most common cause of wildfires (behind human causes); thus, predicting the location and timing of future storms and strikes is of great importance to predicting fire occurrence. [Here's](https://cdnsciencepub.com/doi/full/10.1139/er-2020-0019) a discussion on a fire ignition factors across landscape types. 
         
-**Drought** (and in-turn, **land vegetation**) has a very complicated relationship with wildfire.
-- “Fire depends on two things: having enough fuel and drying that fuel out so it can catch fire. So in the short term, more droughts probably mean more fire as the vegetation dries out,” said Cook. “If those droughts continue for a long period, like a megadrought, however, it can actually mean less fire, because the vegetation will not grow back as vigorously, and you may run out of fuel to burn. It’s definitely complicated.” https://climate.nasa.gov/news/2891/a-drier-future-sets-the-stage-for-more-wildfires/
-- Both these factors are not, in and of themselves, the trigger for a wildfire to begin, but it most defintely plays a big role in its persistence.
+**Drought** (and in-turn, **land vegetation**) has a very complicated relationship with wildfire. Both these factors are not, in and of themselves, the trigger for a wildfire to begin, but it most defintely plays a big role in its persistence.
+> “Fire depends on two things: having enough fuel and drying that fuel out so it can catch fire. So in the short term, more droughts probably mean more fire as the vegetation dries out,” said Cook. “If those droughts continue for a long period, like a megadrought, however, it can actually mean less fire, because the vegetation will not grow back as vigorously, and you may run out of fuel to burn. It’s definitely complicated.” https://climate.nasa.gov/news/2891/a-drier-future-sets-the-stage-for-more-wildfires/
 
 --- 
 
 # Previous Research 
+
+(Caption: Going over some interesting methodologies used.)
 
 - [Using machine learning to predict fire-ignition occurrences from lightning forecasts](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/met.1973)
     - Data:
@@ -126,17 +127,32 @@ You can find the code for the visualizations and data here.
     {% include figure.liquid loading="eager" path="assets/img/lwl/lf1.gif" title="left" class="img-fluid rounded z-depth-1" %}
     {% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined_1.gif" title="right" class="img-fluid rounded z-depth-1" %}
     
+    
+<div class="caption">
+    Blue points indicate lightning activity (cloud cover + ignition centers). Red points indicate fire spread. Purple points identify overlapping points of interest across the Δt.
+</div>
+
 #### April 2022 
 
     {% include figure.liquid loading="eager" path="assets/img/lwl/lfe2.gif" title="left" class="img-fluid rounded z-depth-1" %}
     {% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined.gif" title="right" class="img-fluid rounded z-depth-1" %}
 
+
+<div class="caption">
+    Blue points indicate lightning activity (cloud cover + ignition centers). Red points indicate fire spread. Purple points identify overlapping points of interest across the Δt.
+</div>
+
+
 # Prototype Classifier
 
-Below is the algorithm I used for identifying 'lightning-ignited fires' based on GLM and VIIRS (/MODIS) data. 
+Below is the algorithm I used for identifying 'lightning-ignited fires' based on GLM and VIIRS (/MODIS) data. It was modelled from the method shown [here](https://rmets.onlinelibrary.wiley.com/doi/pdf/10.1002/met.1973).
 
+Certainly, expressing the concepts as equations within MathJax notation:
 
-Let $G_{ij}^{t}$ represent the state of a cell in an  $n times m$ canvas grid at time  $t$, where $i$ and $j$ are the row and column indices, respectively.
+$$
+\text{Let } G_{ij}^{t} \text{ represent the state of a cell in an } n \times m \text{ canvas grid at time } t, \text{ where } i \text{ and } j \text{ are the row and column indices, respectively.}
+$$
+
 
 $$
 G_{ij}^{t} \in \{0, 1\} \text{, where 1 indicates the presence of fire.}
@@ -151,12 +167,18 @@ $$
 $$
 
 $$
-\text{An "ipl" (intersection point between fire and lightning) is defined by: } G_{ij} = L_{ij} = 1.
+\text{An "IPL" (intersection point between fire and lightning) is defined by: } G_{ij} = L_{ij} = 1.
 $$
 
 
-{% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined.gif" title="left" class="img-fluid rounded z-depth-1" %}
 {% include figure.liquid loading="eager" path="assets/img/lwl/IPL.gif" title="right" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/lwl/IPL.gif" title="right" class="img-fluid rounded z-depth-1" %}
+
+
+<div class="caption">
+    Lighting-Fire Ignition Points.
+</div>
+
 
 # Next Steps 
 
