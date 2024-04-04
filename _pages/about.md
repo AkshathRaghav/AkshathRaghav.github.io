@@ -20,9 +20,7 @@ I'm a second-year undergraduate @ Purdue, pursuing a B.Sc in CompE.
 
 My primary interest revolves arould building robust user-facing solutions at the intersection of applied AI, algorithmic learning and interoperablility principles. I enjoy research-driven environments aimed at taking concepts to tangible products. 
 
-<b>Automatability</b>, <b>innovation</b> and <b>accessability</b> remain the core of my work. 
-
-
+<b>Automatability</b>, <b>accessability</b> and <b>innovation</b> remain the core of my work. 
 
 I'm currently looking to involved in the following: 
 - *Vision Generation Algorithms*, 
