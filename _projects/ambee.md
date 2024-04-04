@@ -60,6 +60,9 @@ Recent fire incidents have resulted in tragic loss of life, such as the Black Su
 We discuss some aspects of our gridded GMAO FWI data:
 
 <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/feature/image6.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+
+To account for year-wise patterns and shifts in fire risk, we employ two target encoding approaches: One-Shot encoding and Year-By-Year encoding of the 'month' feature across the 'percentage' features. These encoding methods are implemented within the timeframe of values utilized during model training in time-series-based folds to avoid data leakage. 
+
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/distributions/image18.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/distributions/image16.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
@@ -68,6 +71,12 @@ We discuss some aspects of our gridded GMAO FWI data:
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/onevsyr/image13.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ambee/plots/onevsyr/image19.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
 </swiper-container>
+
+Upon comparing the boxplots of One-Shot and Year-By-Year encoding methods, we observe that the distribution of month-encoded values for No Risk and Extreme Risk is similar, while Low Risk, Moderate Risk, and High-Risk values exhibit lower outliers in the One-Shot plot compared to the Year-By-Year plot. This difference is further highlighted by the smaller interquartile range in the Year-By-Year plot for the same three risk values. 
+
+The nature of the Year-By-Year encoding method becomes evident when considering a geo-location that incrementally experienced extreme fire risk over the month of July across different years. With Year-By-Year encoding, the risk level values assigned to the month of July vary based on previous years, capturing changes in the fire risk trend. In the early years, these values would be lower but would go on increasing sharply during the later years. 
+
+In contrast, the One-Shot encoding assigns the same values to the month of July across all years, potentially overlooking the historical changes in fire risk trends. Despite this, our results, discussed later on, showcase the good accuracy achieved by both encoding methods, indicating the overall season's reliability in modeling fire risk historically.
 
 --- 
 

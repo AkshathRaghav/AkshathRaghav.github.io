@@ -8,7 +8,7 @@ category: research
 ---
 
 
-(Demo)[https://eugenio-a3n.streamlit.app/]
+### [Demo](https://eugenio-a3n.streamlit.app/)
 
 Responsible for source code published [here](https://github.com/e-lab/Forestry_Student/).
 
@@ -20,6 +20,6 @@ The current iteration of the project features the integration of several tools d
 - **Python Interpreter:** Supporting the execution of Python code for enhanced scripting capabilities.
 - **In-context QA:** Offering question-answering functionality within the context of the project.
 
-<iframe src="https://www.youtube.com/embed/-d7hI4Q0vXw?si=Qjipc3Q4010uJMsh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" src="https://www.youtube.com/embed/-d7hI4Q0vXw?si=Qjipc3Q4010uJMsh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
  
 > Currently, working on a multi-modal RAG system to identify and route document aspects to specialized local VLMs.

@@ -136,9 +136,7 @@ You can find the code for the visualizations and data here.
 Below is the algorithm I used for identifying 'lightning-ignited fires' based on GLM and VIIRS (/MODIS) data. 
 
 
-$$
-\text{Let } G_{ij}^{t} \text{ represent the state of a cell in an } n \times m \text{ canvas grid at time } t, \text{ where } i \text{ and } j \text{ are the row and column indices, respectively.}
-$$
+Let $G_{ij}^{t}$ represent the state of a cell in an  $n times m$ canvas grid at time  $t$, where $i$ and $j$ are the row and column indices, respectively.
 
 $$
 G_{ij}^{t} \in \{0, 1\} \text{, where 1 indicates the presence of fire.}
@@ -157,14 +155,8 @@ $$
 $$
 
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined.gif" title="left" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid loading="eager" path="assets/img/lwl/IPL.gif" title="right" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
+{% include figure.liquid loading="eager" path="assets/img/lwl/loop_combined.gif" title="left" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/lwl/IPL.gif" title="right" class="img-fluid rounded z-depth-1" %}
 
 # Next Steps 
 
@@ -192,7 +184,7 @@ Here's some data I have acquired and transformed for the purpose. It is modelled
 *[1] 2m RH found from Dewpoint Temp*
 *[2] calculated post-download*
 
-After that, I want to prose the problem as a forecasting problem with a supervised-learning approach of ([t-1]^(nxm), [t]^(nxm)) predictions. The data needs to be translated into the following structure for it to work with *XGBoost*: 
+After that, I want to prose the problem as a forecasting problem with a supervised-learning approach of $([t-1]^(nxm), [t]^(nxm))$ predictions. The data needs to be translated into the following structure for it to work with *XGBoost*: 
 - Construct a 3-dimensional array (n_samples, time_steps, features) incorporating mean, slope, and variance across a periodicity of 3-4 days to enrich the dataset.
 - Transform the dataset into a 2D format (n_samples * time_steps, features), focusing on calculating mean, variance, and slope temperatures for every 3-day segment within a week.
 - Reintegrate these calculations into the dataset and revert it to its original 3D structure (n_samples, time_steps, features).
