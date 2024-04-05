@@ -31,11 +31,20 @@ MaskFormer transforms any per-pixel classification model into a mask classificat
 
 Here are our results: 
 
-<p align="center">
+<div align="center">
 {% include figure.liquid loading="eager" path="assets/img/maskformer/train_results.png" class="img-fluid rounded z-depth-1" %}
+<div class="caption">
+    Annotated results of our results on the training split of the COCO TFRecords
+</div>
 {% include figure.liquid loading="eager" path="assets/img/maskformer/val_results.png" class="img-fluid rounded z-depth-1" %}
+<div class="caption">
+    Annotated results of our results on the eval split of the COCO TFRecords
+</div>
 {% include figure.liquid loading="eager" path="assets/img/maskformer/losses.png" class="img-fluid rounded z-depth-1" %}
-</p>
+<div class="caption">
+  Comparison of our training losses vs PyTorch's logs. From left to right: 'cls_loss', 'dice_loss', 'focal_loss/mask_loss', 'total_loss'
+</div>
+</div>
 
 # Getting Started
 ---
@@ -110,7 +119,7 @@ scripts/
 
 ## (Recommended) Working with TPUs
 
-### Environemnt Variables 
+### Environment Variables 
 Manually set the environment variables as follows:
 ```
 export PYTHONPATH=$PYTHONPATH:~/models
