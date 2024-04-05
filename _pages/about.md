@@ -20,12 +20,10 @@ I'm a second-year undergraduate @ Purdue, pursuing a B.Sc in CompE.
 
 My primary interest revolves arould building robust user-facing solutions at the intersection of applied AI, explainable learning paradigms and interoperablile systems. I enjoy research-driven environments aimed at taking concepts to tangible products. 
 
-<b>Automatability</b>, <b>reproducibility</b> and <b>accessability</b> remain the core of my work. 
-
-{Translations: 
-*I hate doing the same thing thrice;*
-*Quality work is replicable, replicable work guarantees quality;*
-*If it's not use(d)(ful), what's the point of building it?*}
+<b>Automatability</b>, <b>reproducibility</b> and <b>accessability</b> remain the core of my work. In other words, 
+- *I hate doing the same thing thrice;*
+- *Quality work is replicable, replicable work guarantees quality;*
+- *If it's not use(d)(ful), what's the point of building it?*}
 
 I'm currently looking to involved in the following: 
 - *Vision Generation Algorithms*, 
