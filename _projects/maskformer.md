@@ -172,11 +172,3 @@ python3 train.py \
 ```
 
 
-## Authors
-
-This list is ordered alphabetically by first name. 
-
-- Akshath Raghav R ([@Github AkshathRaghav](https://github.com/AkshathRaghav))
-- Vishal Purohit ([@Github Vishal-S-P](https://github.com/Vishal-S-P))
-- Wenxin Jiang ([@Github wenxin-jiang](https://github.com/wenxin-jiang))
-
