@@ -31,21 +31,26 @@ GrammarFlow was tested against popular LLM datasets, with a focus on constrainin
 
 [ReasoningAboutColors](https://github.com/google/BIG-bench/blob/main/bigbench/benchmark_tasks/reasoning_about_colored_objects/) - Requires handling multiple fields in grammar. 
 
+
 |    Model Name   |Parameters|Logic Grid Puzzle (n=200)|StrategyQA (n=200)|ReasoningAboutColors (n=200)|
 |:-----------------:|:----------:|:-------------------------:|:------------------:|:----------------------------:|
 |    Mistral-7B   |    7B    |          100.0%         |       100.0%      |            100.0%           |
 |  CodeLlama2-13B |    13B   |          100.0%        |       100.0%      |            100.0%           |
 |    Llama2-70B   |    70B   |          100.0%       |       100.0%    |            100.0%           |
+{: .table .table-bordered .table-sm }
+
 
 [PrOntoQA](https://github.com/Ber666/llm-reasoners/blob/main/examples/prontoqa/data/345hop_random_true.json) - Chain of Thought reasoning, with randomly-scattered supporting facts in prompt. Taken from [llm-reasoners](https://github.com/Ber666/llm-reasoners/). Tests the ability to place specific reasoning statements in the right place. 
 
 [HotPotQA](http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_train_v1.1.json) - Multi-hop questions, with strong supervision for supporting facts. Integrated within the first ReAct prompting paper's [code](https://github.com/ysymyth/ReAct). Incremental steps, leading to large prompts; tests robustness. 
 
-|    Model Name   |Parameters|PrOntoQA Parsing (n=200)|PrOntoQA Accuracy (n=200)|HotPotQA Parsing (n=200)|
+
+|    Model Name     | Parameters | PrOntoQA Parsing (n=200) | PrOntoQA Accuracy (n=200) | HotPotQA Parsing (n=200) |
 |:-----------------:|:----------:|:------------------------:|:-------------------------:|:------------------------:|
-|    Mistral-7B   |    7B    |           99%           |           88.5%          |          99.0%          |
-|  CodeLlama2-13B |    13B   |          97.5%          |           55.5%          |          100.0%         |
-|    Llama2-70B   |    70B   |          99.5%         |           81.9%          |          99.0%          |
+|    Mistral-7B     |    7B      |           99%            |           88.5%           |          99.0%           |
+|  CodeLlama2-13B   |    13B     |          97.5%           |           55.5%           |          100.0%          |
+|    Llama2-70B     |    70B     |          99.5%           |           81.9%           |          99.0%           |
+{: .table .table-bordered .table-sm }
 
 ## Features
 
@@ -71,20 +76,6 @@ This is people have come up with great alternatives to prompting strategies, pro
   name="Note!"
   statement="
     JSONFormer and [super-json-mode](https://github.com/varunshenoy/super-json-mode/blob/main/superjsonmode/) use batch-processing to generate tokens and manually enter them into JSON formats and stringify them. This works for smaller prompts which are not dependent on the context. There might be different aspects of the expected result which might depend on the earlier fields or maybe specific portions of the grammar itself to generate. This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
-  "
-%}
-
-{% include theorem.md 
-  type="definition"
-  name="Convergence in Distribution"
-  statement="
-  Let \( F_{X_n} \) and \( F_{X} \) denotes the cumulative density functions (CDF) of 
-  \( X_n \) and \( X \) respectively.
-
-  A sequence \( X_n \) converges to \( X \) in distribution if
-  $$ \lim_{n \to \infty } F_{X_n}(t) = F_X (t)$$
-  
-  for all points \( t \) where \( F_X \) is continuous.
   "
 %}
 

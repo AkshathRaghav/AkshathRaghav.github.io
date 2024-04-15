@@ -35,109 +35,101 @@ I'd highly appreciate any mentorship or suggestions for research labs @ Purdue t
 ## background 
 
 ```echarts 
-import * as echarts from 'echarts';
-
-var chartDom = document.getElementById('main');
-var myChart = echarts.init(chartDom);
-var option;
-
-option = {
-  title: {
-    text: 'Basic Graph'
-  },
-  tooltip: {},
-  animationDurationUpdate: 1500,
-  animationEasingUpdate: 'quinticInOut',
-  series: [
-    {
-      type: 'graph',
-      layout: 'none',
-      symbolSize: 50,
-      roam: true,
-      label: {
-        show: true
+{
+title: {
+  text: 'Basic Graph'
+},
+tooltip: {},
+animationDurationUpdate: 1500,
+animationEasingUpdate: 'quinticInOut',
+series: [
+  {
+    type: 'graph',
+    layout: 'none',
+    symbolSize: 50,
+    roam: true,
+    label: {
+      show: true
+    },
+    edgeSymbol: ['circle', 'arrow'],
+    edgeSymbolSize: [4, 10],
+    edgeLabel: {
+      fontSize: 20
+    },
+    data: [
+      {
+        name: 'Node 1',
+        x: 300,
+        y: 300
       },
-      edgeSymbol: ['circle', 'arrow'],
-      edgeSymbolSize: [4, 10],
-      edgeLabel: {
-        fontSize: 20
+      {
+        name: 'Node 2',
+        x: 800,
+        y: 300
       },
-      data: [
-        {
-          name: 'Node 1',
-          x: 300,
-          y: 300
-        },
-        {
-          name: 'Node 2',
-          x: 800,
-          y: 300
-        },
-        {
-          name: 'Node 3',
-          x: 550,
-          y: 100
-        },
-        {
-          name: 'Node 4',
-          x: 550,
-          y: 500
-        }
-      ],
-      // links: [],
-      links: [
-        {
-          source: 0,
-          target: 1,
-          symbolSize: [5, 20],
-          label: {
-            show: true
-          },
-          lineStyle: {
-            width: 5,
-            curveness: 0.2
-          }
-        },
-        {
-          source: 'Node 2',
-          target: 'Node 1',
-          label: {
-            show: true
-          },
-          lineStyle: {
-            curveness: 0.2
-          }
-        },
-        {
-          source: 'Node 1',
-          target: 'Node 3'
-        },
-        {
-          source: 'Node 2',
-          target: 'Node 3'
-        },
-        {
-          source: 'Node 2',
-          target: 'Node 4'
-        },
-        {
-          source: 'Node 1',
-          target: 'Node 4'
-        }
-      ],
-      lineStyle: {
-        opacity: 0.9,
-        width: 2,
-        curveness: 0
+      {
+        name: 'Node 3',
+        x: 550,
+        y: 100
+      },
+      {
+        name: 'Node 4',
+        x: 550,
+        y: 500
       }
+    ],
+    // links: [],
+    links: [
+      {
+        source: 0,
+        target: 1,
+        symbolSize: [5, 20],
+        label: {
+          show: true
+        },
+        lineStyle: {
+          width: 5,
+          curveness: 0.2
+        }
+      },
+      {
+        source: 'Node 2',
+        target: 'Node 1',
+        label: {
+          show: true
+        },
+        lineStyle: {
+          curveness: 0.2
+        }
+      },
+      {
+        source: 'Node 1',
+        target: 'Node 3'
+      },
+      {
+        source: 'Node 2',
+        target: 'Node 3'
+      },
+      {
+        source: 'Node 2',
+        target: 'Node 4'
+      },
+      {
+        source: 'Node 1',
+        target: 'Node 4'
+      }
+    ],
+    lineStyle: {
+      opacity: 0.9,
+      width: 2,
+      curveness: 0
     }
+  }
   ]
-};
-
-option && myChart.setOption(option);
+}
 ```
 
-* F'23 - S'24: I'm (almost done) working at the [Duality Lab](https://davisjam.github.io/), where [we're re-engineering](https://akshathraghav.github.io/projects/maskformer/) the MaskFormer segmentation from the [PyTorch-based artifact](https://github.com/facebookresearch/MaskFormer) to TensorFlow for publishing to the TF Model Garden. You can find our paper [here]() and code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
+* F'23 - S'24: I'm worked at the [Duality Lab](https://davisjam.github.io/), where [we re-engineered](https://akshathraghav.github.io/projects/maskformer/) the MaskFormer segmentation from the [PyTorch-based artifact](https://github.com/facebookresearch/MaskFormer) to TensorFlow for publishing to the TF Model Garden. You can find our paper [here]() and code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
 * S'24: I'm involved in MultiModal (LM) understanding projects at the [e-lab](https://e-lab.github.io/). I've built [eugenie](https://akshathraghav.github.io/projects/eugenie/) & [grammarflow](https://github.com/e-lab/SyntaxShaper/tree/main) and am working on encoding reading-order patterns within documents ([here's](https://drive.google.com/file/d/1x1IE_1NT-UAO7bFtoc_bPNJgqQFA1AXK/view?usp=sharing) my current plan of action)
 * S'24: I led a project at the [CVES](https://yhlu.net/research.html) group @ Purdue ECE, where our goal was to define and evaluate reproducibility within AI/ML projects. I wrote the [codebase](https://github.com/AkshathRaghav/RAIS) for building our pipeline and statistically [defined](https://akshathraghav.github.io/projects/rais/) the importance of parameters. 
 * S'23 - Summer'23: Worked at [Ambee](https://www.getambee.com/), where I deployed a worldwide [fire forecasting system](https://akshathraghav.github.io/projects/ambee/) into their API and wrote automated scripts for their environment-data focused [data lakes](https://www.getambee.com/api-documentation). You can find my **LOR** [here](https://akshathraghav.github.io/assets/pdf/AkshathRaghavR_LOR_Ambee.pdf). You can find the whitepaper [here](https://www.researchgate.net/publication/372769364_Time-Driven_Fire_Risk_Forecasting_Leveraging_Historical_Trends_for_Enhanced_Seasonal_Modeling). 
@@ -147,7 +139,7 @@ option && myChart.setOption(option);
 
 I'm super excited about the [Partner as a Product (PaaP)](https://uxdesign.cc/this-is-the-moment-to-reinvent-your-product-1ee084e38ab1) era we're entering into. I hope to gain experience across the systems we're (going to) base our lives on, from hardware-level programming to cloud-based HA lifecycles. Majoring in ECE gives me the oppurtunity to develop myself in these areas. 
 
-Going forward, I **aim** to specialize in the art of solution-building, by bridging happening research with dynamic market needs. My approach involves deep-diving into research to understand core principles thoroughly and then 'swimming' across to explore its applications, ensuring my projects are both fundamentally robust and practically relevant.
+Going forward, I aim to specialize in the art of **solution-building**, by bridging happening research with dynamic market needs. My approach involves deep-diving into research to understand core principles thoroughly and then 'swimming' across to explore its applications, ensuring my projects are both **fundamentally robust and practically relevant**.
 
 Lessons from my mentors: 
 - *Reliable software is a by-product of a robust design process;*
