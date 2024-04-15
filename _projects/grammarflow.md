@@ -12,7 +12,7 @@ toc:
 🚀 Supercharging Agent Chains with Constrained LLM outputs 🚀
 
 
-## 🤔 What is this?
+## What is this?
 
 This repository contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by `json.loads` (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the [llama.cpp](https://github.com/ggerganov/llama.cpp/) package for sampling logits smartly. 
 
@@ -56,6 +56,23 @@ GrammarFlow is mainly meant to be an add-on to your existing LLM applications. I
 - [x] **Experiments with different 'formats'**: Defines grammar rules in XML, JSON and TOML formats. JSON is the standard, while XML is best for nested parsing and TOML is best when you want to get multiple models parsed simulatenously. Each has it's own usecase as described in the [demo](https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb).
 - [x] **Reduces hallucinations or garbage results during sampling**: GBNF grammars allow for controlled whitespacing/identation and model ordering, while parsing logic allows for ignoring incorrect terminal symbols.  
 
+
+## Remarks!
+
+Please keep in mind that this package is purely software driven and aims to make developers lives simpler. It can work across model families and parameter counts with great success in parsing. 
+
+However, with an increase in complexity of the prompt, the accuracy and 'performance' of the model's thinking capability will degrade. This is attributed to the context-window problem that a lot of researchers are working to improve. LLMs are autoregressive models which track previously seen tokens in order to iteratively predict the next one, and thus provide (a lottt) of token probabilities in every generation. Different decoding startegies like nucleus (used in GPT) sampling and beam search are expensive and need to be used in combination with other methods to prune bad thinking patterns at generation time. When you have large context prompts, theres also too much information to sort through. Additionally, grammar constrained decoding uses context free grammars to enforce the probability of certain tokens (like terminals) to get predicted. Eventually, there will be randomly repeating text or weird tokens being outputted. After a point, even the grammars are unable to be constrained properly, and just decay after that. 
+
+This is people have come up with great alternatives to prompting strategies, prompt pruning, batch processing prompts (like in JSONFormer), etc. Using those practices along with this library boosts the efficiency of whatever you're building! 
+
+{% include theorem.md 
+  type="example"
+  name="Note!"
+  statement="
+    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats and stringify them. This works for smaller prompts which are not dependent on the context. There might be different aspects of the expected result which might depend on the earlier fields or maybe specific portions of the grammar itself to generate. This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
+  "
+%}
+
 ### Examples (@ samples/)
 1. For a general overview of what GrammarFlow can do, look at [demo.ipynb](https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb). 
 2. For my modification to [ReAct's](https://github.com/ysymyth/ReAct) evaluation code on [HotPotQA](https://hotpotqa.github.io/), look at [hotpotqa_modified](https://github.com/e-lab/SyntaxShaper/blob/main/samples/hotpotqa/hotpotqa_modified.ipynb).
@@ -67,7 +84,7 @@ GrammarFlow is mainly meant to be an add-on to your existing LLM applications. I
   type="example"
   name="GNBF Grammar"
   statement="
-    "GBNF (GGML BNF) is a format for defining formal grammars to constrain model outputs in llama.cpp. For example, you can use it to force the model to generate valid JSON, or speak only in emojis."
+    GBNF (GGML BNF) is a format for defining formal grammars to constrain model outputs in llama.cpp. For example, you can use it to force the model to generate valid JSON, or speak only in emojis.
     Read more about it [here](https://github.com/ggerganov/llama.cpp/blob/master/grammars/README.md).
   "
 %}
@@ -174,16 +191,6 @@ observation = PerformSomeAction(
   action_input = response.AgentStep.action_input
 ) 
 ```
-
-## Remarks!
-
-Please keep in mind that this package is purely software driven and aims to make developers lives simpler. It can work across model families and parameter counts with great success in parsing. 
-
-However, with an increase in complexity of the prompt, the accuracy and 'performance' of the model's thinking capability will degrade. This is attributed to the context-window problem that a lot of researchers are working to improve. LLMs are autoregressive models which track previously seen tokens in order to iteratively predict the next one, and thus provide (a lottt) of token probabilities in every generation. Different decoding startegies like nucleus (used in GPT) sampling and beam search are expensive and need to be used in combination with other methods to prune bad thinking patterns at generation time. When you have large context prompts, theres also too much information to sort through. Additionally, grammar constrained decoding uses context free grammars to enforce the probability of certain tokens (like terminals) to get predicted. Eventually, there will be randomly repeating text or weird tokens being outputted. After a point, even the grammars are unable to be constrained properly, and just decay after that. 
-
-This is people have come up with great alternatives to prompting strategies, prompt pruning, batch processing prompts (like in JSONFormer), etc. Using those practices along with this library boosts the efficiency of whatever you're building! 
-
-> JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats and stringify them. This works for smaller prompts which are not dependent on the context. There might be different aspects of the expected result which might depend on the earlier fields or maybe specific portions of the grammar itself to generate. This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
 
 
 ## Citation
