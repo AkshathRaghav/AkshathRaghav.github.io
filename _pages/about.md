@@ -37,75 +37,111 @@ I'd highly appreciate any mentorship or suggestions for research labs @ Purdue t
 ```echarts 
 import * as echarts from 'echarts';
 
-var ROOT_PATH = 'https://echarts.apache.org/examples';
-
 var chartDom = document.getElementById('main');
 var myChart = echarts.init(chartDom);
 var option;
 
-myChart.showLoading();
-$.getJSON(ROOT_PATH + '/data/asset/data/les-miserables.json', function (graph) {
-  myChart.hideLoading();
-  graph.nodes.forEach(function (node) {
-    node.label = {
-      show: node.symbolSize > 30
-    };
-  });
-  option = {
-    title: {
-      text: 'Les Miserables',
-      subtext: 'Default layout',
-      top: 'bottom',
-      left: 'right'
-    },
-    tooltip: {},
-    legend: [
-      {
-        // selectedMode: 'single',
-        data: graph.categories.map(function (a) {
-          return a.name;
-        })
-      }
-    ],
-    animationDuration: 1500,
-    animationEasingUpdate: 'quinticInOut',
-    series: [
-      {
-        name: 'Les Miserables',
-        type: 'graph',
-        layout: 'none',
-        data: graph.nodes,
-        links: graph.links,
-        categories: graph.categories,
-        roam: true,
-        label: {
-          position: 'right',
-          formatter: '{b}'
+option = {
+  title: {
+    text: 'Basic Graph'
+  },
+  tooltip: {},
+  animationDurationUpdate: 1500,
+  animationEasingUpdate: 'quinticInOut',
+  series: [
+    {
+      type: 'graph',
+      layout: 'none',
+      symbolSize: 50,
+      roam: true,
+      label: {
+        show: true
+      },
+      edgeSymbol: ['circle', 'arrow'],
+      edgeSymbolSize: [4, 10],
+      edgeLabel: {
+        fontSize: 20
+      },
+      data: [
+        {
+          name: 'Node 1',
+          x: 300,
+          y: 300
         },
-        lineStyle: {
-          color: 'source',
-          curveness: 0.3
+        {
+          name: 'Node 2',
+          x: 800,
+          y: 300
         },
-        emphasis: {
-          focus: 'adjacency',
-          lineStyle: {
-            width: 10
-          }
+        {
+          name: 'Node 3',
+          x: 550,
+          y: 100
+        },
+        {
+          name: 'Node 4',
+          x: 550,
+          y: 500
         }
+      ],
+      // links: [],
+      links: [
+        {
+          source: 0,
+          target: 1,
+          symbolSize: [5, 20],
+          label: {
+            show: true
+          },
+          lineStyle: {
+            width: 5,
+            curveness: 0.2
+          }
+        },
+        {
+          source: 'Node 2',
+          target: 'Node 1',
+          label: {
+            show: true
+          },
+          lineStyle: {
+            curveness: 0.2
+          }
+        },
+        {
+          source: 'Node 1',
+          target: 'Node 3'
+        },
+        {
+          source: 'Node 2',
+          target: 'Node 3'
+        },
+        {
+          source: 'Node 2',
+          target: 'Node 4'
+        },
+        {
+          source: 'Node 1',
+          target: 'Node 4'
+        }
+      ],
+      lineStyle: {
+        opacity: 0.9,
+        width: 2,
+        curveness: 0
       }
-    ]
-  };
-  myChart.setOption(option);
-});
+    }
+  ]
+};
 
 option && myChart.setOption(option);
 ```
 
-* I'm (almost done) working at the [Duality Lab](https://davisjam.github.io/), where [we're re-engineering](https://akshathraghav.github.io/projects/maskformer/) the MaskFormer segmentation from the [PyTorch-based artifact](https://github.com/facebookresearch/MaskFormer) to TensorFlow for publishing to the TF Model Garden. You can find our paper [here]().
-* I'm also involved in MultiModal (LM) understanding projects at the [e-lab](https://e-lab.github.io/). I've built [eugenie](https://akshathraghav.github.io/projects/eugenie/) & [grammarflow](https://github.com/e-lab/SyntaxShaper/tree/main) and am working on encoding reading-order patterns within documents ([here's]((https://drive.google.com/file/d/1x1IE_1NT-UAO7bFtoc_bPNJgqQFA1AXK/view?usp=sharing)) my current plan of action)
-* In Spring '24, I led a project at the [CVES](https://yhlu.net/research.html) group @ Purdue ECE, where our goal was to define and evaluate reproducibility within AI/ML projects. I wrote the [codebase](https://github.com/AkshathRaghav/RAIS) for building our pipeline and statistically [defined](https://akshathraghav.github.io/projects/rais/) the importance of parameters. 
-* I spent the Summer of '23 at [Ambee](https://www.getambee.com/), where I deployed a worldwide [fire forecasting system](https://akshathraghav.github.io/projects/ambee/) into their API and wrote automated scripts for their environment-data focused [data lakes](https://www.getambee.com/api-documentation). You can find my [LOR](https://akshathraghav.github.io/assets/pdf/AkshathRaghavR_LOR_Ambee.pdf) here. You can find the whitepaper [here](https://www.researchgate.net/publication/372769364_Time-Driven_Fire_Risk_Forecasting_Leveraging_Historical_Trends_for_Enhanced_Seasonal_Modeling). 
-* Around the same time, I helped lead a project that was supervised by Prof. Yuan Wang (currently at Stanford) where we aimed to correlate [lightning activity with wildfire spread](https://akshathraghav.github.io/projects/lwl/). I wrote (big-)data-interfacing code for satellites across EUR/EUS/SAR, and was responsible for packing them to use within a ConvLSTM model from [DeepCube's short-term forecasting](https://github.com/DeepCube-org/uc3-public-notebooks/blob/main/3_UC3_DL_models_XAI.ipynb).
+* F'23 - S'24: I'm (almost done) working at the [Duality Lab](https://davisjam.github.io/), where [we're re-engineering](https://akshathraghav.github.io/projects/maskformer/) the MaskFormer segmentation from the [PyTorch-based artifact](https://github.com/facebookresearch/MaskFormer) to TensorFlow for publishing to the TF Model Garden. You can find our paper [here]() and code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
+* S'24: I'm involved in MultiModal (LM) understanding projects at the [e-lab](https://e-lab.github.io/). I've built [eugenie](https://akshathraghav.github.io/projects/eugenie/) & [grammarflow](https://github.com/e-lab/SyntaxShaper/tree/main) and am working on encoding reading-order patterns within documents ([here's](https://drive.google.com/file/d/1x1IE_1NT-UAO7bFtoc_bPNJgqQFA1AXK/view?usp=sharing) my current plan of action)
+* S'24: I led a project at the [CVES](https://yhlu.net/research.html) group @ Purdue ECE, where our goal was to define and evaluate reproducibility within AI/ML projects. I wrote the [codebase](https://github.com/AkshathRaghav/RAIS) for building our pipeline and statistically [defined](https://akshathraghav.github.io/projects/rais/) the importance of parameters. 
+* S'23 - Summer'23: Worked at [Ambee](https://www.getambee.com/), where I deployed a worldwide [fire forecasting system](https://akshathraghav.github.io/projects/ambee/) into their API and wrote automated scripts for their environment-data focused [data lakes](https://www.getambee.com/api-documentation). You can find my **LOR** [here](https://akshathraghav.github.io/assets/pdf/AkshathRaghavR_LOR_Ambee.pdf). You can find the whitepaper [here](https://www.researchgate.net/publication/372769364_Time-Driven_Fire_Risk_Forecasting_Leveraging_Historical_Trends_for_Enhanced_Seasonal_Modeling). 
+* F'22 - S'23: I helped lead a project that was supervised by Prof. [Yuan Wang](https://wang-lab.stanford.edu/people/yuan-wang) (currently at Stanford) where we aimed to correlate [lightning activity with wildfire spread](https://akshathraghav.github.io/projects/lwl/). I wrote (big-)data-interfacing code for satellites across EUR/EUS/SAR, and was responsible for packing them to use within a ConvLSTM model from [DeepCube's short-term forecasting](https://github.com/DeepCube-org/uc3-public-notebooks/blob/main/3_UC3_DL_models_XAI.ipynb).
 
 ## interests
 

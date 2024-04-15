@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: post
+class: post-template
 title: grammarflow 
 description: Powering Agent Chains by Constraining LLM Outputs 🪢
 img: assets/img/lgoo.jpg
@@ -61,15 +62,29 @@ GrammarFlow is mainly meant to be an add-on to your existing LLM applications. I
 
 Please keep in mind that this package is purely software driven and aims to make developers lives simpler. It can work across model families and parameter counts with great success in parsing. 
 
-However, with an increase in complexity of the prompt, the accuracy and 'performance' of the model's thinking capability will degrade. This is attributed to the context-window problem that a lot of researchers are working to improve. LLMs are autoregressive models which track previously seen tokens in order to iteratively predict the next one, and thus provide (a lottt) of token probabilities in every generation. Different decoding startegies like nucleus (used in GPT) sampling and beam search are expensive and need to be used in combination with other methods to prune bad thinking patterns at generation time. When you have large context prompts, theres also too much information to sort through. Additionally, grammar constrained decoding uses context free grammars to enforce the probability of certain tokens (like terminals) to get predicted. Eventually, there will be randomly repeating text or weird tokens being outputted. After a point, even the grammars are unable to be constrained properly, and just decay after that. 
+However, with an increase in complexity of the prompt, the accuracy and 'performance' of the model's thinking capability will degrade. This is attributed to the context-window problem that a lot of researchers are working to improve. LLMs are autoregressive models which track previously seen tokens in order to iteratively predict the next one, and thus provide (a lot) of token probabilities in every generation. Different decoding startegies like **nucleus sampling** (used in GPT) and **beam search** are expensive and need to be used in combination with other methods to prune bad thinking patterns at generation time. When you have large context prompts, theres also too much information to sort through. Additionally, grammar constrained decoding uses context free grammars to enforce the probability of certain tokens (like terminals) to get predicted. Eventually, there will be randomly repeating text or weird tokens being outputted. After a point, even the grammars are unable to be constrained properly, and just decay after that. 
 
-This is people have come up with great alternatives to prompting strategies, prompt pruning, batch processing prompts (like in JSONFormer), etc. Using those practices along with this library boosts the efficiency of whatever you're building! 
+This is people have come up with great alternatives to prompting strategies, prompt pruning, batch processing prompts (like in [JSONFormer](https://github.com/1rgs/jsonformer/blob/main/jsonformer/)), etc. Using those practices along with this library **boosts the efficiency** of whatever you're building! 
 
 {% include theorem.md 
   type="example"
   name="Note!"
   statement="
-    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats and stringify them. This works for smaller prompts which are not dependent on the context. There might be different aspects of the expected result which might depend on the earlier fields or maybe specific portions of the grammar itself to generate. This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
+    JSONFormer and [super-json-mode](https://github.com/varunshenoy/super-json-mode/blob/main/superjsonmode/) use batch-processing to generate tokens and manually enter them into JSON formats and stringify them. This works for smaller prompts which are not dependent on the context. There might be different aspects of the expected result which might depend on the earlier fields or maybe specific portions of the grammar itself to generate. This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
+  "
+%}
+
+{% include theorem.md 
+  type="definition"
+  name="Convergence in Distribution"
+  statement="
+  Let \( F_{X_n} \) and \( F_{X} \) denotes the cumulative density functions (CDF) of 
+  \( X_n \) and \( X \) respectively.
+
+  A sequence \( X_n \) converges to \( X \) in distribution if
+  $$ \lim_{n \to \infty } F_{X_n}(t) = F_X (t)$$
+  
+  for all points \( t \) where \( F_X \) is continuous.
   "
 %}
 
@@ -155,7 +170,7 @@ response = llm(manager.prompt, grammar=manager.get_grammar(CoT), stop_at=manager
 
 `pip install grammarflow`
 
-## 📃 Code Usage 
+## Code Usage 📃
 
 Map out what your agent chain is doing. Understand what it's goals are and what data needs to be carried forward from one step to the next. 
 For example, consider the [ReAct prompting framework](https://react-lm.github.io/). In every call, we want to pass in the Action and subsequent Observation to the next call. 
