@@ -5,6 +5,8 @@ description: Powering Agent Chains by Constraining LLM Outputs 🪢
 img: assets/img/lgoo.jpg
 importance: 2
 category: software
+toc:
+  beginning: true
 ---
 
 🚀 Supercharging Agent Chains with Constrained LLM outputs 🚀
@@ -41,7 +43,7 @@ GrammarFlow was tested against popular LLM datasets, with a focus on constrainin
 [ReasoningAboutColors](https://github.com/google/BIG-bench/blob/main/bigbench/benchmark_tasks/reasoning_about_colored_objects/) - Requires handling multiple fields in grammar (Single object with list). 
 
 |    Model Name   |Parameters|Logic Grid Puzzle (n=200)|StrategyQA (n=200)|ReasoningAboutColors (n=200)|
-|-----------------|----------|-------------------------|------------------|----------------------------|
+|:-----------------:|:----------:|:-------------------------:|:------------------:|:----------------------------:|
 |    Mistral-7B   |    7B    |          100.0%         |       100.0%      |            100.0%           |
 |  CodeLlama2-13B |    13B   |          100.0%        |       100.0%      |            100.0%           |
 |    Llama2-70B   |    70B   |          100.0%       |       100.0%    |            100.0%           |
@@ -51,7 +53,7 @@ GrammarFlow was tested against popular LLM datasets, with a focus on constrainin
 [HotPotQA](http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_train_v1.1.json) - Multi-hop questions, with strong supervision for supporting facts. Integrated within the first ReAct prompting paper's [code](https://github.com/ysymyth/ReAct). Incremental steps, leading to large prompts.
 
 |    Model Name   |Parameters|PrOntoQA Parsing (n=200)|PrOntoQA Accuracy (n=200)|HotPotQA Parsing (n=200)|
-|-----------------|----------|------------------------|-------------------------|------------------------|
+|:-----------------:|:----------:|:------------------------:|:-------------------------:|:------------------------:|
 |    Mistral-7B   |    7B    |           99%           |           88.5%          |          99.0%          |
 |  CodeLlama2-13B |    13B   |          97.5%          |           55.5%          |          100.0%         |
 |    Llama2-70B   |    70B   |          99.5%         |           81.9%          |          99.0%          |

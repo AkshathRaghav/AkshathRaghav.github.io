@@ -6,6 +6,8 @@ img: assets/img/dualityxtfmg.jpg
 importance: 1
 category: research
 related_publications: false 
+toc:
+  sidebar: left
 ---
 
 This page is the culmination of the work I did at [Duality Lab](https://github.com/PurdueDualityLab/tf-maskformer) (Fall '23 + Spring '24) as a research assistant under [Vishal S P](https://www.linkedin.com/in/vishalsp/) and [Wenxin Jiang](https://wenxin-jiang.github.io/cv/).

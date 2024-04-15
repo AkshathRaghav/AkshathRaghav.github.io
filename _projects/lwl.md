@@ -6,6 +6,8 @@ img: assets/img/lwl.png
 importance: 5
 category: research
 related_publications: false 
+toc:
+  beginning: true
 ---
 
 * Systematized the process of bundling netCDF data on the basis of temporal, spatial and spatio-temporal features to package into Ensemble, LSTM and ConvLSTM models. 

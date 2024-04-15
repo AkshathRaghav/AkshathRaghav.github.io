@@ -8,6 +8,8 @@ category: research
 images:
   compare: true
   slider: true
+toc:
+  sidebar: left
 ---
 
 This page is the culmination of the work I did at [Ambee](https://www.getambee.com/) (Summer '22) as a Data Science Intern. 
