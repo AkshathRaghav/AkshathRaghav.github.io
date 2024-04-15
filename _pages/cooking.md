@@ -3,6 +3,6 @@ layout: table
 permalink: /cooking/
 title: cooking
 description: 
-nav: true
+nav: false
 nav_order: 7
 ---
