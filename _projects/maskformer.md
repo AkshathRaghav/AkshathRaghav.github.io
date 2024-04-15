@@ -6,8 +6,6 @@ img: assets/img/dualityxtfmg.jpg
 importance: 1
 category: research
 related_publications: false 
-toc:
-  sidebar: left
 ---
 
 This page is the culmination of the work I did at [Duality Lab](https://github.com/PurdueDualityLab/tf-maskformer) (Fall '23 + Spring '24) as a research assistant under [Vishal S P](https://www.linkedin.com/in/vishalsp/) and [Wenxin Jiang](https://wenxin-jiang.github.io/cv/).
@@ -16,6 +14,9 @@ This page is the culmination of the work I did at [Duality Lab](https://github.c
 * Conducted experiments on GPUs & TPUs to ensure layer precision across the meta-architecture and implemented functions to ensure data consistency through the dataloader. Fixed run-time issues in main task file related to running across different computes. 
 * Wrote the evaluation module, including the implementation of panoptic inference metrics to work with tf2's inbuilt task workflow. Fixed and integrated code for multi-scale (auxillary) losses to address inability of loss convergence. 
 * Responsible for the PR to [TF Model Garden](https://github.com/tensorflow/models), from re-writing modules (across layers) for guidelines adherence to creating/annotating results for the report. Also wrote unit tests for all modules used in the architecture for tensor shape validation and expected results. 
+
+[Paper]()
+[Code](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer)
 
 # Description
 

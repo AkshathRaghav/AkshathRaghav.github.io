@@ -14,12 +14,14 @@ Responsible for source code published [here](https://github.com/e-lab/Forestry_S
 
 The current iteration of the project features the integration of several tools designed to augment its capabilities:
 - **Data Chat:** Enabling data visualization and analysis support of uploaded CSV files. 
-- **Arxiv Search:** Facilitating exploration and retrieval of scholarly articles.
+- **Arxiv Search:** Answers questions from research papers/articles.
 - **Web Browser:** Enabling web-based research and information gathering.
-- **Calculator:** Providing computational functionality within the environment.
-- **Python Interpreter:** Supporting the execution of Python code for enhanced scripting capabilities.
-- **In-context QA:** Offering question-answering functionality within the context of the project.
+- **Calculator:** Added to the chains for factual reasoning. 
+- **Python Interpreter:** Supporting the execution of Python code. Required by questions involving binary or numbers. 
+- **In-context QA:** Offering question-answering functionality within the context.
 
+<div align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-d7hI4Q0vXw?si=QOXM3GEj6KGKP-DP&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
 
 > Currently, working on a multi-modal RAG system to identify and route document aspects to specialized local VLMs.
