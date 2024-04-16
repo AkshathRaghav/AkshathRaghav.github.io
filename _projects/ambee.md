@@ -23,14 +23,21 @@ The code and data (/sources) extracted from are considered proprietary, and henc
 
 ---
 
-# Abstract
-> Wildfires pose severe threats across North America, causing extensive damage to lives, ecosystems, and property. To address this, accurate fire prediction and forecast outlooks are crucial for effective mitigation. Agencies like the National Interagency Fire Center (NIFC) and the Canadian Wildland Fire Information System (CWFIS) provide vital fire risk assessments. In this paper, our main goal was to demonstrate the sufficiency of **seasonality** in fire risk forecasting. Two encoding methods, One-Shot and Year-By-Year, used for encoding the seasonal changes of fire weather, were analyzed for their implications in fire risk assessment, revealing contrasting attributes.  The findings guide model design improvements, bolstering wildfire management and protection measures.
+{% include theorem.md 
+  type="remark"
+  name="Abstract"
+  statement="
+Wildfires pose severe threats across North America, causing extensive damage to lives, ecosystems, and property. To address this, accurate fire prediction and forecast outlooks are crucial for effective mitigation. Agencies like the National Interagency Fire Center (NIFC) and the Canadian Wildland Fire Information System (CWFIS) provide vital fire risk assessments. In this paper, our main goal was to demonstrate the sufficiency of **seasonality** in fire risk forecasting. Two encoding methods, One-Shot and Year-By-Year, used for encoding the seasonal changes of fire weather, were analyzed for their implications in fire risk assessment, revealing contrasting attributes.  The findings guide model design improvements, bolstering wildfire management and protection measures.
+  "
+%}
 
-# 'Why?'
+# Understanding the 'Why?'
 
-Recent fire incidents have resulted in tragic loss of life, such as the Black Summer of 2019-2020 in Australia, where an estimated 33 people perished, and extensive damage to land and homes, with 18.6 million hectares consumed by flames (Parrott et al., 2021). In early 2021, wildfires ravaged approximately 7.13 million acres in the United States (Statista, 2022), while Algeria experienced a prolonged system of wildfires that took the lives of at least 70 people (Reuters, 2021). The financial toll is equally significant, with the 2018 California Camp Fire alone incurring losses exceeding $16.5 billion (Los Angeles Times, 2019). These losses are primarily attributed to the destruction of residential and commercial structures, including homes, businesses, and infrastructure. The costs also encompassed expenses related to emergency response efforts, rehabilitation, and restoration of the affected areas. In the coming days, resources from all over the Western United States would be sent to Paradise to assist in the fight to contain the fire. In the aftermath of the wildfire, resources from across the Western United States were mobilized to support firefighting efforts in Paradise (Town of Paradise, n.d.). By November 10th, the response included a force of 5,596 firefighters, 622 engines, 75 water tenders, 101 fire crews, 103 bulldozers, and 24 helicopters working diligently to contain the fire (Town of Paradise, n.d.). These statistics highlight the urgent need for comprehensive fire risk forecasting and management strategies to protect lives, infrastructure, and ecosystems.
+Recent fire incidents have resulted in tragic loss of life, such as the Black Summer of 2019-2020 in Australia, where an estimated 33 people perished, and extensive damage to land and homes, with 18.6 million hectares consumed by flames (Parrott et al., 2021). In early 2021, wildfires ravaged approximately 7.13 million acres in the United States (Statista, 2022), while Algeria experienced a prolonged system of wildfires that took the lives of at least 70 people (Reuters, 2021). The financial toll is equally significant, with the 2018 California Camp Fire alone incurring losses exceeding $16.5 billion (Los Angeles Times, 2019). 
 
-# Understanding the North American Region 
+These losses are primarily attributed to the destruction of residential and commercial structures, including homes, businesses, and infrastructure. The costs also encompassed expenses related to emergency response efforts, rehabilitation, and restoration of the affected areas. In the coming days, resources from all over the Western United States would be sent to Paradise to assist in the fight to contain the fire. In the aftermath of the wildfire, resources from across the Western United States were mobilized to support firefighting efforts in Paradise (Town of Paradise, n.d.). By November 10th, the response included a force of 5,596 firefighters, 622 engines, 75 water tenders, 101 fire crews, 103 bulldozers, and 24 helicopters working diligently to contain the fire (Town of Paradise, n.d.). These statistics highlight the urgent need for comprehensive fire risk forecasting and management strategies to protect lives, infrastructure, and ecosystems.
+
+# North American Region Overview 
 
 > "During the winter  months ... fire activity is concentrated in the SouthWest and South areas. Spring, .. sees fire season expanding to cover the North, Central, and  South West regions. As summer arrives ... wildfire activity becomes prevalent in multiple regions, including the Northwest, South, Southwest, and East areas. Lastly, autumn ... witnesses thefire season primarily concentrated in the Central region. Additionally, California ... is now experiencing a year-round firerisk  (Cart, 2022, para. 3). Presented below are visualizations of the fire climate regions in  North America, depicting their spatial distribution and corresponding fire risk levels." (Pg. 17)
 
@@ -107,13 +114,13 @@ Here are how our results compare with the real FWI maps during 2022.
 </img-comparison-slider>
 
 {% include theorem.md 
-  type="Remark!"
-  name=""
+  type="remark"
+  name="Limitations"
   statement="
  You might notice the last plot having bad results. For this, recall how NAR saw the worst fires it has during the Sept-Oct period of '22. This sudden difference in the seasonality shows the limitations in our methodology. However, that is just the point we try to make -- seasonality is not everything. 
   "
 %}
->
+
 
 # Talking Numbers! 
 

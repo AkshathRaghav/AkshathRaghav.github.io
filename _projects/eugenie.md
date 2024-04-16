@@ -10,9 +10,9 @@ category: research
 
 ### [Demo](https://eugenio-a3n.streamlit.app/)
 
-Responsible for source code published [here](https://github.com/e-lab/Forestry_Student/).
+Responsible for the source code published [here](https://github.com/e-lab/Forestry_Student/).
 
-The current iteration of the project features the integration of several tools designed to augment its capabilities:
+The current iteration of the project smartly routes specific problems to sub-systems: 
 - **Data Chat:** Enabling data visualization and analysis support of uploaded CSV files. 
 - **Arxiv Search:** Answers questions from research papers/articles.
 - **Web Browser:** Enabling web-based research and information gathering.

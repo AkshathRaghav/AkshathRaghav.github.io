@@ -12,8 +12,9 @@ toc:
 
 🚀 Supercharging Agent Chains with Constrained LLM outputs 🚀
 
+[Code](https://github.com/e-lab/SyntaxShaper/tree/main) 
 
-## What is this?
+## Overview
 
 This repository contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by `json.loads` (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the [llama.cpp](https://github.com/ggerganov/llama.cpp/) package for sampling logits smartly. 
 
@@ -63,7 +64,7 @@ GrammarFlow is mainly meant to be an add-on to your existing LLM applications. I
 - [x] **Reduces hallucinations or garbage results during sampling**: GBNF grammars allow for controlled whitespacing/identation and model ordering, while parsing logic allows for ignoring incorrect terminal symbols.  
 
 
-## Remarks!
+## Remarks
 
 Please keep in mind that this package is purely software driven and aims to make developers lives simpler. It can work across model families and parameter counts with great success in parsing. 
 
@@ -81,12 +82,12 @@ This is why people have come up with great workarounds like prompting strategies
   "
 %}
 
-### Examples (@ samples/)
+## Examples (@ samples/)
 1. For a general overview of what GrammarFlow can do, look at [demo.ipynb](https://github.com/e-lab/SyntaxShaper/blob/main/samples/demo.ipynb). 
 2. For my modification to [ReAct's](https://github.com/ysymyth/ReAct) evaluation code on [HotPotQA](https://hotpotqa.github.io/), look at [hotpotqa_modified](https://github.com/e-lab/SyntaxShaper/blob/main/samples/hotpotqa/hotpotqa_modified.ipynb).
 3. I've also added an implementation of a [data annotator](https://github.com/e-lab/SyntaxShaper/blob/main/samples/bert_finetuning/annotator.ipynb) for this [BERT fine-tuning guide](https://www.datasciencecentral.com/how-to-fine-tune-bert-transformer-with-spacy-3/).
 
-### GNBF Grammar 
+## GNBF Grammar 
 
 {% include theorem.md 
   type="definition"
@@ -160,11 +161,11 @@ llm = LocalLlama()
 response = llm(manager.prompt, grammar=manager.get_grammar(CoT), stop_at=manager.stop_at)
 ```
 
-## Quick Install  ⚡ 
+## Quick Install  
 
 `pip install grammarflow`
 
-## Code Usage 📃
+## Code Usage
 
 Map out what your agent chain is doing. Understand what it's goals are and what data needs to be carried forward from one step to the next. 
 For example, consider the [ReAct prompting framework](https://react-lm.github.io/). In every call, we want to pass in the Action and subsequent Observation to the next call. 
