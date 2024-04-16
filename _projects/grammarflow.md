@@ -74,10 +74,10 @@ When you have large context prompts, theres also too much information to sort th
 This is why people have come up with great workarounds like prompting strategies, prompt pruning, batch processing prompts (like in [JSONFormer](https://github.com/1rgs/jsonformer/blob/main/jsonformer/) and [super-json-mode](https://github.com/varunshenoy/super-json-mode/blob/main/superjsonmode/)), etc. Using those practices along with this library **boosts the efficiency** of whatever you're building! 
 
 {% include theorem.md 
-  type="Note!"
-  name=""
+  type="remark"
+  name="Note!"
   statement="
-    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats and stringify them. This works for smaller prompts which are not dependent on the context. There might be different aspects of the expected result which might depend on the earlier fields or maybe specific portions of the grammar itself to generate. This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
+    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats and stringify them. This works for smaller prompts which are not dependent on the context. There might be different aspects of the expected result which depend on the earlier fields begin generated. This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
   "
 %}
 
@@ -89,8 +89,8 @@ This is why people have come up with great workarounds like prompting strategies
 ### GNBF Grammar 
 
 {% include theorem.md 
-  type="What is it?"
-  name=" "
+  type="definition"
+  name="What is it?"
   statement="
     GBNF (GGML BNF) is a format for defining formal grammars to constrain model outputs in llama.cpp. For example, you can use it to force the model to generate valid JSON, or speak only in emojis.
   "

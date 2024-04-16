@@ -149,29 +149,32 @@ You can find the code for the visualizations and data here.
 
 Below is the algorithm I used for identifying 'lightning-ignited fires' based on GLM and VIIRS (/MODIS) data. It was modelled from the method shown [here](https://rmets.onlinelibrary.wiley.com/doi/pdf/10.1002/met.1973).
 
-
-$$
-\text{Let } G_{ij}^{t} \text{ represent the state of a cell in an } n \times m \text{ canvas grid at time } t, \text{ where } i \text{ and } j \text{ are the row and column indices, respectively.}
-$$
-
-
-$$
-G_{ij}^{t} \in \{0, 1\} \text{, where 1 indicates the presence of fire.}
-$$
-
-$$
-\text{An ignition point at time } t \text{ is defined by: } G_{ij}^{t} = 1 \text{ and } G_{ij}^{t-1} = 0.
-$$
-
-$$
-\text{Let } L_{ij} \text{ represent the state of a cell in an alternate } n \times m \text{ grid for lightning, with } L_{ij} \in \{0, 1\} \text{ where 1 indicates the presence of lightning.}
-$$
-
-$$
-\text{An "IPL" (intersection point between fire and lightning) is defined by: } G_{ij} = L_{ij} = 1.
-$$ 
+{% include theorem.md 
+  type="theorem"
+  name="Note!"
+  statement="
+    $$
+    \text{Let } G_{ij}^{t} \text{ represent the state of a cell in an } n \times m \text{ canvas grid at time } t, \text{ where } i \text{ and } j \text{ are the row and column indices, respectively.}
+    $$
 
 
+    $$
+    G_{ij}^{t} \in \{0, 1\} \text{, where 1 indicates the presence of fire.}
+    $$
+
+    $$
+    \text{An ignition point at time } t \text{ is defined by: } G_{ij}^{t} = 1 \text{ and } G_{ij}^{t-1} = 0.
+    $$
+
+    $$
+    \text{Let } L_{ij} \text{ represent the state of a cell in an alternate } n \times m \text{ grid for lightning, with } L_{ij} \in \{0, 1\} \text{ where 1 indicates the presence of lightning.}
+    $$
+
+    $$
+    \text{An "IPL" (intersection point between fire and lightning) is defined by: } G_{ij} = L_{ij} = 1.
+    $$ 
+  "
+%}
 
 {% include figure.liquid loading="eager" path="assets/img/lwl/IPL.gif" title="right" class="img-fluid rounded z-depth-1" %}
 {% include figure.liquid loading="eager" path="assets/img/lwl/IPL.gif" title="right" class="img-fluid rounded z-depth-1" %}
@@ -189,7 +192,7 @@ Using this data as a base, I'm working on using the IPL point-map as a way to na
 Here's some data I have acquired and transformed for the purpose. It is modelled after the IFS used by the paper 
 
 | IFS (Paper) | ERA5 (Proposed Alt) |
-| --- | --- |
+|-------------| --- |
 | Volumetric Soil Water Layer | Volumetric soil water layer 1 |
 | 2m temp | 2m temperature |
 | 2m relative humidity | 2m dewpoint temp [1] |
@@ -204,11 +207,12 @@ Here's some data I have acquired and transformed for the purpose. It is modelled
 | avg 15 days soil moisture | [2] |
 | avg 20 days soil moisture | [2] |
 | CAPE | Convective available potential energy |
+{: .table .table-bordered .table-sm }
 
 * [1] 2m RH found from Dewpoint Temp*
 * [2] calculated post-download*
 
-After that, I want to prose the problem as a forecasting problem with a supervised-learning approach of $$([t-1]^(nxm), [t]^(nxm))$$ predictions. The data needs to be translated into the following structure for it to work with *XGBoost*: 
+After that, I want to prose the problem as a forecasting problem with a supervised-learning approach of $$([t-1]^{n*m}, [t]^{n*m})$$ predictions. The data needs to be translated into the following structure for it to work with *XGBoost*: 
 - Construct a 3-dimensional array (n_samples, time_steps, features) incorporating mean, slope, and variance across a periodicity of 3-4 days to enrich the dataset.
 - Transform the dataset into a 2D format (n_samples * time_steps, features), focusing on calculating mean, variance, and slope temperatures for every 3-day segment within a week.
 - Reintegrate these calculations into the dataset and revert it to its original 3D structure (n_samples, time_steps, features).
