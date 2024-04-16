@@ -106,7 +106,14 @@ Here are how our results compare with the real FWI maps during 2022.
   {% include figure.liquid path="assets/img/ambee/oct/image_part_002.jpg" class="img-fluid rounded z-depth-1" slot="second" %}
 </img-comparison-slider>
 
-> You might notice the last plot having bad results. For this, recall how NAR saw the worst fires it has during the Sept-Oct period of '22. This sudden difference in the seasonality shows the limitations in our methodology. However, that is just the point we try to make. Seasonality is not everything, but it can help everything else. 
+{% include theorem.md 
+  type="Remark!"
+  name=""
+  statement="
+ You might notice the last plot having bad results. For this, recall how NAR saw the worst fires it has during the Sept-Oct period of '22. This sudden difference in the seasonality shows the limitations in our methodology. However, that is just the point we try to make -- seasonality is not everything. 
+  "
+%}
+>
 
 # Talking Numbers! 
 

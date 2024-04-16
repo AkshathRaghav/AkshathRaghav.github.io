@@ -149,6 +149,10 @@ You can find the code for the visualizations and data here.
 
 Below is the algorithm I used for identifying 'lightning-ignited fires' based on GLM and VIIRS (/MODIS) data. It was modelled from the method shown [here](https://rmets.onlinelibrary.wiley.com/doi/pdf/10.1002/met.1973).
 
+{% include theorem.md 
+  type="Algorithm"
+  name=""
+  statement="
 $$
 \text{Let } G_{ij}^{t} \text{ represent the state of a cell in an } n \times m \text{ canvas grid at time } t, \text{ where } i \text{ and } j \text{ are the row and column indices, respectively.}
 $$
@@ -168,7 +172,10 @@ $$
 
 $$
 \text{An "IPL" (intersection point between fire and lightning) is defined by: } G_{ij} = L_{ij} = 1.
-$$
+$$ 
+  "
+%}
+
 
 
 {% include figure.liquid loading="eager" path="assets/img/lwl/IPL.gif" title="right" class="img-fluid rounded z-depth-1" %}
