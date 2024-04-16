@@ -77,7 +77,7 @@ This is why people have come up with great workarounds like prompting strategies
   type="remark"
   name="Note!"
   statement="
-    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats and stringify them. This works for smaller prompts which are not dependent on the context. There might be different aspects of the expected result which depend on the earlier fields begin generated. This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
+    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats. There might be different aspects of the expected result which depend on the earlier fields begin generated. If you imagine a reasoning-focused prompt, different calls to the LLM will return unrelated thoughts. Or if you consider our Chain-of-Thought prompt, different LLM calls cannot fill out the list of thoughts elements.  This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
   "
 %}
 
@@ -128,10 +128,12 @@ from grammarflow import GNBF
 grammar = GNBF(Project).generate_grammar()
 
 # Verify with LlamaGrammar
-GNBF.verify_grammar(grammar)
+GNBF.verify_grammar(grammar, format_='json')
+# GNBF.verify_grammar(grammar, format_='xml')
+# GNBF.verify_grammar(grammar, format_='toml')
 ```
 
-Results: 
+This is what gets returned, a version of BNF grammar rules: 
 ```
 root ::= project ws
 project ::= "{" ws "\"name\":" ws string "," ws "\"description\":" ws string "," ws "\"project-url\":" ws string "," ws "\"team-members\":" ws teammember "," ws "\"grammars\":" ws grammars "}" ws
