@@ -16,6 +16,9 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 chart:
   echarts: true
+mermaid:
+  enabled: true
+  zoomable: true
 ---
 
 I'm a second-year undergraduate @ Purdue, pursuing a B.Sc in CompE.
@@ -33,6 +36,32 @@ I'm currently looking to get involved in the following:
 I'd highly appreciate any mentorship or suggestions for research labs @ Purdue that focus on these topics!
 
 ## background 
+
+```mermaid
+classDiagram
+    note "From Duck till Zebra"
+    Animal <|-- Duck
+    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+```
 
 ```echarts
 {
