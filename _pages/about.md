@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: ECE @ <a href='https://engineering.purdue.edu/ECE'>Purdue</a> | <a href='araviki@purdue.edu'>araviki@purdue.edu</a>
+subtitle: ECE @ <a href='https://engineering.purdue.edu/ECE'>Purdue</a> | AI Engineer/Researcher
 
 profile:
   align: right
