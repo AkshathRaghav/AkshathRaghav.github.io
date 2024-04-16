@@ -151,28 +151,27 @@ Below is the algorithm I used for identifying 'lightning-ignited fires' based on
 
 {% include theorem.md 
   type="Algorithm"
-  name=""
+  name=" "
   statement="
-$$
-\text{Let } G_{ij}^{t} \text{ represent the state of a cell in an } n \times m \text{ canvas grid at time } t, \text{ where } i \text{ and } j \text{ are the row and column indices, respectively.}
-$$
+    $$
+    \text{Let } G_{ij}^{t} \text{ represent the state of a cell in an } n \times m \text{ canvas grid at time } t, \text{ where } i \text{ and } j \text{ are the row and column indices, respectively.}
+    $$
 
+    $$
+    G_{ij}^{t} \in \{0, 1\} \text{, where 1 indicates the presence of fire.}
+    $$
 
-$$
-G_{ij}^{t} \in \{0, 1\} \text{, where 1 indicates the presence of fire.}
-$$
+    $$
+    \text{An ignition point at time } t \text{ is defined by: } G_{ij}^{t} = 1 \text{ and } G_{ij}^{t-1} = 0.
+    $$
 
-$$
-\text{An ignition point at time } t \text{ is defined by: } G_{ij}^{t} = 1 \text{ and } G_{ij}^{t-1} = 0.
-$$
+    $$
+    \text{Let } L_{ij} \text{ represent the state of a cell in an alternate } n \times m \text{ grid for lightning, with } L_{ij} \in \{0, 1\} \text{ where 1 indicates the presence of lightning.}
+    $$
 
-$$
-\text{Let } L_{ij} \text{ represent the state of a cell in an alternate } n \times m \text{ grid for lightning, with } L_{ij} \in \{0, 1\} \text{ where 1 indicates the presence of lightning.}
-$$
-
-$$
-\text{An "IPL" (intersection point between fire and lightning) is defined by: } G_{ij} = L_{ij} = 1.
-$$ 
+    $$
+    \text{An "IPL" (intersection point between fire and lightning) is defined by: } G_{ij} = L_{ij} = 1.
+    $$ 
   "
 %}
 
