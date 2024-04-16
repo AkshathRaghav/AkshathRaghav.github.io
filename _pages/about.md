@@ -18,7 +18,6 @@ chart:
   echarts: true
 mermaid:
   enabled: true
-  zoomable: true
 ---
 
 I'm a second-year undergraduate @ Purdue, pursuing a B.Sc in CompE.
@@ -39,54 +38,39 @@ I'd highly appreciate any mentorship or suggestions for research labs @ Purdue t
 
 ```mermaid
 classDiagram
-    note "From Duck till Zebra"
-    Animal <|-- Duck
-    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
-    Animal <|-- Fish
-    Animal <|-- Zebra
-    Animal : +int age
-    Animal : +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck{
-        +String beakColor
-        +swim()
-        +quack()
+    note "Skills <-> Experiences"
+    ML <|-- AutoRecruit
+    ML <|-- ForestFireForecastSystem
+    ML <|-- TensorFlow
+    ML <|-- ComputerVision
+    ML <|-- MLOps
+    ML : +Expertise in advanced AI models
+    ML : +Innovative solutions in AI
+    
+    class AutoRecruit{
+        +HackHarvard '23
+        +Dynamic Question Generation
+        +Applicant Evaluation
     }
-    class Fish{
-        -int sizeInFeet
-        -canEat()
+    class ForestFireForecastSystem{
+        +Developed at Ambee
+        +Global Monitoring
+        +ETL Pipelines
     }
-    class Zebra{
-        +bool is_wild
-        +run()
+    class TensorFlow{
+        +Panoptic Segmentation
+        +Model Re-engineering
+    }
+    class ComputerVision{
+        +Deep Learning Models
+        +Image and Video Analysis
+    }
+    class MLOps{
+        +Backend Server Integration
+        +Model Serving
     }
 ```
 
-```echarts
-{
-  "title": {
-    "text": "ECharts Getting Started Example"
-  },
-  "responsive": true,
-  "tooltip": {},
-  "legend": {
-    "top": "30px",
-    "data": ["sales"]
-  },
-  "xAxis": {
-    "data": ["Shirts", "Cardigans", "Chiffons", "Pants", "Heels", "Socks"]
-  },
-  "yAxis": {},
-  "series": [
-    {
-      "name": "sales",
-      "type": "bar",
-      "data": [5, 20, 36, 10, 10, 20]
-    }
-  ]
-}
-```
 
 * F'23 - S'24: I'm worked at the [Duality Lab](https://davisjam.github.io/), where [we re-engineered](https://akshathraghav.github.io/projects/maskformer/) the MaskFormer segmentation from the [PyTorch-based artifact](https://github.com/facebookresearch/MaskFormer) to TensorFlow for publishing to the TF Model Garden. You can find our paper [here]() and code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
 * S'24: I'm involved in MultiModal (LM) understanding projects at the [e-lab](https://e-lab.github.io/). I've built [eugenie](https://akshathraghav.github.io/projects/eugenie/) & [grammarflow](https://github.com/e-lab/SyntaxShaper/tree/main) and am working on encoding reading-order patterns within documents ([here's](https://drive.google.com/file/d/1x1IE_1NT-UAO7bFtoc_bPNJgqQFA1AXK/view?usp=sharing) my current plan of action)
