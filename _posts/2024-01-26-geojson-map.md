@@ -3,12 +3,14 @@ layout: post
 title: Set up Llama.cpp on university compute clusters 🦙
 date: 2024-03-23 17:57:00
 description: Scripts + Guide to automate installations
-tags: guide software research 
-categories: software
+tags: software research 
+categories: 
 map: true
 ---
 
 Welcome to the quick start guide for running `llama.cpp` on academic/research community compute clusters **without root access**.
+
+Find all the scripts [here](https://github.com/AkshathRaghav/llama_on_community_clusters).
 
 ## Why This Guide is Necessary
 
@@ -43,23 +45,23 @@ Extras:
 
 1. Type `accept` in the console.
 <div align="center">
-  <img  href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/1.png' alt="1" style="height: 50%;"/>
+  <img  href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/1.png?raw=true' alt="1" style="height: 50%;"/>
 </div>
 
 2. Use `ENTER` to select/deselect settings. Make sure the settings screen looks like the following image: 
 <div align="center">
-  <img  href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/2.png' alt="1" style="height: 50%;"/>
+  <img  href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/2.png?raw=true' alt="1" style="height: 50%;"/>
 </div>
 
 3. Hover over the `CUDA Toolkit 12.3` option, and press `A`. Deselect all of the settings here except `Install manpage documents...` 
 <div align="center">
-  <img  href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/3.png' alt="1" style="height: 50%;"/>
+  <img  href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/3.png?raw=true' alt="1" style="height: 50%;"/>
 </div>
 
 
 4. Hover over `Change Toolkit Install Path`. Hit `ENTER` and add the $TOOLKIT variable path here. 
 <div align="center">
-  <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/4.png' alt="1" style="height: 50%;"/>
+  <img href='https://github.com/AkshathRaghav/llama_on_community_clusters/blob/main/assets/4.png?raw=true' alt="1" style="height: 50%;"/>
 </div>
 
 5. Finally, exit out into the main menu, hover over `Install` and hit `ENTER`. 

@@ -15,8 +15,9 @@ This page is the culmination of the work I did at [Duality Lab](https://github.c
 * Wrote the evaluation module, including the implementation of panoptic inference metrics to work with tf2's inbuilt task workflow. Fixed and integrated code for multi-scale (auxillary) losses to address inability of loss convergence. 
 * Responsible for the PR to [TF Model Garden](https://github.com/tensorflow/models), from re-writing modules (across layers) for guidelines adherence to creating/annotating results for the report. Also wrote unit tests for all modules used in the architecture for tensor shape validation and expected results. 
 
-[Paper]()
-[Code](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer)
+Find the paper [here]().
+
+Find our code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
 
 # Description
 
