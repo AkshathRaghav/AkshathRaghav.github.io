@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-[GrammarFlow v0.1.0](https://github.com/e-lab/SyntaxShaper/tree/main) published. Testbenches, workflow builds and results added. 
+Results for GrammarFlow updated to reflect high guarantee in LLM parsing. Read about it [here](https://akshathraghav.github.io/projects/grammarflow/). 
