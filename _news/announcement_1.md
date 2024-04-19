@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Results for GrammarFlow updated to reflect high guarantee in LLM parsing. Read about it [here](https://akshathraghav.github.io/projects/grammarflow/). 
+Results for GrammarFlow updated to reflect high guarantee in LLM parsing. Tested with Llama, Mistral and Dolphin families. Read about it [here](https://akshathraghav.github.io/projects/grammarflow/). 

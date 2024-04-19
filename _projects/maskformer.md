@@ -10,14 +10,24 @@ related_publications: false
 
 This page is the culmination of the work I did at [Duality Lab](https://github.com/PurdueDualityLab/tf-maskformer) (Fall '23 + Spring '24) as a research assistant under [Vishal S P](https://www.linkedin.com/in/vishalsp/) and [Wenxin Jiang](https://wenxin-jiang.github.io/cv/).
 
-* Re-engineering the state-of-the-art MaskFormer computer-vision model to publish into Google’s TensorFlow Model Garden for codebase re-use by users globally, alongside optimal pre-trained weights.
-* Conducted experiments on GPUs & TPUs to ensure layer precision across the meta-architecture and implemented functions to ensure data consistency through the dataloader. Fixed run-time issues in main task file related to running across different computes. 
+{% include theorem.md 
+  type="abstract"
+  name="Goal of the project!"
+  statement="
+    Re-engineer the state-of-the-art MaskFormer computer-vision model to publish into Google’s TensorFlow Model Garden for codebase re-use by users globally.
+  "
+%}
+
+
+
 * Wrote the evaluation module, including the implementation of panoptic inference metrics to work with tf2's inbuilt task workflow. Fixed and integrated code for multi-scale (auxillary) losses to address inability of loss convergence. 
-* Responsible for the PR to [TF Model Garden](https://github.com/tensorflow/models), from re-writing modules (across layers) for guidelines adherence to creating/annotating results for the report. Also wrote unit tests for all modules used in the architecture for tensor shape validation and expected results. 
+* Conducted experiments on GPUs & TPUs to ensure layer precision across the meta-architecture and implemented functions to ensure data consistency through the dataloader. Fixed run-time issues in main task file related to running across different computes. 
+* Responsible for the PR to [TF Model Garden](https://github.com/tensorflow/models), from re-writing modules (across layers) for guidelines adherence to creating/annotating results for the report. Wrote unit tests for all modules used in the architecture for tensor shape validation and expected results. Wrote [differential testing module](https://gist.github.com/AkshathRaghav/9f81ea6f997a2972732fb3d955b5b444) for comparison of modules between PyTorch and TensorFlow. 
+
+Find our code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
 
 Find the paper [here]().
 
-Find our code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
 
 # Description
 

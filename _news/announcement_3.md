@@ -5,5 +5,4 @@ inline: true
 related_posts: false
 ---
 
-First iteration of <a href='https://github.com/e-lab/'>our</a> multi-tool autonomous agent hosted <a href='https://eugenio-a3n.streamlit.app/'>here</a>. <a href='https://github.com/e-lab/AI-Assistant'>Demo and Technical Report can be found here</a>. Pursuing multi-modality routing within RAG systems. 
-
+First iteration of <a href='https://github.com/e-lab/'>our</a> multi-tool autonomous agent hosted <a href='https://eugenio-a3n.streamlit.app/'>here</a>.
