@@ -12,12 +12,11 @@ This page is the culmination of the work I did at [Duality Lab](https://github.c
 
 {% include theorem.md 
   type="abstract"
-  name="Goal of the project!"
+  name="Goal!"
   statement="
     Re-engineer the state-of-the-art MaskFormer computer-vision model to publish into Google’s TensorFlow Model Garden for codebase re-use by users globally.
   "
 %}
-
 
 
 * Wrote the evaluation module, including the implementation of panoptic inference metrics to work with tf2's inbuilt task workflow. Fixed and integrated code for multi-scale (auxillary) losses to address inability of loss convergence. 

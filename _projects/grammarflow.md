@@ -87,6 +87,50 @@ This is why people have come up with great workarounds like prompting strategies
 2. For my modification to [ReAct's](https://github.com/ysymyth/ReAct) evaluation code on [HotPotQA](https://hotpotqa.github.io/), look at [hotpotqa_modified](https://github.com/e-lab/SyntaxShaper/blob/main/samples/hotpotqa/hotpotqa_modified.ipynb).
 3. I've also added an implementation of a [data annotator](https://github.com/e-lab/SyntaxShaper/blob/main/samples/bert_finetuning/annotator.ipynb) for this [BERT fine-tuning guide](https://www.datasciencecentral.com/how-to-fine-tune-bert-transformer-with-spacy-3/).
 
+
+## Quick Install  
+
+`pip install grammarflow`
+
+
+
+## Code Usage
+
+Map out what your agent chain is doing. Understand what it's goals are and what data needs to be carried forward from one step to the next. 
+For example, consider the [ReAct prompting framework](https://react-lm.github.io/). In every call, we want to pass in the Action and subsequent Observation to the next call. 
+
+
+```python
+from grammarflow import * 
+from grammarflow.prompt.template import Agent 
+from grammarflow.grammars.template import AgentStep
+from grammarflow.tools.LLM import LocalLlama
+
+llm = LocalLlama() 
+prompt = Agent() 
+# prompt.placeholders lists out what you can pass into the prompt. 
+
+system_context = """Your goal is to think and plan out how to solve questions using agent tools provided to you. Think about all aspects of your thought process."""
+user_message = """Who is Vladmir Putin?"""
+
+with Constrain(prompt, 'xml') as manager:
+    # Makes the changes to the prompt
+    manager.format_prompt(
+        placeholders={'prompt': user_message, 'instructions': system_context},
+        grammars=[{'model': AgentStep}]
+    )
+
+    llm_response = llm(manager.prompt, temperature=0.01)
+
+    # Parse the response into a custom dataclass for holding values
+    response = manager.parse(llm_response)
+
+observation = PerformSomeAction(
+  action = response.AgentStep.action, 
+  action_input = response.AgentStep.action_input
+) 
+```
+
 ## GNBF Grammar 
 
 {% include theorem.md 
@@ -160,48 +204,6 @@ You can use this grammar to pass into [llama.cpp](https://github.com/ggerganov/l
 llm = LocalLlama() 
 response = llm(manager.prompt, grammar=manager.get_grammar(CoT), stop_at=manager.stop_at)
 ```
-
-## Quick Install  
-
-`pip install grammarflow`
-
-## Code Usage
-
-Map out what your agent chain is doing. Understand what it's goals are and what data needs to be carried forward from one step to the next. 
-For example, consider the [ReAct prompting framework](https://react-lm.github.io/). In every call, we want to pass in the Action and subsequent Observation to the next call. 
-
-
-```python
-from grammarflow import * 
-from grammarflow.prompt.template import Agent 
-from grammarflow.grammars.template import AgentStep
-from grammarflow.tools.LLM import LocalLlama
-
-llm = LocalLlama() 
-prompt = Agent() 
-# prompt.placeholders lists out what you can pass into the prompt. 
-
-system_context = """Your goal is to think and plan out how to solve questions using agent tools provided to you. Think about all aspects of your thought process."""
-user_message = """Who is Vladmir Putin?"""
-
-with Constrain(prompt, 'xml') as manager:
-    # Makes the changes to the prompt
-    manager.format_prompt(
-        placeholders={'prompt': user_message, 'instructions': system_context},
-        grammars=[{'model': AgentStep}]
-    )
-
-    llm_response = llm(manager.prompt, temperature=0.01)
-
-    # Parse the response into a custom dataclass for holding values
-    response = manager.parse(llm_response)
-
-observation = PerformSomeAction(
-  action = response.AgentStep.action, 
-  action_input = response.AgentStep.action_input
-) 
-```
-
 
 ## Citation
 
