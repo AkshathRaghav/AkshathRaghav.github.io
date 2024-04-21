@@ -12,9 +12,20 @@ This page expands upon the work I did at the [CVES Group](https://yhlu.net/) (Sp
 * Summarized SWE Research papers pertaining to reproducibility and reusability of ML code and identified common trends in findings. Formulated the problem as one that requires a reverse-MLOps perspective. 
 * Built efficient scrapers for research paper archives and common ML repositories. Extracted data from 3000+ commerical and academic organizations to statistically back our proposed evaluation pipeline. 
 
-You can find the code [here](). 
+You can find the code [here](https://github.com/AkshathRaghav/RAIS). 
 
 ---
+
+
+{% include figure.liquid loading="eager" path="assets/img/rais/parallel_coordinates_plot.png" title="example image" class="img-fluid rounded z-depth-1" %}
+
+{% include figure.liquid loading="eager" path="assets/img/rais/bubble.png" title="example image" class="img-fluid rounded z-depth-1" %}
+
+{% include figure.liquid loading="eager" path="assets/img/rais/stacked.png" title="example image" class="img-fluid rounded z-depth-1" %}
+
+{% include figure.liquid loading="eager" path="assets/img/rais/doughnut.png" title="example image" class="img-fluid rounded z-depth-1" %}
+
+{% include figure.liquid loading="eager" path="assets/img/rais/RAIS.png" title="example image" class="img-fluid rounded z-depth-1" %}
 
 > This report is incomplete. 
 
