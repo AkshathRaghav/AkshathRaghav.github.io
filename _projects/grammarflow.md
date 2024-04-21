@@ -78,7 +78,7 @@ This is why people have come up with great workarounds like prompting strategies
   type="remark"
   name="Why GrammarFlow?"
   statement="
-    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats. There might be different aspects of the expected result which depend on the earlier fields begin generated. If you imagine a reasoning-focused CoT prompt, different calls to the LLM will return unrelated thoughts which cannot satisfy a list-based grammar. This is what GrammarFlow comes in -- context-free-grammars with engineered prompts. 
+    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats. However, there might be different aspects of the expected result which depend on earlier fields begin generated. For example, if you consider a reasoning-focused CoT prompt, different calls to the LLM will return unrelated thoughts which cannot satisfy a list-based grammar by manual entering. This is what GrammarFlow comes in -- context-free-grammars with engineered prompts. 
   "
 %}
 
