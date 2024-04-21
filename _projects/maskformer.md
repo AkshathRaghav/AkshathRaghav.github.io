@@ -10,13 +10,7 @@ related_publications: false
 
 This page is the culmination of the work I did at [Duality Lab](https://github.com/PurdueDualityLab/tf-maskformer) (Fall '23 + Spring '24) as a research assistant under [Vishal S P](https://www.linkedin.com/in/vishalsp/) and [Wenxin Jiang](https://wenxin-jiang.github.io/cv/).
 
-{% include theorem.md 
-  type="abstract"
-  name="Goal!"
-  statement="
-    Re-engineer the state-of-the-art MaskFormer computer-vision model to publish into Google’s TensorFlow Model Garden for codebase re-use by users globally.
-  "
-%}
+> Re-engineer the state-of-the-art MaskFormer computer-vision model to publish into Google’s TensorFlow Model Garden for codebase re-use by users globally.
 
 
 * Wrote the evaluation module, including the implementation of panoptic inference metrics to work with tf2's inbuilt task workflow. Fixed and integrated code for multi-scale (auxillary) losses to address inability of loss convergence. 
@@ -37,7 +31,6 @@ MaskFormer transforms any per-pixel classification model into a mask classificat
 <p align="center">
 {% include figure.liquid loading="eager" path="assets/img/maskformer/maskformer_real.png" class="img-fluid rounded z-depth-1" %}
 </p>
-
 
 
 # Results 

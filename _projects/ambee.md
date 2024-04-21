@@ -24,8 +24,7 @@ The code and data (/sources) extracted from are considered proprietary, and henc
 ---
 
 {% include theorem.md 
-  type="remark"
-  name="Abstract"
+  type="abstract"
   statement="
 Wildfires pose severe threats across North America, causing extensive damage to lives, ecosystems, and property. To address this, accurate fire prediction and forecast outlooks are crucial for effective mitigation. Agencies like the National Interagency Fire Center (NIFC) and the Canadian Wildland Fire Information System (CWFIS) provide vital fire risk assessments. In this paper, our main goal was to demonstrate the sufficiency of **seasonality** in fire risk forecasting. Two encoding methods, One-Shot and Year-By-Year, used for encoding the seasonal changes of fire weather, were analyzed for their implications in fire risk assessment, revealing contrasting attributes.  The findings guide model design improvements, bolstering wildfire management and protection measures.
   "
@@ -114,8 +113,7 @@ Here are how our results compare with the real FWI maps during 2022.
 </img-comparison-slider>
 
 {% include theorem.md 
-  type="remark"
-  name="Limitations"
+  type="limitations"
   statement="
  You might notice the last plot having bad results. For this, recall how NAR saw the worst fires it has during the Sept-Oct period of '22. This sudden difference in the seasonality shows the limitations in our methodology. However, that is just the point we try to make -- seasonality is not everything. 
   "

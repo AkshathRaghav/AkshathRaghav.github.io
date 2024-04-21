@@ -52,3 +52,6 @@ Lessons from my mentors:
 - *If it's not use(d)(ful), what's the point of building it?*
 <!-- - *Every unexplained idea in one field can be explained by another;* -->
 
+## hobbies 
+
+In my free time, I enjoy [photography](https://akshathraghav.github.io/photography/), reading manga, watching [@Geopold](https://www.youtube.com/@Geopoldd) and speed typing (130+ wpm). At one point, I was religiously keeping up to date with 53 mangas concurrently. On Sundays, I meal prep with my roommates; we alternate between cuisines regularly with Thai curries being our favorite. On Saturdays, I play Valorant with my friends till sunrise, or we make banana bread while watching old Telugu movies. During the week, I love cycling back to my dorm with friends and chugging apple juice (Mott's is the best) during dinner. 
