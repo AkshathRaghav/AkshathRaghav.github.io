@@ -12,7 +12,7 @@ toc:
 
 🚀 Supercharging Agent Chains with Constrained LLM outputs 🚀
 
-[Code](https://github.com/e-lab/SyntaxShaper/tree/main) 
+Find the package [here](https://github.com/e-lab/SyntaxShaper/tree/main) 
 
 ## Overview
 
@@ -75,7 +75,8 @@ When you have large context prompts, theres also too much information to sort th
 This is why people have come up with great workarounds like prompting strategies, prompt pruning, batch processing prompts (like in [JSONFormer](https://github.com/1rgs/jsonformer/blob/main/jsonformer/) and [super-json-mode](https://github.com/varunshenoy/super-json-mode/blob/main/superjsonmode/)), etc. Using those practices along with this library **boosts the efficiency** of whatever you're building! 
 
 {% include theorem.md 
-  type="note!"
+  type="note"
+  name="Why GrammarFlow?"
   statement="
     JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats. There might be different aspects of the expected result which depend on the earlier fields begin generated. If you imagine a reasoning-focused prompt, different calls to the LLM will return unrelated thoughts. Or if you consider our Chain-of-Thought prompt, different LLM calls cannot fill out the list of thoughts elements.  This is what GrammarFlow *tries* to help in -- context-free-grammars with engineered prompts. 
   "
@@ -133,7 +134,8 @@ observation = PerformSomeAction(
 ## GNBF Grammar 
 
 {% include theorem.md 
-  type="what is it?"
+  type="note"
+  name="what is it?"
   statement="
     GBNF (GGML BNF) is a format for defining formal grammars to constrain model outputs in llama.cpp. For example, you can use it to force the model to generate valid JSON, or speak only in emojis.
   "
