@@ -4,8 +4,9 @@ permalink: /photography/
 title: photography
 nav: true
 nav_order: 6
+redirect: https://www.flickr.com/photos/akshathrr/
 ---
-
+<!-- 
 <img src="https://drive.google.com/thumbnail?id=16O2U3hhayp0o3pOGWMf4Vs9nYC4hmsqh">
 <img src="https://drive.google.com/thumbnail?id=1Zs89WSkbSvDcNIf9MjAyhGa4nuhfDbDI">
 <img src="https://drive.google.com/thumbnail?id=18iIOBsJ7GGIuGQbLluCSDw9eOSkmnZHD">
@@ -70,4 +71,4 @@ nav_order: 6
 <img src="https://drive.google.com/thumbnail?id=1Qyhs5fkj2tzMcw879mfR3zD2JK_NMMed">
 <img src="https://drive.google.com/thumbnail?id=1lbbL8ErSDmJF8OdhUjZ7Hm_Q-SiYxsxJ">
 
-
+ -->

@@ -1,4 +1,4 @@
-<div class="{{ include.type }}"
+<div class="{{ include.type | downcase }}"
     {% if include.id %}
     id="{{ include.id }}"
     {% endif %}>
