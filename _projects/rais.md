@@ -33,7 +33,7 @@ Expected outcomes of this project include
 
 ## Methodology
 
-To substantiate and explore the assertions of this project, data was amassed from over 3000 repositories from both academic institutions and corporate research entities that have shared codebases for community reuse. The findings are summarized in the sections that follow.
+To substantiate the claims made in this project, data from over 3000 repositories (from both academic and corporate research organizations) that have shared codebases for community reuse was collected. The findings are summarized in the sections that follow.
 
 {% include figure.liquid loading="eager" path="assets/img/rais/parallel_coordinates_plot.png" title="parallel" class="img-fluid rounded z-depth-1" %}
 
