@@ -30,6 +30,9 @@ I'm currently looking to get involved in the following:
 
 I'd highly appreciate any mentorship or suggestions for research labs @ Purdue that focus on these topics!
 
+<script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+<spline-viewer url="https://prod.spline.design/UWoeqiir20o49Dah/scene.splinecode"></spline-viewer>
+
 ## background 
 
 * F'23 - S'24: I worked at the [Duality Lab](https://davisjam.github.io/), where [we re-engineered](https://akshathraghav.github.io/projects/maskformer/) the MaskFormer segmentation model **(funded by Google!)** from the [PyTorch-based artifact](https://github.com/facebookresearch/MaskFormer) to TensorFlow for publishing to the TF Model Garden. You can find our **paper** [here](https://akshathraghav.github.io/projects/maskformer/) and **code** [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer). I also generated figures for the [PeaTMOSS **paper**](https://arxiv.org/pdf/2402.00699.pdf).
