@@ -22,13 +22,7 @@ My primary interest revolves arould building robust user-facing solutions at the
 
 <b>Automatability</b>, <b>reproducibility</b> and <b>accessability</b> remain the core of my work. 
 
-I'm currently looking to get involved in the following: 
-- *Vision Generation Algorithms*, 
-- *Robot-Environment Interactions*, 
-- *GPU Programming*, 
-- *Digital Design ↔️ ML/DL*. 
-
-I'd highly appreciate any mentorship or suggestions for research labs @ Purdue that focus on these topics!
+Feel free to reach out to me at araviki[at]purdue[dot]edu. 
 
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.1.8/build/spline-viewer.js"></script>
 <spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/yM3OABoP-icn9QQo/scene.splinecode"></spline-viewer>
@@ -36,8 +30,6 @@ I'd highly appreciate any mentorship or suggestions for research labs @ Purdue t
     Fun lil' animation of CFOP in speedcubing!
 </div>
 
-
-<br>
 
 ## background 
 
@@ -49,11 +41,11 @@ I'd highly appreciate any mentorship or suggestions for research labs @ Purdue t
 
 Find my reports [here](https://akshathraghav.github.io/projects/).
 
-<!-- ## interests
+## interests
 
 At the highest level, I'm super excited about the [Partner as a Product (PaaP)](https://uxdesign.cc/this-is-the-moment-to-reinvent-your-product-1ee084e38ab1) era we're entering into. I hope to gain experience across the systems we ('re going to) base our lives on, from hardware-level programming to cloud-based HA lifecycles. Majoring in ECE gives me the oppurtunity to develop myself in these areas. 
 
-More specifically, I work with language models and learning algorithms. I like to augment intelligence in LLMs, as opposed to using them as a general purpose solution (which it's not). I approach any AI problem (overarching the ML bubble) as a toddler trying to learn -- by using their senses and the environment. I believe the future of intelligence will come from making machines self-aware of their need to integrate with other machines.  -->
+More specifically, I work with language models and learning algorithms. I like to augment intelligence in LLMs, as opposed to using them as a general purpose solution (which it's not). I approach any AI problem (overarching the ML bubble) as a toddler trying to learn -- by using their senses and the environment. I believe the future of intelligence will come from making machines self-aware of their need to integrate with other machines. 
 
 <!-- Going forward, I aim to specialize in the art of **solution-building**, by bridging happening research with dynamic market needs. My approach involves deep-diving into research to understand core principles thoroughly and then 'swimming' across to explore its applications, ensuring my projects are both **fundamentally robust and practically relevant**. -->
 <!-- 
