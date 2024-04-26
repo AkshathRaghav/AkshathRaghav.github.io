@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Received the "**Outstanding Sophomore in VIP**" award for the work I did at the [CVES](https://yhlu.net/research.html) group. Read about it [here](https://akshathraghav.github.io/projects/rais/).
+Received the **Outstanding Sophomore in VIP** award for the work I did at the [CVES](https://yhlu.net/research.html) group. Read about it [here](https://akshathraghav.github.io/projects/rais/).
