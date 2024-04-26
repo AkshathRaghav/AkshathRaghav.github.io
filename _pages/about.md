@@ -32,6 +32,10 @@ I'd highly appreciate any mentorship or suggestions for research labs @ Purdue t
 
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.1.8/build/spline-viewer.js"></script>
 <spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/yM3OABoP-icn9QQo/scene.splinecode"></spline-viewer>
+<div class="caption">
+    Fun lil' animation of CFOP in speedcubing!
+</div>
+
 
 <br>
 
