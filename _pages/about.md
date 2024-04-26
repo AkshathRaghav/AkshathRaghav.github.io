@@ -25,7 +25,6 @@ My primary interest revolves arould building robust user-facing solutions at the
 I'm concurrently working on multimodal document understanding, model-task alignment and integrated tools for AI agents. Post this, I intend to dive into building parallel compute architectures. Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdue.edu).
 
 
-
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.1.8/build/spline-viewer.js"></script>
 <spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/yM3OABoP-icn9QQo/scene.splinecode"></spline-viewer>
 <div class="caption">
