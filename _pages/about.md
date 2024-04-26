@@ -30,8 +30,8 @@ I'm currently looking to get involved in the following:
 
 I'd highly appreciate any mentorship or suggestions for research labs @ Purdue that focus on these topics!
 
-<script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
-<spline-viewer url="https://prod.spline.design/UWoeqiir20o49Dah/scene.splinecode"></spline-viewer>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.1.8/build/spline-viewer.js"></script>
+<spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/yM3OABoP-icn9QQo/scene.splinecode"></spline-viewer>
 
 ## background 
 
