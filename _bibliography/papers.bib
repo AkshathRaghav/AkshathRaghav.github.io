@@ -5,6 +5,7 @@
 @article{tfmg2024maskformer,
   title={A Partial Replication of MaskFormer in TensorFlow on TPUs for the TensorFlow Model Garden},
   author={Purohit, Vishal and Jiang, Wenxin and Ravikiran, Akshath R. and Davis, James C.},
+  abstract={This paper undertakes the task of replicating the MaskFormer model a universal image segmentation model originally developed using the PyTorch framework, within the TensorFlow ecosystem, specifically optimized for execution on Tensor Processing Units (TPUs). Our implementation exploits the modular constructs available within the TensorFlow Model Garden (TFMG), encompassing elements such as the data loader, training orchestrator, and various architectural components, tailored and adapted to meet the specifications of the MaskFormer model. We address key challenges encountered during the replication, non-convergence issues, slow training, adaptation of loss functions, and the integration of TPU-specific functionalities. We verify our reproduced implementation and present qualitative results on the COCO dataset. Although our implementation meets some of the objectives for end-to-end reproducibility, we encountered challenges in replicating the PyTorch version of MaskFormer in TensorFlow. },
   year={2024},
   month={April},
   journal={arXiv preprint, arXiv:2404.18801},

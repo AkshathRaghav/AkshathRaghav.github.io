@@ -22,9 +22,8 @@ My primary interest revolves arould building robust user-facing solutions at the
 
 <b>Automatability</b>, <b>reproducibility</b> and <b>accessability</b> remain the core of my work. 
 
-I'm concurrently working on multimodal document understanding, model-task alignment and integrated tools for AI agents. Post this, I intend to dive into building parallel compute architectures. Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdue.edu).
+I'm concurrently working on multimodal document understanding, model-task alignment and integrated tools for AI agents. Post this, I intend to dive into accelerated computing and parallized ML architectures. Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdue.edu).
 
-<br>
 
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.1.8/build/spline-viewer.js"></script>
 <spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/yM3OABoP-icn9QQo/scene.splinecode"></spline-viewer>
@@ -59,6 +58,6 @@ Lessons from my mentors:
 
 ## hobbies 
 
-In my free time, I enjoy [photography](https://akshathraghav.github.io/photography/), reading manga, watching [@Geopold](https://www.youtube.com/@Geopoldd) and speed typing (130+ wpm). At one point, I was religiously keeping up to date with 53 mangas concurrently. 
+In my free time, I enjoy [photography](https://akshathraghav.github.io/photography/), reading manga, watching [@Geopold](https://www.youtube.com/@Geopoldd) and speed typing (130+ wpm). At one point, I was religiously keeping up to date with 40 mangas concurrently. 
 
 On Sundays, I meal prep with my roommates; we alternate between cuisines regularly with Thai curries being our favorite. On Saturdays, I play Valorant with my friends till sunrise, or we make banana bread while watching old Telugu movies. During the week, I love cycling back to my dorm with friends and chugging apple juice (Mott's is the best) during dinner. 
