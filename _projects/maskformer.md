@@ -19,7 +19,7 @@ This page is the culmination of the work I did at [Duality Lab](https://github.c
 
 Find our code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
 
-Find the paper [here]().
+Find the paper [here](https://arxiv.org/pdf/2404.18801).
 
 
 # Description
