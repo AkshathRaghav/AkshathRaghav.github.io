@@ -5,7 +5,9 @@ description: Re-engineering MaskFormer for Google's TF Model Garden (Funded) �
 img: assets/img/dualityxtfmg.jpg
 importance: 1
 category: research
-related_publications: false 
+related_publications: true
+toc:
+  sidebar: left
 ---
 
 This page is the culmination of the work I did at [Duality Lab](https://github.com/PurdueDualityLab/tf-maskformer) (Fall '23 + Spring '24) as a research assistant under [Vishal S P](https://www.linkedin.com/in/vishalsp/) and [Wenxin Jiang](https://wenxin-jiang.github.io/cv/).
@@ -24,9 +26,11 @@ This page is the culmination of the work I did at [Duality Lab](https://github.c
 * Responsible for the PR to [TF Model Garden](https://github.com/tensorflow/models), from re-writing modules (across layers) for guidelines adherence to creating/annotating results for the report. Wrote unit tests for all modules used in the architecture for tensor shape validation and expected results. Wrote [differential testing module](https://gist.github.com/AkshathRaghav/9f81ea6f997a2972732fb3d955b5b444) for comparison of modules between PyTorch and TensorFlow. 
 
 Find our code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer).
-
 Find the paper [here](https://arxiv.org/pdf/2404.18801).
 
+Below, I've summarized some portions from the paper, and included some code to get started with the model. A huge thank you to **Vishal** for his hard-work and patience! 
+
+--- 
 
 # Description
 
@@ -70,13 +74,12 @@ Here are our results:
 </div>
 The process begins with the raw image and annotation files (JSON format), which are serialized into TFRecord format, a TensorFlow-specific binary storage format. Subsequently, these TFRecords are deserialized, and the data is passed through a series of preprocessing steps including normalization, augmentation, and padding to ensure uniformity of the input data. The binary mask generation and the label mapping are integral to preparing segmentation tasks. The output is then converted to a format compatible with the models data loader, which feeds the processed data into the training pipeline. (zoom in for a better viewing experience)
 
-### Overview  
+### Compressed Overview  
 <div align="center">
   {% include figure.liquid loading="eager" path="assets/img/maskformer/maskformer(3).png" class="img-fluid rounded z-depth-1" %}
 </div>
 
-The process
-begins with an input image (A), which is processed by a ResNet-50 backbone to extract feature maps.
+After the dataloader step, the model continues with an input image (A), which is processed by a ResNet-50 backbone to extract feature maps.
 Multi-scale features (B) are generated from the backbone and then decoded by a Pixel Decoder (C) to create
 refined feature maps. These are fed into a Transformer Decoder (D), along with a set of learned queries that
 interact with the feature maps to generate mask embeddings (F). An MLP head (E) processes the mask
@@ -84,7 +87,7 @@ embedding to produce the final segmentation output, which consists of binary mas
 with their corresponding output labels, indicating the presence of specific objects or regions within the input
 image.
 
-### Implementation 
+### Complete Implementation 
 
 <div align="center">
   {% include figure.liquid loading="eager" path="assets/img/maskformer/transformer_pixel_decoder(1).png" class="img-fluid rounded z-depth-1" %}
@@ -96,14 +99,14 @@ image.
 The architecture begins with the backbone features extracted from the input image. These features are then projected and enriched with positional embeddings before being passed through multiple layers of a Transformer encoder.
 The resulting encoded features are processed by a Transformer Pixel Decoder, which combines them with mask features to enhance localization capability. Simultaneously, query embeddings are combined with positional embeddings and processed by the Transformer Decoder to generate predictions. The decoded features are then passed through an MLP head, which classifies each pixel, resulting in the final output comprising predicted binary masks and their associated labels.
 
-- Backbone Network A : The original work explored a diverse array of backbone networks for fea-
+- **Backbone Network A** : The original work explored a diverse array of backbone networks for fea-
 ture extraction, encompassing both convolutional architectures, such as ResNet-50 He et al. (2016),
 and transformer-based models like the Swin Transformer Liu et al. (2021). The ResNet50 imple-
 mentation is readily available in TFMG under official > vision > modeling > backbones and
 the pre-trained checkpoint for ResNet are made available at TF-Vision Model Garden found under
 official > vision.
 
-- Multiscale Features B : In our model’s architecture, a key component is the utilization of mul-
+- **Multiscale Features B** : In our model’s architecture, a key component is the utilization of mul-
 tiscale features, as indicated by the ‘B’ in Figure 5. This design choice allows for flexibility in feature
 extraction from the backbone network, specifically ResNet. Our implementation supports both the
 extraction of deep, high-level features from the final layer of ResNet and the rich, intermediate
@@ -113,7 +116,7 @@ from multiple layers escalates the volume of information processed, which can st
 ory resources. In our implementation, the use of multi-scale features is controlled by the parameter
 deep_supervision
 
-- Transformer Pixel Decoder C : A comprehensive depiction of the transformer pixel decoder’s
+- **Transformer Pixel Decoder C** : A comprehensive depiction of the transformer pixel decoder’s
 architecture is illustrated in Figure 6. At its core, the transformer pixel decoder is an assembly of
 two primary components: the transformer encoder and a series of convolutional and normalization
 layers. We have incorporated the transformer encoder layers into our architecture by utilizing the
@@ -122,7 +125,7 @@ official > nlp > layers. To maintain consistency and interoperability with model
 other frameworks, particularly PyTorch, we have undertaken a process to ensure that our adopted
 transformer encoder layers exhibit functional parity with their PyTorch counterparts. 
 
-- Transformer Decoder D : Similar to our approach with the Pixel Decoder, we have adopted
+- **Transformer Decoder D** : Similar to our approach with the Pixel Decoder, we have adopted
 the Transformer Decoder component from the pre-existing implementations provided in the Ten-
 sorFlow Model Garden, specifically sourced from the directory official > nlp > layers. While
 integrating the Transformer Decoder from the TensorFlow Model Garden, we ensure that it seam-
@@ -132,7 +135,7 @@ types, and configuring the decoder appropriately to match our specific requireme
 and test the functionality of the integrated transformer decoder and the transformer pixel decoder
 within our architecture.
 
-- MLP Projection E : The MLP (Multi-Layer Perceptron) projection layers, in conjunction with
+- **MLP Projection E** : The MLP (Multi-Layer Perceptron) projection layers, in conjunction with
 the linear classifier, are used to obtain the predicted binary masks and corresponding labels. The
 Transformer Decoder processes the Transformer Encoder Features to extract high-dimensional fea-
 tures, Transformer Features, that encapsulate both spatial and contextual information are used by

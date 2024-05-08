@@ -5,6 +5,7 @@ description: Deployed a global fire-risk prediction into Ambee's proprietary API
 img: assets/img/ambee/ambee_maddy.jpeg
 importance: 2
 category: research 
+related_publications: true
 images:
   compare: true
   slider: true
