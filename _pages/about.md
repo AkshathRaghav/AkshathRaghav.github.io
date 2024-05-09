@@ -42,11 +42,11 @@ I'm concurrently working on multimodal document understanding, model-task alignm
 
 Find my reports [here](https://akshathraghav.github.io/projects/).
 
-## interests
+<!-- ## interests
 
 At the highest level, I'm super excited about the [Partner as a Product (PaaP)](https://uxdesign.cc/this-is-the-moment-to-reinvent-your-product-1ee084e38ab1) era we're entering into. I hope to gain experience across the systems we ('re going to) base our lives on, from hardware-level programming to cloud-based HA lifecycles. Majoring in ECE gives me the oppurtunity to develop myself in these areas. 
 
-More specifically, I work with language models and learning algorithms. I like to augment intelligence in LLMs, as opposed to using them as a general purpose solution (which it's not). I approach any AI problem (overarching the ML bubble) as a toddler trying to learn -- by using their senses and the environment. I believe the future of intelligence will come from making machines self-aware of their need to integrate with other machines. 
+More specifically, I work with language models and learning algorithms. I like to augment intelligence in LLMs, as opposed to using them as a general purpose solution (which it's not). I approach any AI problem (overarching the ML bubble) as a toddler trying to learn -- by using their senses and the environment. I believe the future of intelligence will come from making machines self-aware of their need to integrate with other machines.  -->
 
 <!-- Going forward, I aim to specialize in the art of **solution-building**, by bridging happening research with dynamic market needs. My approach involves deep-diving into research to understand core principles thoroughly and then 'swimming' across to explore its applications, ensuring my projects are both **fundamentally robust and practically relevant**. -->
 <!-- 

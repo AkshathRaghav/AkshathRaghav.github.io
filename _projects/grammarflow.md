@@ -16,11 +16,13 @@ Find the package [here](https://github.com/e-lab/SyntaxShaper/tree/main)
 
 ## Overview
 
-This repository contains code to abstract the LLM output constraining process. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by `json.loads` (..etc) while parsing direct outputs. It can also create GNBF grammr from the same, which is used by the [llama.cpp](https://github.com/ggerganov/llama.cpp/) package for sampling logits smartly. 
+GrammarFlow abstracts the **LLM constraining process for complex-response tasks**. It helps you define your grammar rules using Pydantic and Typing in a pythonic way, and inherently embeds metadata from these dataclasses into the prompt. Parsing is enabled in JSON, TOML and XML formats, with custom parsers that avoid the issues faced by `json.loads` (..etc) while parsing direct outputs. 
 
-The goal of this package was to overcome the issues faced when using langchain's output parsers with instruct language models locally. While GPT-4 produces consistent results in returning the correct formats, Llama-7B would cause parsing errors in my testing chains with more complex prompts. However, GrammarFlow was extended to cover more features to help anyone trying to work with LLMs for complex use-cases.  
+Importantly, the package supports the generation of **GNBF grammar**, which integrates seamlessly with the [llama.cpp](https://github.com/ggerganov/llama.cpp/)  package. This integration allows for more intelligent sampling of logits, optimizing the response quality from models.
 
-> Please reach out to `araviki [at] purdue [dot] edu` or open an issue on Github if you have any questions or inquiry related to GrammarFlow and its usage.
+The goal of this package was to overcome the issues faced when using LangChain's output parsers with instruct language models locally. While GPT-4 produces consistent results in returning the correct formats, local models from families like Llama and Mistral would cause parsing errors in my testing chains when I need more than just a single string response. Recently, GrammarFlow was extended to cover more features to help anyone trying to work with LLMs for complex use-cases: multi-grammar generation, regex patterns, etc. 
+
+> Please reach out to `araviki[at]purdue[dot]edu` or open an issue on Github if you have any questions or inquiry related to GrammarFlow and its usage.
 
 ## Results
 
@@ -55,7 +57,7 @@ GrammarFlow was tested against popular LLM datasets, with a focus on constrainin
 
 ## Features
 
-GrammarFlow is mainly meant to be an add-on to your existing LLM applications. It works on the input to and output from your `llm()` call, treating everything in between as a black box. It contains pre-made template prompts for local GGUF models like [Llama2 (70B, 13B, 7B)](https://huggingface.co/TheBloke/Upstage-Llama-2-70B-instruct-v2-GGUF), [Mistral](https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF), [Mixtral](https://huggingface.co/TheBloke/Synthia-MoE-v3-Mixtral-8x7B-GGUF) and has template grammars for common tasks. Making these prompts and grammars are trivial and require minimal effort, as long as you know the format of what you're building. 
+GrammarFlow is mainly meant to be an add-on to your existing LLM applications. It works on the input to and output from your `llm()` call, treating everything in between as a black box. It contains pre-made template prompts for local GGUF models like [Llama2 (70B, 13B, 7B)](https://huggingface.co/TheBloke/Upstage-Llama-2-70B-instruct-v2-GGUF), [Mistral](https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF), [Mixtral](https://huggingface.co/TheBloke/Synthia-MoE-v3-Mixtral-8x7B-GGUF) and has template grammars for common tasks like Chain-of-Thought and Iterative Agents. Making these prompts and grammars are trivial and require minimal effort, as long as you know the format of what you're building. 
 
 - [X] **GBNF Support**: Converts any Pydantic model to GNBF grammar for using with [llama.cpp](https://github.com/ggerganov/llama.cpp/)'s token-based sampling. Enables adding regex patterns directly. 
 - [x] **Easy Integration**: Integrates with any package or stack by just manipulating the prompt and decoding the result into a pythonic data abstractor. Treats everything in between as a **black box**.
@@ -70,15 +72,19 @@ Please keep in mind that this package is purely software driven and aims to make
 
 However, with an increase in complexity of the prompt, the accuracy and 'performance' of the model's thinking capability will degrade. This is attributed to the context-window problem that a lot of researchers are working to improve. LLMs are autoregressive models which track previously seen tokens in order to iteratively predict the next one, and thus provide (a lot) of token probabilities in every generation. Different decoding startegies like **nucleus sampling** (used in GPT) and **beam search** are expensive and need to be used in combination with other methods to prune bad thinking patterns at generation time. 
 
-When you have large context prompts, theres also too much information to sort through. Additionally, grammar constrained decoding uses context free grammars to enforce the probability of certain tokens (like terminals) to get predicted. Eventually, with an increase in the prompt length, there will be randomly repeating text or weird tokens being outputted. After a point, even the grammars are unable to be constrained properly, and just decay after that. 
+In language models, a larger prompt provides more context, leading to a wider range of plausible continuations and increasing the uncertainty in the next token's prediction. Mathematically, this manifests as a **higher entropy in the distribution** over possible next tokens, reflecting a greater number of likely follow-up sequences or "divergent trees" during decoding. Incorporating grammar-based constraining in language models forces the parsing of outputs to adhere to predefined syntactic rules, increasing the computational complexity and reducing flexibility in generation. This constriction **narrows the search space of possible outputs**, complicating the task of finding optimal sequences that satisfy both grammatical and contextual criteria.
 
 This is why people have come up with great workarounds like prompting strategies, prompt pruning, batch processing prompts (like in [JSONFormer](https://github.com/1rgs/jsonformer/blob/main/jsonformer/) and [super-json-mode](https://github.com/varunshenoy/super-json-mode/blob/main/superjsonmode/)), etc. Using those practices along with this library **boosts the efficiency** of whatever you're building! 
 
 {% include theorem.md 
   type="remark"
-  name="Why GrammarFlow?"
+  name="GrammarFlow Vs. Alternatives"
   statement="
-    JSONFormer and super-json-mode use batch-processing to generate tokens and manually enter them into JSON formats. However, there might be different aspects of the expected result which depend on earlier fields begin generated. For example, if you consider a reasoning-focused CoT prompt, different calls to the LLM will return unrelated thoughts which cannot satisfy a list-based grammar by manual entering. This is what GrammarFlow comes in -- context-free-grammars with engineered prompts. 
+    Batch-processing techniques entail generating simple strings in batches and subsequently formatting them into JSON structures manually. This approach, while straightforward, encounters significant limitations when the generated content requires internal consistency or interdependence among fields.
+
+    For instance, take the generation of responses for a Chain of Thought (CoT) prompt. Traditional batch processing might yield a series of isolated responses, each reflecting distinct, possibly unrelated thought processes. When these responses need to be structured into a JSON format that adheres to a list, manual entry is not sufficient. This method lacks the capability to ensure that subsequent entries are contextually aligned with previous ones.
+
+    This is where GrammarFlow steps in -- leveraging context-free grammars (CFGs) combined with carefully engineered prompts to guide the generation process. 
   "
 %}
 
@@ -113,14 +119,15 @@ prompt = Agent()
 system_context = """Your goal is to think and plan out how to solve questions using agent tools provided to you. Think about all aspects of your thought process."""
 user_message = """Who is Vladmir Putin?"""
 
-with Constrain(prompt, 'xml') as manager:
+with Constrain('xml') as manager:
     # Makes the changes to the prompt
-    manager.format_prompt(
+    prompt = manager.format(
+        prompt,
         placeholders={'prompt': user_message, 'instructions': system_context},
         grammars=[{'model': AgentStep}]
     )
 
-    llm_response = llm(manager.prompt, temperature=0.01)
+    llm_response = llm(prompt, temperature=0.01)
 
     # Parse the response into a custom dataclass for holding values
     response = manager.parse(llm_response)
@@ -170,12 +177,10 @@ class Project(BaseModel):
 # Convert to grammar
 from grammarflow import GNBF
 
-grammar = GNBF(Project).generate_grammar()
+grammar = GNBF(Project).generate_grammar(format_='json')
 
 # Verify with LlamaGrammar
-GNBF.verify_grammar(grammar, format_='json')
-# GNBF.verify_grammar(grammar, format_='xml')
-# GNBF.verify_grammar(grammar, format_='toml')
+GNBF.verify_grammar(grammar, )
 ```
 
 This is what gets returned, a version of BNF grammar rules: 
