@@ -9,8 +9,8 @@ category: research
 
 This page expands upon the work I did at the [CVES Group](https://yhlu.net/) (Spring '24), where I led a team to build a workflow to evaluate factors affecting **practical** reproducibility in AI/ML Research projects. 
 
-* Summarized SWE Research papers pertaining to reproducibility and reusability of ML code and identified common trends in findings. Formulated the problem as one that requires a reverse-MLOps perspective. 
-* Built efficient scrapers for research paper archives and common ML repositories. Extracted data from 3000+ commerical and academic organizations to statistically back our proposed evaluation pipeline. 
+* Awarded ”Outstanding Sophomore in VIP” for directing efforts to practically evaluate AI/ML research reproducibility. Categorized reproducibility types and quantified reusability with a scoring system.
+* Implemented ETL pipelines to analyze over 3000 academic & corporate research projects for validating our data-driven pipeline. Employed LLM chains integrated within repository file structures to assess structural cohesion, documentation, community engagement, etc.
 
 You can find the code [here](https://github.com/AkshathRaghav/RAIS). 
 

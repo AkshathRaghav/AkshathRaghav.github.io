@@ -1,7 +1,7 @@
 ---
 layout: table
-permalink: /cooking/
-title: cooking
+permalink: /tldr_etran/
+title: etran
 description: 
 nav: false
 nav_order: 7
