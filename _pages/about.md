@@ -16,13 +16,13 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I'm a **senior** @ Purdue, pursuing a B.Sc in CompE.
+I'm a **junior** @ Purdue, pursuing a B.Sc in CompE.
 
 My primary interest revolves arould building robust user-facing solutions at the intersection of explainable learning algorithms and interoperable systems. I enjoy research-driven environments aimed at taking concepts to tangible products. 
 
 <b>Automatability</b>, <b>reproducibility</b> and <b>accessability</b> remain the core of my work. 
 
-I'm concurrently working on multimodal document understanding, model-task alignment and integrated tools for AI agents. Post this, I intend to dive into accelerated computing and parallized ML architectures. Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdue.edu).
+I'm concurrently working on model-task alignment and integrated tools for AI agents. Post this, I intend to dive into accelerated computing and parallized ML architectures. Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdue.edu).
 
 
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.1.8/build/spline-viewer.js"></script>
@@ -34,11 +34,11 @@ I'm concurrently working on multimodal document understanding, model-task alignm
 
 ## background 
 
-* Smr'24: I've joined the Purdue SoCET group, in the Digital Design team. Over the summer, I added the [Zicond Extension](https://github.com/riscvarchive/riscv-zicond/) to the [RISCV core](https://github.com/Purdue-SoCET/RISCVBusiness/tree/rv32zc) for the AFTx07 tape-out. The goal is to reduce our branch mispredictions and simplify the conditional logic. 
-* Smr'24: I'm interned at [VLSI System Design](https://www.vlsisystemdesign.com/), a semiconductor ed-tech platform, where I implemented the [TinySpeech](https://arxiv.org/abs/2008.04245) family of speech recognition models for their [vsdsquadronmini boad](https://www.vlsisystemdesign.com/vsdsquadronmini/). I also wrote an [ANSI-C based inference engine](https://github.com/AkshathRaghav/tinyspeech) which runs out-of-box in 8bit precision, with 91%+ accuracies on the CH32V003F4U6 chip (2kb volatile sram, 16kb external mem). 
+* Smr'24: I've joined the Purdue SoCET group, in the Digital Design team. Over the summer, I added the [Zicond Extension](https://github.com/riscvarchive/riscv-zicond/) to the [RISCV core](https://github.com/Purdue-SoCET/RISCVBusiness/tree/rv32zc) for the AFTx07 tape-out. The goal is to reduce our branch mispredictions and to enable branchless logic.
+* Smr'24: I interned at [VLSI System Design](https://www.vlsisystemdesign.com/), a semiconductor ed-tech platform, where I implemented the [TinySpeech](https://arxiv.org/abs/2008.04245) family of speech recognition models for their [vsdsquadronmini boad](https://www.vlsisystemdesign.com/vsdsquadronmini/). I also wrote an [ANSI-C based inference engine](https://github.com/AkshathRaghav/tinyspeech) which runs out-of-box in 8bit precision, with 91%+ accuracies on the CH32V003F4U6 chip (2kb volatile sram, 16kb external mem). 
 * F'23 - S'24: I worked at the [Duality Lab](https://davisjam.github.io/), where [we re-engineered](https://akshathraghav.github.io/projects/maskformer/) the MaskFormer segmentation model **(funded by Google!)** from the [PyTorch-based artifact](https://github.com/facebookresearch/MaskFormer) to TensorFlow for publishing to the TF Model Garden. You can find our **paper** [here](https://arxiv.org/pdf/2404.18801) and **code** [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer). I also generated figures for the [PeaTMOSS **paper**](https://arxiv.org/pdf/2402.00699.pdf) (accepted at MSR'24).
-* S'24: I'm involved in MultiModal (LM) understanding projects at the [e-lab](https://e-lab.github.io/). I've built [eugenie](https://akshathraghav.github.io/projects/eugenie/) & [grammarflow](https://akshathraghav.github.io/projects/grammarflow/). I am currently working on encoding reading-order patterns within documents ([here's](https://drive.google.com/file/d/1x1IE_1NT-UAO7bFtoc_bPNJgqQFA1AXK/view?usp=sharing) my current plan of action), and building a routing-system for multi-modal RAG. 
 * S'24: I led a project at the [CVES](https://yhlu.net/research.html) group @ Purdue ECE, where our goal was to define and evaluate reproducibility within AI/ML projects. I wrote the [codebase](https://github.com/AkshathRaghav/RAIS) for building our pipeline and statistically [defined](https://akshathraghav.github.io/projects/rais/) the importance of parameters. 
+* S'24: I was involved in MultiModal (LM) understanding projects at the [e-lab](https://e-lab.github.io/). I've built [eugenie](https://akshathraghav.github.io/projects/eugenie/) & [grammarflow](https://akshathraghav.github.io/projects/grammarflow/).
 * S'23 - Smr'23: I was employed at [Ambee](https://www.getambee.com/), where I deployed a worldwide [fire forecasting system (F3)](https://akshathraghav.github.io/projects/ambee/) into their API and wrote automated scripts for their environment-data focused [data lakes](https://www.getambee.com/api-documentation) (still in use). You can find my **LOR** [here](https://akshathraghav.github.io/assets/pdf/AkshathRaghavR_LOR_Ambee.pdf). You can find the **whitepaper** [here](https://www.researchgate.net/publication/372769364_Time-Driven_Fire_Risk_Forecasting_Leveraging_Historical_Trends_for_Enhanced_Seasonal_Modeling). You can get the data [here](https://www.getambee.com/api-documentation).
 * F'22 - S'23: I helped lead a project that was supervised by Prof. [Yuan Wang](https://wang-lab.stanford.edu/people/yuan-wang) (currently at Stanford) where we aimed to correlate [lightning activity with wildfire spread](https://akshathraghav.github.io/projects/lwl/). I wrote (big-)data-interfacing code for satellites across EUR/EUS/SAR, and was responsible for packing them to use within a ConvLSTM model from [DeepCube's short-term forecasting](https://github.com/DeepCube-org/uc3-public-notebooks/blob/main/3_UC3_DL_models_XAI.ipynb).
 
