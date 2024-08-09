@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Grateful to recieve the Purdue OUR Scholars Research Scholarship within [Professor Vhaduri's](https://sudipvhaduri.wordpress.com/) group.
+Grateful to recieve the Purdue <u>OUR Scholars</u> and <u> DUIRI </u> Scholarships.
