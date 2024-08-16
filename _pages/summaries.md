@@ -3,7 +3,7 @@ layout: default
 permalink: /summaries/
 title: tl;dr
 nav: true
-nav_order: 2
+nav_order: 3
 toc:
   sidebar: left
 ---

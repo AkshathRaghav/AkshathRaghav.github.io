@@ -2,7 +2,7 @@
 layout: default
 permalink: /photography/
 title: photography
-nav: true
+nav: false
 nav_order: 6
 redirect: https://www.flickr.com/photos/akshathrr/
 ---

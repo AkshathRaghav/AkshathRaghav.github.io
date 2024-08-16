@@ -2,7 +2,7 @@
 layout: default
 permalink: /gists/
 title: gists
-nav: true
+nav: false
 nav_order: 10 
 ---
 
