@@ -5,7 +5,6 @@ description: Re-engineering MaskFormer for Google's TF Model Garden (Funded) ðŸš
 img: assets/img/dualityxtfmg.jpg
 importance: 1
 category: research
-related_publications: true
 toc:
   sidebar: left
 ---
@@ -266,6 +265,19 @@ python3 train.py \
   --model_dir $MODEL_DIR \
   --tpu $TPU_NAME \
   --params_override=$OVERRIDES
+```
+
+## Citation 
+If you find our implementation useful cite our work.
+
+```
+@misc{purohit2024partial,
+      title={A Partial Replication of MaskFormer in TensorFlow on TPUs for the TensorFlow Model Garden}, 
+      author={Vishal Purohit and Wenxin Jiang and Akshath R. Ravikiran and James C. Davis},
+      year={2024},
+      eprint={2404.18801},
+      archivePrefix={arXiv},
+}
 ```
 
 

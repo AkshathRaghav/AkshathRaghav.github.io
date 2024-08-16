@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Grateful to recieve the Purdue <u>OUR Scholars</u> and <u> DUIRI </u> Scholarships.
+Grateful to recieve the Purdue <u>OUR Scholars</u> and <u>DUIRI</u> Scholarships. Excited to be starting as a research assistant under Ms. Zhao in the NSF-funded IGUIDE team. 
