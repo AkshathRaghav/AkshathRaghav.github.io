@@ -16,7 +16,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I'm a **senior** @ Purdue, pursuing a B.Sc in CompE.
+I'm a **third-year** student @ Purdue, majoring in Computer Engineering.
 
 My primary interest revolves arould building robust user-facing solutions at the intersection of explainable learning algorithms and interoperable systems. I enjoy research-driven environments aimed at taking concepts to tangible products. 
 
