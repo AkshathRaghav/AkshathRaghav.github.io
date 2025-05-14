@@ -4,7 +4,7 @@ title: eugenie
 description: Deployed a multi-tool autonomous agent (handles web research, data engineering, coding problems) 🧞
 img: assets/img/eugenie.jpg
 importance: 3
-category: research
+category: software
 ---
 
 

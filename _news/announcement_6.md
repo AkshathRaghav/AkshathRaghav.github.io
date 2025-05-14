@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Grateful to recieve the Purdue <u>OUR Scholars</u> and <u>DUIRI</u> Scholarships. Excited to be starting as a research assistant in the NSF-funded [IGUIDE](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2118329&HistoricalAwards=false) team. 
+Grateful to recieve the Purdue <u>OUR Scholars</u> and <u>DUIRI</u> Scholarships. Excited to be starting as a research assistant in the NSF-funded [I-GUIDE](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2118329&HistoricalAwards=false) team. 

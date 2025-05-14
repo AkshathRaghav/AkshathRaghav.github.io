@@ -4,7 +4,7 @@ title: lightning wildfire lab
 description: Can we predicting wildfires using lightning data? ⚡
 img: assets/img/lwl.png
 importance: 5
-category: research
+category: software
 related_publications: false 
 toc:
   beginning: true

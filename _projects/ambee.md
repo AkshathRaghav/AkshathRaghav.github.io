@@ -4,7 +4,7 @@ title: forest-fire-forecast
 description: Deployed a global fire-risk prediction into Ambee's proprietary API (Funded) 🔥
 img: assets/img/ambee/ambee_maddy.jpeg
 importance: 2
-category: research 
+category: software 
 related_publications: true
 images:
   compare: true
