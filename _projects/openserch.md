@@ -3,7 +3,7 @@ layout: page
 title: aws-opensearch
 description: Contributed to the macrobenchmarking framework through OSCI! 
 img: assets/img/opensearch.jpg
-importance: 3
+importance: 10
 redirect: https://opensearch.org/authors/akshathraghav/
 category: software
 ---

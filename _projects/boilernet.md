@@ -1,8 +1,8 @@
 ---
 layout: page
-title: gustavsons-sparse-kernels
-description: CUDA C++ Sparse MatMul Kernels  
-img: assets/img/ambee/ambee_maddy.jpeg
+title: boilernet
+description: compute-enabled-mini-nas 
+img: assets/img/boilernet/Slide6.jpg
 importance: 1
 category: hardware 
 related_publications: true

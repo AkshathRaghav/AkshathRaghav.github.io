@@ -4,13 +4,12 @@ class: post-template
 title: grammarflow 
 description: Powering Agent Chains by Constraining LLM Outputs 🪢
 img: assets/img/lgoo.jpg
-importance: 2
+importance: 6
 category: software
 toc:
   sidebar: left
 ---
 
-🚀 Supercharging Agent Chains with Constrained LLM outputs 🚀
 
 Find the package [here](https://github.com/e-lab/SyntaxShaper/tree/main) 
 

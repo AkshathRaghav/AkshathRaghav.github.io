@@ -3,20 +3,15 @@ layout: page
 title: RAIS 
 description: Defining and leveraging reproducibility factors in AI/ML Research 😎
 img: assets/img/rais.jpg
-importance: 4
+importance: 3
 category: software
 ---
 
-This page expands upon the work I did at the [CVES Group](https://yhlu.net/) (Spring '24), where I led a team to build a workflow to evaluate factors affecting **practical** reproducibility in AI/ML Research projects. 
-
-* Awarded ”Outstanding Sophomore in VIP” for directing efforts to practically evaluate AI/ML research reproducibility. Categorized reproducibility types and quantified reusability with a scoring system.
-* Implemented ETL pipelines to analyze over 3000 academic & corporate research projects for validating our data-driven pipeline. Employed LLM chains integrated within repository file structures to assess structural cohesion, documentation, community engagement, etc.
+This page expands upon the work I did at the [CVES Group](https://yhlu.net/) (Spring '24), building a workflow to evaluate factors affecting **practical** reproducibility in AI/ML Research projects. I was awarded "Outstanding Sophomore in VIP" for this effort. 
 
 You can find the code [here](https://github.com/AkshathRaghav/RAIS). 
 
 ---
-
-> This report is incomplete. 
 
 # Reproducible AI Software 
 
@@ -45,7 +40,7 @@ To substantiate the claims made in this project, data from over 3000 repositorie
 
 ## Proposed Methodology 
 
-Based on my findings from the collected data, I have compiled a workflow that can be used to iteratively identify the crucial and miscellenous aspects of a repository, decide upon a label to present to the codebase as a whole with respect to it's level of replicability, and provide a score to reflect how re-useable it *looks* to be. 
+Based on my findings from the collected data, I compiled a workflow that can be used to iteratively identify the crucial and miscellenous aspects of a repository, decide upon a label to present to the codebase as a whole with respect to it's level of replicability, and provide a score to reflect how re-useable it *looks* to be. 
 
 * LHS: I focus on evaluating a repository based on it’s structure, documentation, trustability (certificates), and community engagement. These aspects help us understand how straightforward it is for someone to replicate open-source work, and if there is a reputation for the same.
 * RHS: I focus on practicality. My goal is to understand if all the data, code, and metrics are present to (literally) reproduce an experiment. I make my decision tree aimed at classifying repositories into ‘types’ of reproducibility (shown in purple), with a final ‘score’ to reflect the presence of all the required factors (shown in blue).
