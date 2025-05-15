@@ -13,8 +13,6 @@ You can find the code [here](https://github.com/AkshathRaghav/RAIS).
 
 ---
 
-# Reproducible AI Software 
-
 ## Abstract
 
 Machine learning (ML) software has become a crucial component in many systems. This list includes software published as novel improvements to academic standard, helper packages for AI developers, re-engineered models, etc. If the purpose of the software repository is open code for research community reuse, it should be executable on any system that satisfies the necessary hardware requirements. This requires the inclusion of detailed information such as software dependencies, environmental settings, training hyperparameters, data sourcing, among other related details. Unfortunately, a standardized methodology ensuring reproducibility of AI research results is yet to be established. Many developers fail to reproduce their own reported results. Previous studies have shown that merely publishing the source code is not enough for reproducibility. 
