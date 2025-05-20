@@ -22,9 +22,11 @@ I’m passionate about developing robust, user-facing solutions that combine exp
 
 I'm excited about AI Accelerator Microarch, ML Compilers and Data-Center Infrastructure. Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdue.edu).
 
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.95/build/spline-viewer.js"></script>
+<spline-viewer url="https://prod.spline.design/yM3OABoP-icn9QQo/scene.splinecode"></spline-viewer>
 
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.1.8/build/spline-viewer.js"></script>
-<spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/yM3OABoP-icn9QQo/scene.splinecode"></spline-viewer>
+<iframe src='https://my.spline.design/untitled-aa704d48617c63e5ee5f4e018a934fb1/' frameborder='0' width='100%' height='100%'></iframe>
+
 <div class="caption">
     Fun lil' animation of the Fridrich (CFOP) speedsolving method
 </div>

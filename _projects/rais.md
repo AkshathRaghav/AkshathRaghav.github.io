@@ -19,10 +19,13 @@ Machine learning (ML) software has become a crucial component in many systems. T
 
 > This project aims to identify key factors that either enhance or impair reproducibility. It will also explore the connections between reproducibility, replicability, and popularity. 
 
-Expected outcomes of this project include 
-* an enumerated list of factors critical for software reproducibility evaluation and their significance, 
-* a toolkit utilizing large language models (LLMs) to gauge and enhance reproducibility, and 
-* a comprehensive reproducibility analysis of selected projects, including aspects like source code, seed consistency in random number generation, model weights, dataset accessibility, and methods for splitting data for training and testing.
+
+{% include figure.liquid loading="eager" path="assets/img/rais/poster.png" title="poster" class="img-fluid rounded z-depth-1" %}
+
+<div class="caption">
+    Poster presented at the Spring EXPO Fair!
+</div>
+
 
 ## Methodology
 
