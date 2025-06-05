@@ -73,9 +73,6 @@ The physical enclosure consists of six piece types, along with an optional divid
     Compute Enclosure
 </div>
 
-<div align="center">
-  <img src= alt="third" style="height: 50%;"/>
-</div>
 
 {% include figure.liquid loading="eager" path="/assets/img/boilernet/Slide6.jpg" title="poster" class="img-fluid rounded z-depth-1" %}
 
@@ -102,6 +99,12 @@ You can find our PCB Designs at [/gerbers/](https://github.com/AkshathRaghav/boi
 
 <div class="caption" align="center">
     Compute Node PCB
+</div>
+
+{% include figure.liquid loading="eager" path="/assets/img/boilernet/slide.png" title="poster" class="img-fluid rounded z-depth-1" %}
+
+<div class="caption" align="center">
+    Mishaps/Learnings!
 </div>
 
 ## Software 
