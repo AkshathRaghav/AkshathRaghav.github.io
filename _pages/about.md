@@ -16,6 +16,9 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
+<br>
+<br>
+
 I'm a **final-year** student @ Purdue, majoring in Electrical & Computer Engineering.
 
 I’m passionate about developing robust, user-facing solutions that combine explainable learning algorithms, seamless system interoperability, and hardware–software co‑optimized platforms.
