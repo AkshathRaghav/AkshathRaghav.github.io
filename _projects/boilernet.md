@@ -30,9 +30,9 @@ This project aimed to develop a Network Attached Storage utilizing ESP32 MCUs. T
 
 {% include theorem.md 
   type="remark"
-  name="Disclaimer!"
+  name="Disclaimer"
   statement="
-    Our reports/presentations are linked in the [/docs](https://github.com/AkshathRaghav/boilernet/tree/main/docs/). They contain in-depth views, reasonings and explanations regarding the design and its motivation. We also outline how we tested and ensured functionality. This repository is just meant to help anyone who wishes to "refer" to our code/designs for their own use-case. 
+    Our reports/presentations are linked in the [/docs](https://github.com/AkshathRaghav/boilernet/tree/main/docs/). They contain in-depth views, reasonings and explanations regarding the design and its motivation. We also outline how we tested and ensured functionality. This repository is just meant to help anyone who wishes to 'refer' to our code/designs for their own use-case. 
   "
 %}
 
