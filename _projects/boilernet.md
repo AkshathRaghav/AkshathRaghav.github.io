@@ -25,7 +25,7 @@ category: hardware
 
 This project aimed to develop a Network Attached Storage utilizing ESP32 MCUs. The aptly-named BoilerNet aims to enable In-Network-compute alongside swappable disks and compute workloads, neatly brought together by a cloud-hosted Dashboard interface. There are a few core ideas that form the foundation for this ”cluster” – Low Power Usage, Plug-and-Play Workloads, High Scalability. 
 
-> **The project won the "Senior Design Award" for Spring '25 through the ECE 49022 group.**
+> BoilerNet won the "Senior Design Award" for Spring '25 through Purdue ECE.
 
 
 {% include theorem.md 
@@ -52,31 +52,33 @@ The physical enclosure consists of six piece types, along with an optional divid
 3mm diameter - 20mm screws, 4x 3mm diameter - 5 mm screws. You can find the related CAD files at [/cad/](https://github.com/AkshathRaghav/boilernet/tree/main/cad/) w/o dependencies. Reach out to [Aneesh Poddutur](https://www.linkedin.com/in/aneesh-poddutur/) for more information. 
 
 
-<div align="center">
-  <img src="/assets/img/boilernet/mechanical_first.png" alt="first" style="width: 40%;"/>
-  <caption> 
-</div>
+{% include figure.liquid loading="eager" path="/assets/img/boilernet/mechanical_first.png" title="poster" class="img-fluid rounded z-depth-1" %}
+
 <div class="caption" align="center">
     Physical Enclosure
 </div>
 
-<div align="center">
-  <img src="/assets/img/boilernet/second.drawio.png" alt="second" style="width: 40%;"/>
-</div>
+
+{% include figure.liquid loading="eager" path="/assets/img/boilernet/second.drawio.png" title="poster" class="img-fluid rounded z-depth-1" %}
+
 <div class="caption" align="center">
     Top Enclosure
 </div>
 
-<div align="center">
-  <img src="/assets/img/boilernet/mechanical_third.png" alt="third" style="width: 40%;"/>
-</div>
+
+
+{% include figure.liquid loading="eager" path="/assets/img/boilernet/mechanical_third.png" title="poster" class="img-fluid rounded z-depth-1" %}
+
 <div class="caption" align="center">
     Compute Enclosure
 </div>
 
 <div align="center">
-  <img src="/assets/img/boilernet/Slide6.jpg" alt="third" style="height: 50%;"/>
+  <img src= alt="third" style="height: 50%;"/>
 </div>
+
+{% include figure.liquid loading="eager" path="/assets/img/boilernet/Slide6.jpg" title="poster" class="img-fluid rounded z-depth-1" %}
+
 <div class="caption" align="center">
     Assembled System!
 </div>
@@ -89,16 +91,15 @@ You can find our PCB Designs at [/gerbers/](https://github.com/AkshathRaghav/boi
 
 
 
-<div align="center">
-  <img src="/assets/img/boilernet/pcb_network.png" alt="third" style="width: 50%;"/>
-</div>
+{% include figure.liquid loading="eager" path="/assets/img/boilernet/pcb_network.png" title="poster" class="img-fluid rounded z-depth-1" %}
+
 <div class="caption" align="center">
     Network/Switch PCB
 </div>
 
-<div align="center">
-  <img src="/assets/img/boilernet/pcb_compute.png" alt="third" style="width: 50%;"/>
-</div>
+
+{% include figure.liquid loading="eager" path="/assets/img/boilernet/pcb_compute.png" title="poster" class="img-fluid rounded z-depth-1" %}
+
 <div class="caption" align="center">
     Compute Node PCB
 </div>
