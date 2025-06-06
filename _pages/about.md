@@ -20,9 +20,9 @@ I'm a **final-year** student @ Purdue, majoring in Electrical & Computer Enginee
 
 I’m passionate about developing robust, user-facing solutions that combine explainable learning algorithms, seamless system interoperability, and hardware–software co‑optimized platforms.
 
-<br>
-
-I'm excited about AI Accelerator Microarch, ML Compilers and Data-Center Infrastructure. Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdue.edu).
+I'm excited about AI Accelerator Microarch, ML Compilers and Data-Center Infrastructure. 
+ 
+Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdue.edu).
 
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.95/build/spline-viewer.js"></script>
 <spline-viewer url="https://prod.spline.design/yM3OABoP-icn9QQo/scene.splinecode"></spline-viewer>
