@@ -17,7 +17,6 @@ social: false # includes social icons at the bottom of the page
 ---
 
 <br>
-<br>
 
 I'm a **final-year** student @ Purdue, majoring in Electrical & Computer Engineering.
 
