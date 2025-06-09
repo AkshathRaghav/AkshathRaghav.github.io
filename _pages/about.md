@@ -46,24 +46,11 @@ Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdu
 
 Find my reports [here](https://akshathraghav.github.io/projects/).
 
-<!-- ## interests
-
-At the highest level, I'm super excited about the [Partner as a Product (PaaP)](https://uxdesign.cc/this-is-the-moment-to-reinvent-your-product-1ee084e38ab1) era we're entering into. I hope to gain experience across the systems we ('re going to) base our lives on, from hardware-level programming to cloud-based HA lifecycles. Majoring in ECE gives me the oppurtunity to develop myself in these areas. 
-
-More specifically, I work with language models and learning algorithms. I like to augment intelligence in LLMs, as opposed to using them as a general purpose solution (which it's not). I approach any AI problem (overarching the ML bubble) as a toddler trying to learn -- by using their senses and the environment. I believe the future of intelligence will come from making machines self-aware of their need to integrate with other machines.  -->
-
-<!-- Going forward, I aim to specialize in the art of **solution-building**, by bridging happening research with dynamic market needs. My approach involves deep-diving into research to understand core principles thoroughly and then 'swimming' across to explore its applications, ensuring my projects are both **fundamentally robust and practically relevant**. -->
-<!-- 
-Lessons from my mentors: 
-- *Reliable software is a by-product of a robust design process;*
-- *Quality work is replicable, replicable work guarantees quality;*
-- *If it's not use(d)(ful), what's the point of building it?* -->
-<!-- - *Every unexplained idea in one field can be explained by another;* -->
 
 ## extras
 
-In my free time, I enjoy [photography](https://akshathraghav.github.io/photography/), reading manga, speed typing (130+ wpm), and whittling. 
+In my free time, I enjoy [photography](https://vsco.co/echomannfog/gallery), [reading manga](https://anilist.co/user/araviki/mangalist), [speed typing (130+ wpm)](https://monkeytype.com/profile/genocide), and whittling. I'm on [Strava](https://strava.app.link/Yz5t2Sq01Tb  ) too! 
 
 I can speak English, Hindi, Tamil, and Kannada. Currently, I'm learning German and ASL. 
 
-I enjoy Bowling, Billiards and Golf. I follow the NBA (Warriors) and IPL (RCB).
+I enjoy Bowling, Golfing, Billiards and Chess. I follow the NBA (Warriors), IPL (RCB) and ATP Masters.
