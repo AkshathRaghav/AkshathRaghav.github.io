@@ -2,9 +2,9 @@
 layout: default
 permalink: /photography/
 title: photography
-nav: false
-nav_order: 6
-redirect: https://www.flickr.com/photos/akshathrr/
+nav: true
+nav_order: 4
+redirect: https://vsco.co/echomannfog/gallery
 ---
 
 # Redirecting! 

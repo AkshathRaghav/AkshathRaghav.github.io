@@ -49,7 +49,7 @@ Find my reports [here](https://akshathraghav.github.io/projects/).
 
 ## extras
 
-In my free time, I enjoy [photography](https://vsco.co/echomannfog/gallery), [reading manga](https://anilist.co/user/araviki/mangalist), [speed typing (130+ wpm)](https://monkeytype.com/profile/genocide), and whittling. I'm on [Strava](https://strava.app.link/Yz5t2Sq01Tb  ) too! 
+In my free time, I enjoy [photography](https://vsco.co/echomannfog/gallery), [chess](https://www.chess.com/member/thefog666), [reading manga](https://anilist.co/user/araviki/mangalist), [speed typing (130+ wpm)](https://monkeytype.com/profile/genocide), and whittling.! 
 
 I can speak English, Hindi, Tamil, and Kannada. Currently, I'm learning German and ASL. 
 
