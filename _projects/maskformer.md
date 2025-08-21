@@ -3,7 +3,7 @@ layout: page
 title: maskformer
 description: Re-engineering MaskFormer for Google's TF Model Garden (Funded) 🚀
 img: assets/img/dualityxtfmg.jpg
-importance: 1
+importance: 2
 category: software
 toc:
   sidebar: left
