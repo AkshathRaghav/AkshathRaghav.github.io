@@ -10,5 +10,5 @@ images:
   slider: true
 ---
 
-This page is the culmination of the work I did at [Ambee](https://www.bmwgroup.com/en/innovation.html) (Summer '25) as a Cloud/IT Intern. You can find my certificate/LOR [here](https://akshathraghav.github.io/assets/pdf/BMW_LOR_AkshathRavikiran.pdf).
+This page is the culmination of the work I did at [BMW](https://www.bmwgroup.com/en/innovation.html) (Summer '25) as a Cloud/IT Intern. You can find my certificate/LOR [here](https://akshathraghav.github.io/assets/pdf/BMW_LOR_AkshathRavikiran.pdf).
 
