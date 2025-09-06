@@ -9,7 +9,12 @@ toc:
   sidebar: left
 ---
 
-I'm responsible for parts of the software and hardware aspects of the Memory Subsystem integrated into AMP0/AMP1. This involves ensuring optimal scratchpad usage and QoS through  multi-layered-control starting at the PyTorch Dispatcher through a Software-Controlled Scratchpad and into the Systolic Array FUs. 
+* Leading memory-subsystem development in the AI Hardware team. Responsible for micro-architecture and ISA design.
+* Designed \& functionally verified the the lockup-free D-Cache and Systolic Array Controllers integrated into the AMP1 Tensor Core. Synthesized using Cadence Flowtool to 700MHz, and ensured toggle coverage using Siemens QuestaSim.
+* Enhanced the AFTx07 RISCV core with the Zicond Ext. for macro-fusion of conditional logic/arithmetic sequences.
+* Helped develop semiconductor-design-specific curriculum under the CASCADE Apprenticeship Program w/ Synopsys. 
+% * Responsible for ensuring team documentation adherence to standards and assisting with logistics for 200+ students.
+
 
 {% include figure.liquid loading="eager" path="assets/img/aihardware/logo.png" title="poster" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
