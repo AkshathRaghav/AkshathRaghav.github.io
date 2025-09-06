@@ -2,7 +2,7 @@
 layout: page
 title: ai4devops
 description: Integrated AI4DevOps into Agile ToolChain Offerings for BMW Germany/SA Hubs!
-img: assets/img/bmw/Akshath - BMW Summer '25-2-0atc.jpeg
+img: assets/img/bmw/atc.jpeg
 importance: 1
 category: software 
 images:
