@@ -1,8 +1,8 @@
 ---
 layout: page
-title: accelerated-matrix-processor
-description: HW-SW Co-Designed Stack for a custom Tensor-Core (targeting TSMC 70nm)
-img: assets/img/aihardware/logo.png
+title: atalla-tensor-core
+description: HW-SW Co-Designed Stack for a custom Tensor-Core (targeting TSMC 65nm)
+img: assets/img/aihardware/poster.png
 importance: 1
 category: microarch 
 toc:
@@ -45,19 +45,10 @@ Code [here](https://github.com/Purdue-SoCET/atalla/tree/main/rtl/modules/memory/
     Addressing scheme inside each Bank 
 </div>
 
-{% include figure.liquid loading="eager" path="assets/img/aihardware/bank.drawio.png" title="poster" class="img-fluid rounded z-depth-1" %}
-<div class="caption">
-    Inside view of each Bank
-</div>
 
 {% include figure.liquid loading="eager" path="assets/img/aihardware/buffer.drawio.png" title="poster" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     Inside view of the MSHR Buffer
-</div>
-
-{% include figure.liquid loading="eager" path="assets/img/aihardware/config.drawio.png" title="poster" class="img-fluid rounded z-depth-1" %}
-<div class="caption">
-    Showcasing Parameters 
 </div>
 
 
