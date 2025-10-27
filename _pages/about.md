@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: ECE @ <a href='https://engineering.purdue.edu/ECE'>Purdue</a> | AI Engineer/Researcher
+subtitle: MS-ECE @ <a href='https://engineering.purdue.edu/ECE'>Purdue</a> | AI-HW Architecture, Agentic-AI Systems
 
 profile:
   align: right
@@ -15,8 +15,6 @@ latest_posts: true # includes a list of the newest posts
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
-
-I'm a MS-ECE student @ Purdue, focusing on AI Hardware Design. 
 
 I’m passionate about designing solutions that intersect explainable learning algorithms, cloud infra, and HW-SW co‑optimized platforms.
 
