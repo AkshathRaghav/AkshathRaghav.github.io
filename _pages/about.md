@@ -6,7 +6,7 @@ subtitle: ECE @ <a href='https://engineering.purdue.edu/ECE'>Purdue</a> | AI Eng
 
 profile:
   align: right
-  image: pfp.jpeg
+  image: face.jpeg
   image_circular: true # crops the image to make it circular
   more_info: 
   
