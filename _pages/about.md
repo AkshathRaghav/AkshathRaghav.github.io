@@ -16,7 +16,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I'm a MS-ECE student @ Purdue, majoring in Electrical & Computer Engineering and focusing on AI Hardware Design. 
+I'm a MS-ECE student @ Purdue, focusing on AI Hardware Design. 
 
 I’m passionate about designing solutions that intersect explainable learning algorithms, cloud infra, and HW-SW co‑optimized platforms.
 

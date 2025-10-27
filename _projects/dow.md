@@ -2,7 +2,7 @@
 layout: page
 title: beacon
 description: Developing Agent-Enabled LIMS for 'Analytical Sciences' within The Dow Chemical Company!
-img: assets/img/bmw/atc.jpeg
+img: assets/img/dow/cover.jpg
 importance: 1
 category: software 
 images:
@@ -10,7 +10,7 @@ images:
   slider: true
 ---
 
-This page outlines some of the work I'm doing at [The Dow Chemical Company](https://www.dow.com/en-us.html) (Fall '25-) as a Student Project Manager. 
+This page outlines some of the work I'm doing at [The Dow Chemical Company](https://www.dow.com/en-us.html) (Fall '25-) as a Student Project Manager (hired through [The Data Mine](https://datamine.purdue.edu/)).
 
 * Leading 12-member team to develop an AI Platform – replacing Analytical Science’s (AS) legacy LIMS – for automating chemical Studies.
 * Built an agent orchestration layer (via Docker & SLURM) for dynamic startup, reproducible sandboxing & traceability w/ MLflow.
