@@ -2,7 +2,7 @@
 layout: page
 title: atalla-tensor-core
 description: HW-SW Co-Designed Stack for a custom Tensor-Core (targeting TSMC 65nm)
-img: assets/img/aihardware/poster.png
+img: assets/img/aihardware/poster.jpg
 importance: 1
 category: microarch 
 toc:
