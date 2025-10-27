@@ -16,7 +16,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I'm a **final-year** student @ Purdue, majoring in Electrical & Computer Engineering.
+I'm a MS-ECE student @ Purdue, majoring in Electrical & Computer Engineering and focusing on AI Hardware Design. 
 
 I’m passionate about designing solutions that intersect explainable learning algorithms, cloud infra, and HW-SW co‑optimized platforms.
 
@@ -34,9 +34,8 @@ Feel free to reach out to me at [araviki[at]purdue[dot]edu](mailto:araviki@purdu
 
 
 ## background 
-<!-- Implemented the [Gustavson-based Sparse Mat-Mul benchmarks](https://akshathraghav.github.io/projects/gpuv3) for the SoCET GPU team's V3 architecture. -->
 * Smr'25: Interned at BMW (Digital Campus Munich, Germany) in the FG-240 group, working on multiple projects focused on integrating AI Workflows into SDLC Offerings. You can find the **projects** [here]().  
-* S'25: Working on a few [parameterizable IPs](https://akshathraghav.github.io/projects/amp) used in the AMP1 Tensor Core, under the AI Hardware Team at SoCET.  Completed my Capstone project (through ECE 49022), and won the Senior Design award for the [BoilerNet system](https://akshathraghav.github.io/projects/boilernet). Led the backend team under [(Beck's Hybrids)-sponsored project](https://akshathraghav.github.io/projects/becks) through the Data Mine. Funded by HII to work on a custom FFT-accelerator ASIC.
+* S'25: Working on a few [parameterizable IPs](https://akshathraghav.github.io/projects/amp) in the AI Hardware Team at SoCET.  Completed my Capstone project (through ECE 49022), and won the Senior Design award for the [BoilerNet system](https://akshathraghav.github.io/projects/boilernet). Led the backend team under [(Beck's Hybrids)-sponsored project](https://akshathraghav.github.io/projects/becks) through the Data Mine. Funded by HII to work on a custom FFT-accelerator ASIC.
 * F'24: Joined the Purdue SoCET Team as a TA. Joined the I-GUIDE Team as a Research Assistant (TDM HDR Fellowship), where we worked on scaling a HPC workflow for [distributed inference](https://akshathraghav.github.io/projects/I-GUIDE) on Apache Spark (+Sedona) through GCP (accepted at I-GUIDE Forum '25).
 * Smr'24: Joined the Purdue SoCET group, in the Digital Design team. Over the summer, I added the [Zicond Extension](https://github.com/riscvarchive/riscv-zicond/) to the [RISCV core](https://github.com/Purdue-SoCET/RISCVBusiness/tree/rv32zc) for the AFTx07 tape-out. Implemented the [TinySpeech](https://arxiv.org/abs/2008.04245) family of speech recognition models at [VLSI System Design](https://www.vlsisystemdesign.com/). I also wrote an [ANSI-C based inference engine](https://github.com/AkshathRaghav/tinyspeech) which runs out-of-box in 8bit precision, with 91%+ accuracies for embedded inference. 
 * F'23 - S'24: Worked at the [Duality Lab](https://davisjam.github.io/), where [we re-engineered](https://akshathraghav.github.io/projects/maskformer/) the MaskFormer segmentation model **(funded by Google!)** from the [PyTorch-based artifact](https://github.com/facebookresearch/MaskFormer) to TensorFlow for publishing to the TF Model Garden. You can find our **paper** [here](https://arxiv.org/pdf/2404.18801) and code [here](https://github.com/PurdueDualityLab/tf-maskformer/tree/PR_Draft/models/official/projects/maskformer). I also generated figures for the [PeaTMOSS paper](https://arxiv.org/pdf/2402.00699.pdf) (accepted at MSR'24).
