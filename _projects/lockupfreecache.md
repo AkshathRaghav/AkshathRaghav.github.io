@@ -5,12 +5,13 @@ description: Multi-Banked Split-Transaction Cache for the OSS Cardinal GPU Core
 img: assets/img/aihardware/dcache_top.png
 importance: 2
 category: computer-architecture 
+toc: 
+  sidebar: left
 ---
 
-[Main Repo](https://github.com/Purdue-SoCET/atalla/tree/main) | Code [here](https://github.com/Purdue-SoCET/atalla/tree/main/rtl/modules/memory/caches).
+[Main Repo](https://github.com/Purdue-SoCET/atalla/tree/main). 
+Code [here](https://github.com/Purdue-SoCET/atalla/tree/main/rtl/modules/memory/caches).
 
-
-## Lockup-Free, Banked Non-Blocking Cache (SystemVerilog)
 
 This project implements a **lockup-free, multi-banked, non-blocking cache** intended for integration with **out-of-order and SMT-capable cores**. The design allows cache hits to complete independently of outstanding misses, while supporting multiple in-flight memory requests via per-bank MSHR queues.
 

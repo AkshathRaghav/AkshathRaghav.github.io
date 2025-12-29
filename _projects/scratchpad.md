@@ -5,6 +5,9 @@ description: SW-Managed Parameterizable Scratchpad for Atalla AI Accelerator
 img: assets/img/aihardware/scratchpad/top_level.jpg
 importance: 1
 category: computer-architecture 
+images:
+  compare: true
+  slider: true
 ---
 
 Modern AI Accelerators, like the Atalla [Ax01 core](https://github.com/Purdue-SoCET/atalla/tree/main), depend on exploiting predictable, high-bandwidth data movement between on-chip memory and compute modules. The Machine Learning (ML) workloads that these specialized chips target inherently expose deterministic access patterns – including tiled matrix multiplication, toeplitz-based convolution, tensor transposes and vector operations. The memory primitive in such architectures are arrays, often called vectors, as opposed to the scalar-optimized general-purpose chips. Additionally, these chips implement memory hierarchies that rely on conventional cache designs, accommodating a wide variety of workloads. These mechanisms are defined by tag overheads, unpredictable latencies, and hardware-based prefetchers that are optimized for adapting to different workload characteristics at runtime. 
@@ -15,8 +18,7 @@ A core component of the explored design space were the interconnect micro-archit
 
 The work accomplished by this team has laid the foundation for a hardware-software co-designed kernel library that will provide optimized implementations of core vector and matrix operations. In parallel, a custom compiler is being developed to lower this code into instruction bundles, enabling parallel execution of µ-ops to use the asynchronous data-movement features of the Scratchpad. The Atalla Ax01 accelerator will feature a 4-wide tainted-VLIW scheduler, split-transaction AXI-bus and dual-channel DDR4 controller to complement the Scratchpad design. 
 
-
-Code [here](https://github.com/Purdue-SoCET/atalla/tree/main/rtl/modules/memory/scratchpad). Find our official ECE 696 report [here](). 
+Code [here](https://github.com/Purdue-SoCET/atalla/tree/main/rtl/modules/memory/scratchpad). Find our official ECE 696 report [here](https://akshathraghav.github.io/assets/pdf/ScratchpadReport.pdf). 
 
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/aihardware/scratchpad/scratchpad_presentation_page-0001.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>

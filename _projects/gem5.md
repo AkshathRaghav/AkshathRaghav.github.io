@@ -5,6 +5,9 @@ description: WIB and Victim Cache in Gem5's Out-Of-Order x86 CPU
 img: assets/img/gem5/gem5_img.gif
 importance: 3
 category: computer-architecture 
+images:
+  compare: true
+  slider: true
 ---
 
 Instruction window size and cache miss behavior are critical bottlenecks in out-of-order processors. Large instruction windows improve latency tolerance but lengthen critical paths, while conventional cache hierarchies suffer from avoidable conflict misses under memory pressure. This project explores two complementary microarchitectural mechanisms: a Waiting Instruction Buffer (WIB) to decouple load-miss-dependent instruction chains from the issue queue, and a Victim Cache to reduce conflict misses without increasing L1 associativity.
