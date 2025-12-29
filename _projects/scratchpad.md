@@ -1,7 +1,7 @@
 ---
 layout: page
 title: scratchpad
-description: SW-Managed Parameterizable Scratchpad for Atalla Ax01 
+description: SW-Managed Parameterizable Scratchpad for Atalla AI Accelerator
 img: assets/img/aihardware/scratchpad/top_level.jpg
 importance: 1
 category: computer-architecture 

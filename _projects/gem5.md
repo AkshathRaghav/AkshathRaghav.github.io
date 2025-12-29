@@ -2,7 +2,7 @@
 layout: page
 title: gem5-o3-projects
 description: WIB and Victim Cache in Gem5's Out-Of-Order x86 CPU
-img: assets/img/aihardware/gem5/gem5_img.gif
+img: assets/img/gem5/gem5_img.gif
 importance: 3
 category: computer-architecture 
 ---

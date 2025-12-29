@@ -1,8 +1,8 @@
 ---
 layout: page
 title: lockup-free-cache
-description: Multi-Banked Split-Transaction Cache in SV 
-img: assets/img/aihardware/dcache_top.jpg
+description: Multi-Banked Split-Transaction Cache for the OSS Cardinal GPU Core
+img: assets/img/aihardware/dcache_top.png
 importance: 2
 category: computer-architecture 
 ---

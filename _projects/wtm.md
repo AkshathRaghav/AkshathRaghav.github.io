@@ -1,8 +1,8 @@
 ---
 layout: page
 title: wallace-tree-multiplier
-description: 8-bit Wallace Tree Multiplier on GPDK45nm
-img: assets/img/aihardware/559/parex.png
+description: 8-bit Wallace Tree Multiplier implementation on GPDK45nm
+img: assets/img/559/parex.png
 importance: 4
 category: computer-architecture 
 ---
