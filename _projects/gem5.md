@@ -2,7 +2,7 @@
 layout: page
 title: gem5-o3-projects
 description: WIB and Victim Cache in Gem5's Out-Of-Order x86 CPU
-img: assets/img/gem5/gem5_img.gif
+img: assets/img/gem5/gem5_img.png
 importance: 3
 category: computer-architecture 
 images:
@@ -14,9 +14,9 @@ Instruction window size and cache miss behavior are critical bottlenecks in out-
 
 Both mechanisms were implemented and evaluated within the gem5 O3CPU as part of Purdue’s ECE 565 coursework. The work focuses on correctness, integration into gem5’s existing pipeline and cache models, and quantitative evaluation across memory-intensive benchmarks.
 
-## Project1: Waiting Instruction Buffer
+These projects were a part of the ECE 565 class at Purdue, taught by Prof. [T. N. Vijaykumar](https://scholar.google.com/citations?user=6eun8QkAAAAJ&hl=en)! As such, I'm only discussing the results below. 
 
-Please find the implementation tips [here](). Below, we discuss results.
+## Project1: Waiting Instruction Buffer
 
 {% include figure.liquid loading="eager" path="assets/img/gem5/ipc_wib_comparison.png" title="example image" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
@@ -31,8 +31,6 @@ An interesting note from this implementation is that the WIB is often full (for 
 
 
 ## Project2: Victim Cache
-
-Please find the implementation tips [here](). Below, we discuss results.
 
 
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
