@@ -2,7 +2,7 @@
 layout: page
 title: scratchpad
 description: SW-Managed Parameterizable Scratchpad for the Atalla AI Accelerator
-img: assets/img/aihardware/scratchpad/poster.jpg
+img: assets/img/aihardware/poster.jpg
 importance: 1
 category: computer-architecture 
 images:
