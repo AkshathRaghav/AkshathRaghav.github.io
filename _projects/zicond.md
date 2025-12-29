@@ -3,8 +3,8 @@ layout: page
 title: zicond
 description: Zicond Extension implemented in the SoCET RISCV Core 
 img: assets/img/zicond.png
-importance: 3
-category: microarch
+importance: 7
+category: computer-architecture
 ---
 
 The Zicond Extension aims to enhance the RISC-V instruction set architecture by introducing a simplistic pair of conditional instructions. Traditional condition-based operations in RISC-V involve using multiple instructions and branches to evaluate and execute actions, leading to increased code complexity and a higher rate of branch mispredictions. This extension addresses this inefficiency by allowing for register-to-register operations that require a smarter, but reliable, use of register values to negate the use of branches. Furthermore, the current RISC-V core being developed for the upcoming AFTx07 chip tape-out does not have a branch predictor implemented, underscoring the necessity of this project.

@@ -5,8 +5,7 @@ permalink: /projects/
 description: 
 nav: true
 nav_order: 2
-# display_categories: [research, software, hardware, hackathons]
-display_categories: [software, microarch, hardware, hobby]
+display_categories: [software, computer-architecture, embedded, hobby]
 horizontal: false
 ---
 

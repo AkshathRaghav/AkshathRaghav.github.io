@@ -4,7 +4,7 @@ title: boilernet
 description: Compute-Enabled Mini-NAS for Senior Design
 img: assets/img/boilernet/Slide6.jpg
 importance: 1
-category: hardware 
+category: embedded 
 ---
 
 <div align="center">
