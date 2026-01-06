@@ -1,41 +1,55 @@
-// _fonts.scss — override site fonts
-// Example: use Inter for UI/body and Merriweather for headings.
-// You can pick any Google Fonts (or local fonts) you like.
+// _fonts.scss — use Inter for body and a heavier/tighter Inter for headings
+// Loads Inter from Google Fonts with multiple weights (300,400,600,700, italic 400)
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
 
 :root {
+  /* primary font stacks */
   --site-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --site-serif: 'Merriweather', Georgia, "Times New Roman", Times, serif;
+  /* same family, but used for headings so we can style differently */
+  --site-sans-heading: 'Inter', var(--site-sans);
 }
 
-/* Apply to normal text */
+/* Body / UI text */
 body,
 .container,
 .content,
-.text,
-p {
+p,
+a,
+li,
+label {
   font-family: var(--site-sans);
   font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings use a serif for contrast */
-h1,h2,h3,h4,h5,h6 {
-  font-family: var(--site-serif);
-  font-weight: 600;
+/* Headings: same family (Inter) but heavier and slightly tighter for contrast */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--site-sans-heading);
+  font-weight: 600;               /* heavier than body */
+  letter-spacing: -0.01em;        /* slight tightening */
   margin-top: 0.6em;
-  margin-bottom: 0.4em;
+  margin-bottom: 0.35em;
+  line-height: 1.2;
 }
 
-/* Keep monospace for code blocks and inline code */
+/* Optional: a slightly different style for small card titles if needed */
+.card .card-title,
+.project-card .card-title,
+.project-card h3 {
+  font-family: var(--site-sans-heading);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Keep monospace for code blocks */
 code, pre, kbd, samp, .mono {
   font-family: SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", "Courier New", monospace;
 }
 
-/* Optionally adjust size/line-height for readability */
-body {
-  font-size: 16px;
-  line-height: 1.6;
-}
+/* If you ever want an alternative "tight" look for headings, toggle this class:
+   .heading-tight { letter-spacing: -0.03em; font-weight: 700; text-transform: uppercase; }
+*/
